@@ -1,0 +1,2708 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>The Messaging Layer Security (MLS) Architecture</title>
+<meta content="Emad Omara" name="author">
+<meta content="Benjamin Beurdouche" name="author">
+<meta content="Eric Rescorla" name="author">
+<meta content="Srinivas Inguva" name="author">
+<meta content="Albert Kwon" name="author">
+<meta content="Alan Duric" name="author">
+<meta content="
+       The Messaging Layer Security (MLS) protocol   document has
+the role of defining a Group Key Agreement, all the necessary
+cryptographic operations, and serialization/deserialization functions
+necessary to create a scalable and secure group messaging protocol.
+The MLS protocol is meant to protect against eavesdropping, tampering,
+message forgery, and provide good properties such as forward-secrecy
+(FS) and post-compromise security (PCS) in the case of past or future
+device compromises. 
+       This document, on the other hand is intended to describe a general
+secure group messaging infrastructure and its security goals.  It
+provides guidance on building a group messaging system and discusses
+security and privacy tradeoffs offered by multiple security mechanism
+that are part of the MLS protocol (ie. frequency of public encryption
+key rotation). 
+       The document also extends the guidance to parts of the infrastructure
+that are not standardized by the MLS Protocol document and left to the
+application or the infrastructure architects to design. 
+       While the recommendations of this document are not mandatory to follow
+in order to interoperate at the protocol level, most will vastly
+influence the overall security guarantees that are achieved by the
+overall messaging system. This is especially true in case of active
+adversaries that are able to compromise clients, the delivery service
+or the authentication service. 
+    " name="description">
+<meta content="xml2rfc 3.6.0" name="generator">
+<meta content="Internet-Draft" name="keyword">
+<meta content="draft-ietf-mls-architecture-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.6.0
+    Python 3.8.8
+    appdirs 1.4.4
+    ConfigArgParse 1.2.3
+    google-i18n-address 2.4.0
+    html5lib 1.1
+    intervaltree 3.1.0
+    Jinja2 2.11.2
+    kitchen 1.2.6
+    lxml 4.6.3
+    pycountry 20.7.3
+    pyflakes 2.2.0
+    PyYAML 5.4.1
+    requests 2.25.1
+    setuptools 51.3.3
+    six 1.15.0
+-->
+<link href="draft-ietf-mls-architecture.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@import url('https://martinthomson.github.io/i-d-template/fonts.css');
+
+html {
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  scrollbar-color: #bbb #eee;
+}
+@media (prefers-color-scheme: dark) {
+html {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  font-family: "Cabin Condensed", sans-serif;
+  font-weight: 600;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+#title {
+  padding: 1em 0 0.2em;
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+}
+#abstract+p, #abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 18px;
+  line-height: 24px;
+}
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+}
+ol ol, ul ul, ol ul, ul ol {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl > dd {
+  margin-bottom: .8em;
+  min-height: 1.3em;
+}
+dl.compact > dd, .dlCompact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+dd.break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href].selfRef {
+  color: var(--text-color);
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px 'Oxygen Mono', monospace;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+}
+@media screen {
+  pre {
+    display: inline-block;
+    overflow-x: auto;
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  pre + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+tr:nth-child(2n) > td {
+  background-color: var(--background-color);
+}
+tr:nth-child(2n+1) > td {
+  background-color: var(--highlight-color);
+}
+thead+tbody > tr:nth-child(2n) > td {
+  background-color: var(--highlight-color);
+}
+thead+tbody > tr:nth-child(2n+1) > td {
+  background-color: var(--background-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+}
+a.pilcrow[href] { color: var(--pilcrow-weak); }
+a.pilcrow[href]:hover { text-decoration: none; }
+@media not print {
+  :hover > a.pilcrow {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+}
+
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 8em;
+}
+#identifiers dt {
+  width: var(--identifier-width);
+  margin: 0;
+  clear: left;
+  float: left;
+  text-align: right;
+}
+#identifiers dd {
+  margin: 0 0 0 calc(1em + var(--identifier-width));
+  min-width: 5em;
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+#toc nav ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+#toc nav li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+#toc a.xref {
+  white-space: normal;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dd {
+  margin-left: 8em;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+.index ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.index ul ul {
+  margin: 0;
+}
+.index li {
+  margin: 0;
+  text-indent: -2em;
+  padding-left: 2em;
+  padding-bottom: 5px;
+}
+.indexIndex {
+  margin: 0.5em 0 1em;
+}
+.index a {
+  font-weight: 700;
+}
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 500px) {
+  .index ul {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  .index ul ul {
+    column-count: 1;
+    column-gap: 0;
+  }
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc.active {
+      opacity: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 8px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active nav {
+    display: block;
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin-top: 2px;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  #toc nav > ul  {
+    margin-bottom: 2em;
+  }
+  #toc ul {
+    margin: 0 0 0 4px;
+    font-size: var(--small-font-size);
+  }
+  #toc ul p, #toc ul li {
+    margin: 2px 0;
+    line-height: 22px;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Changes introduced to fix issues found during implementation */
+
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin: 8px 0.5em 0;
+}
+
+/* Fix the dl styling to match the RFC 7992 attributes */
+dl > dt,
+dl.dlParallel > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+
+/* Provide styling for table cell text alignment */
+table .text-left, table .text-left {
+  text-align: left;
+}
+table .text-center, table .text-center {
+  text-align: center;
+}
+table .text-right, table .text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 20em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  dd {
+    page-break-before: avoid;
+  }
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+/* Tweak the bcp14 keyword presentation */
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+</style>
+
+</head>
+<body>
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">MLS Architecture</td>
+<td class="right">April 2021</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Omara, et al.</td>
+<td class="center">Expires 16 October 2021</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Network Working Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-ietf-mls-architecture-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2021-04-14" class="published">14 April 2021</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2021-10-16">16 October 2021</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">E. Omara</div>
+<div class="org">Google</div>
+</div>
+<div class="author">
+      <div class="author-name">B. Beurdouche</div>
+<div class="org">Inria &amp; Mozilla</div>
+</div>
+<div class="author">
+      <div class="author-name">E. Rescorla</div>
+<div class="org">Mozilla</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Inguva</div>
+<div class="org">Twitter</div>
+</div>
+<div class="author">
+      <div class="author-name">A. Kwon</div>
+<div class="org">MIT</div>
+</div>
+<div class="author">
+      <div class="author-name">A. Duric</div>
+<div class="org">Wire</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">The Messaging Layer Security (MLS) Architecture</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">The Messaging Layer Security (MLS) protocol <span>[<a href="#MLSPROTO" class="xref">MLSPROTO</a>]</span> document has
+the role of defining a Group Key Agreement, all the necessary
+cryptographic operations, and serialization/deserialization functions
+necessary to create a scalable and secure group messaging protocol.
+The MLS protocol is meant to protect against eavesdropping, tampering,
+message forgery, and provide good properties such as forward-secrecy
+(FS) and post-compromise security (PCS) in the case of past or future
+device compromises.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This document, on the other hand is intended to describe a general
+secure group messaging infrastructure and its security goals.  It
+provides guidance on building a group messaging system and discusses
+security and privacy tradeoffs offered by multiple security mechanism
+that are part of the MLS protocol (ie. frequency of public encryption
+key rotation).<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+<p id="section-abstract-3">The document also extends the guidance to parts of the infrastructure
+that are not standardized by the MLS Protocol document and left to the
+application or the infrastructure architects to design.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
+<p id="section-abstract-4">While the recommendations of this document are not mandatory to follow
+in order to interoperate at the protocol level, most will vastly
+influence the overall security guarantees that are achieved by the
+overall messaging system. This is especially true in case of active
+adversaries that are able to compromise clients, the delivery service
+or the authentication service.<a href="#section-abstract-4" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-discussion-venues">
+<a href="#name-discussion-venues" class="section-name selfRef">Discussion Venues</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">Discussion of this document takes place on the
+  MLS Working Group mailing list (mls@ietf.org),
+  which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/mls/">https://mailarchive.ietf.org/arch/browse/mls/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">Source for this draft and an issue tracker can be found at
+  <span><a href="https://github.com/mlswg/mls-architecture">https://github.com/mlswg/mls-architecture</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 16 October 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2021 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Simplified BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Simplified BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
+</li>
+          <li class="compact ulEmpty toc" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-general-setting" class="xref">General Setting</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.2.2.1">
+                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-group-members-and-clients" class="xref">Group, Members and Clients</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.2">
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-authentication-service" class="xref">Authentication Service</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.3">
+                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="xref">2.3</a>.  <a href="#name-delivery-service" class="xref">Delivery Service</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.2.2.3.2.1">
+                    <p id="section-toc.1-1.2.2.3.2.1.1"><a href="#section-2.3.1" class="xref">2.3.1</a>.  <a href="#name-key-storage" class="xref">Key Storage</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.3.2.2">
+                    <p id="section-toc.1-1.2.2.3.2.2.1"><a href="#section-2.3.2" class="xref">2.3.2</a>.  <a href="#name-key-retrieval" class="xref">Key Retrieval</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.3.2.3">
+                    <p id="section-toc.1-1.2.2.3.2.3.1"><a href="#section-2.3.3" class="xref">2.3.3</a>.  <a href="#name-delivery-of-messages-and-at" class="xref">Delivery of messages and attachments</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.3.2.4">
+                    <p id="section-toc.1-1.2.2.3.2.4.1"><a href="#section-2.3.4" class="xref">2.3.4</a>.  <a href="#name-membership-knowledge" class="xref">Membership knowledge</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.3.2.5">
+                    <p id="section-toc.1-1.2.2.3.2.5.1"><a href="#section-2.3.5" class="xref">2.3.5</a>.  <a href="#name-membership-and-offline-memb" class="xref">Membership and offline members</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4">
+                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="xref">2.4</a>.  <a href="#name-functional-requirements" class="xref">Functional Requirements</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.1">
+                    <p id="section-toc.1-1.2.2.4.2.1.1"><a href="#section-2.4.1" class="xref">2.4.1</a>.  <a href="#name-membership-changes" class="xref">Membership Changes</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.2">
+                    <p id="section-toc.1-1.2.2.4.2.2.1"><a href="#section-2.4.2" class="xref">2.4.2</a>.  <a href="#name-parallel-groups" class="xref">Parallel Groups</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.3">
+                    <p id="section-toc.1-1.2.2.4.2.3.1"><a href="#section-2.4.3" class="xref">2.4.3</a>.  <a href="#name-security-of-attachments" class="xref">Security of Attachments</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.4">
+                    <p id="section-toc.1-1.2.2.4.2.4.1"><a href="#section-2.4.4" class="xref">2.4.4</a>.  <a href="#name-asynchronous-usage" class="xref">Asynchronous Usage</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.5">
+                    <p id="section-toc.1-1.2.2.4.2.5.1"><a href="#section-2.4.5" class="xref">2.4.5</a>.  <a href="#name-access-control" class="xref">Access Control</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.6">
+                    <p id="section-toc.1-1.2.2.4.2.6.1"><a href="#section-2.4.6" class="xref">2.4.6</a>.  <a href="#name-recovery-after-state-loss" class="xref">Recovery After State Loss</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.7">
+                    <p id="section-toc.1-1.2.2.4.2.7.1"><a href="#section-2.4.7" class="xref">2.4.7</a>.  <a href="#name-support-for-multiple-device" class="xref">Support for Multiple Devices</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.8">
+                    <p id="section-toc.1-1.2.2.4.2.8.1"><a href="#section-2.4.8" class="xref">2.4.8</a>.  <a href="#name-extensibility-pluggability" class="xref">Extensibility / Pluggability</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.9">
+                    <p id="section-toc.1-1.2.2.4.2.9.1"><a href="#section-2.4.9" class="xref">2.4.9</a>.  <a href="#name-federation" class="xref">Federation</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.2.2.4.2.10">
+                    <p id="section-toc.1-1.2.2.4.2.10.1"><a href="#section-2.4.10" class="xref">2.4.10</a>. <a href="#name-compatibility-with-future-v" class="xref">Compatibility with future versions of MLS</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact ulEmpty toc" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-security-and-privacy-consid" class="xref">Security and Privacy Considerations</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-message-secrecy-and-authent" class="xref">Message Secrecy and Authentication</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.3.2.1.2.1">
+                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="xref">3.1.1</a>.  <a href="#name-forward-and-post-compromise" class="xref">Forward and Post-Compromise Security</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.1.2.2">
+                    <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="xref">3.1.2</a>.  <a href="#name-non-repudiation-vs-deniabil" class="xref">Non-Repudiation vs Deniability</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-considerations-for-attacks-" class="xref">Considerations for attacks outside of the threat model</a></p>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-transport-security-links" class="xref">Transport Security Links</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.3.2.3.2.1">
+                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="xref">3.3.1</a>.  <a href="#name-metadata-protection-for-une" class="xref">Metadata protection for unencrypted group operations</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.3.2.2">
+                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="xref">3.3.2</a>.  <a href="#name-dos-protection" class="xref">DoS protection</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.3.2.3">
+                    <p id="section-toc.1-1.3.2.3.2.3.1"><a href="#section-3.3.3" class="xref">3.3.3</a>.  <a href="#name-message-suppression-and-err" class="xref">Message suppression and error correction</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-delivery-service-compromise" class="xref">Delivery Service Compromise</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.3.2.4.2.1">
+                    <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="xref">3.4.1</a>.  <a href="#name-privacy-of-delivery-and-pus" class="xref">Privacy of delivery and push notifications</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.5">
+                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="xref">3.5</a>.  <a href="#name-authentication-service-comp" class="xref">Authentication Service Compromise</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.3.2.5.2.1">
+                    <p id="section-toc.1-1.3.2.5.2.1.1"><a href="#section-3.5.1" class="xref">3.5.1</a>.  <a href="#name-authentication-compromise-g" class="xref">Authentication compromise: Ghost users and impersonations</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.5.2.2">
+                    <p id="section-toc.1-1.3.2.5.2.2.1"><a href="#section-3.5.2" class="xref">3.5.2</a>.  <a href="#name-privacy-of-the-group-member" class="xref">Privacy of the Group Membership</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.6">
+                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="xref">3.6</a>.  <a href="#name-shared-considerations-regar" class="xref">Shared considerations regarding adversarial AS or DS services</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.3.2.6.2.1">
+                    <p id="section-toc.1-1.3.2.6.2.1.1"><a href="#section-3.6.1" class="xref">3.6.1</a>.  <a href="#name-privacy-of-the-network-conn" class="xref">Privacy of the network connections</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.7">
+                <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="xref">3.7</a>.  <a href="#name-client-compromise" class="xref">Client Compromise</a></p>
+<ul class="compact ulEmpty toc">
+<li class="compact ulEmpty toc" id="section-toc.1-1.3.2.7.2.1">
+                    <p id="section-toc.1-1.3.2.7.2.1.1"><a href="#section-3.7.1" class="xref">3.7.1</a>.  <a href="#name-compromise-of-aead-key-mate" class="xref">Compromise of AEAD key material</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.7.2.2">
+                    <p id="section-toc.1-1.3.2.7.2.2.1"><a href="#section-3.7.2" class="xref">3.7.2</a>.  <a href="#name-compromise-of-the-group-sec" class="xref">Compromise of the Group Secrets of a single group for one or more group epochs</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.7.2.3">
+                    <p id="section-toc.1-1.3.2.7.2.3.1"><a href="#section-3.7.3" class="xref">3.7.3</a>.  <a href="#name-compromise-by-an-active-adv" class="xref">Compromise by an active adversary with the ability to sign messages</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.7.2.4">
+                    <p id="section-toc.1-1.3.2.7.2.4.1"><a href="#section-3.7.4" class="xref">3.7.4</a>.  <a href="#name-compromise-of-the-authentic" class="xref">Compromise of the authentication with access to a signature key</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.7.2.5">
+                    <p id="section-toc.1-1.3.2.7.2.5.1"><a href="#section-3.7.5" class="xref">3.7.5</a>.  <a href="#name-security-consideration-in-t" class="xref">Security consideration in the context of a full state compromise</a></p>
+</li>
+                  <li class="compact ulEmpty toc" id="section-toc.1-1.3.2.7.2.6">
+                    <p id="section-toc.1-1.3.2.7.2.6.1"><a href="#section-3.7.6" class="xref">3.7.6</a>.  <a href="#name-more-attack-scenarios" class="xref">More attack scenarios</a></p>
+</li>
+                </ul>
+</li>
+            </ul>
+</li>
+          <li class="compact ulEmpty toc" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
+</li>
+          <li class="compact ulEmpty toc" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-contributors" class="xref">Contributors</a></p>
+</li>
+          <li class="compact ulEmpty toc" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
+</li>
+          <li class="compact ulEmpty toc" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-appendix.a" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">RFC EDITOR: PLEASE REMOVE THE FOLLOWING PARAGRAPH<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">The source for this draft is maintained in GitHub.  Suggested changes should
+be submitted as pull requests at https://github.com/mlswg/mls-architecture.
+Instructions are on that page as well.  Editorial changes can be
+managed in GitHub, but any substantive change should be discussed on
+the MLS mailing list.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">DISCLAIMER: A lot of work is still ongoing on the current version of
+this draft. Especially, this preliminary writing of the security
+considerations has not been reviewed by the working group yet and
+might contain errors.
+Please file an issue on the document's GitHub if you find errors.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">[[TODO: Remove disclaimer.]]<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">End-to-end security is a requirement for instant messaging systems and
+is commonly deployed in many such systems. In this context,
+"end-to-end" captures the notion that users of the system enjoy some
+level of security -- with the precise level depending on the system
+design -- even when the service provider they are using performs
+unsatisfactorily.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Messaging Layer Security (MLS) specifies an architecture (this
+document) and an abstract protocol <span>[<a href="#MLSPROTO" class="xref">MLSPROTO</a>]</span> for providing
+end-to-end security in this setting. MLS is not intended as a full
+instant messaging protocol but rather is intended to be embedded in
+concrete protocols, such as XMPP <span>[<a href="#RFC6120" class="xref">RFC6120</a>]</span>. In addition, it does not
+specify a complete wire encoding, but rather a set of abstract data
+structures which can then be mapped onto a variety of concrete
+encodings, such as TLS <span>[<a href="#RFC8446" class="xref">RFC8446</a>]</span>, CBOR <span>[<a href="#RFC7049" class="xref">RFC7049</a>]</span>, and
+JSON <span>[<a href="#RFC7159" class="xref">RFC7159</a>]</span>.  Implementations which adopt compatible encodings
+will have some degree of interoperability at the message level, though
+they may have incompatible identity/authentication infrastructures.
+The MLS protocol has been designed to provide the same security
+guarantees to all users, for all group sizes, even when it reduces to
+only two users.<a href="#section-1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="general-setting">
+<section id="section-2">
+      <h2 id="name-general-setting">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-general-setting" class="section-name selfRef">General Setting</a>
+      </h2>
+<p id="section-2-1">Informally, a group is a set of users who possibly use multiple
+endpoint devices to interact with the Service Provider (SP).
+A group may be as small as two members (the simple case of person to
+person messaging) or as large as thousands.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">In order to communicate securely, users initially interact with
+services at their disposal to establish the necessary values and
+credentials required for encryption and authentication.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">The Service Provider presents two abstract functionalities that allow
+clients to prepare for sending and receiving messages securely:<a href="#section-2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-4.1">An Authentication Service (AS) functionality which is responsible
+for maintaining a binding between a unique identifier (identity) and
+the public key material (credential) used for authentication in the
+MLS protocol. This functionality must also be able to generate these
+credentials or validate them if they are provided by MLS clients.<a href="#section-2-4.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-4.2">A Delivery Service (DS) functionality which can receive and
+redistributing messages between group members. In the case of group
+messaging, the delivery service may also be responsible for acting
+as a "broadcaster" where the sender sends a single message which is
+then forwarded to each recipient in the group by the DS. The DS is
+also responsible for storing and delivering initial public key
+material required by MLS clients in order to proceed with the group
+secret key establishment that is part of the MLS protocol.<a href="#section-2-4.2" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="section-2-5">For convenience, this document adopts the representation of these
+services being standalone servers, however the MLS protocol design is
+made so that it is not necessarily the case.<a href="#section-2-5" class="pilcrow">¶</a></p>
+<p id="section-2-6">It is important to note that the Authentication Service functionality
+can be completely abstract in the case of a Service Provider which
+allows MLS clients to generate, redistribute and validate their
+credentials themselves.<a href="#section-2-6" class="pilcrow">¶</a></p>
+<p id="section-2-7">Similarly to the AS, the Delivery Service can be completely abstract
+if users are able to distribute credentials and messages without
+relying on a central Delivery Service. Note, though, that the MLS
+protocol requires group operation messages to be processed in-order by
+all MLS clients.<a href="#section-2-7" class="pilcrow">¶</a></p>
+<p id="section-2-8">In some sense, a set of MLS clients which can achieve the AS and DS
+functionalities without relying on an external party do not need a
+Service Provider.<a href="#section-2-8" class="pilcrow">¶</a></p>
+<div class="artwork art-text alignLeft" id="section-2-9">
+<pre>
+      ----------------      --------------
+     | Authentication |    | Delivery     |
+     | Service (AS)   |    | Service (DS) |
+      ----------------      --------------
+                         /        |         \            Group
+                        / ************************************
+                       /  *       |           \              *
+            ----------    *   ----------        ----------   *
+           | Client 0 |   *  | Member 1 |      | Member N |  *
+            ----------    *   ----------        ----------   *
+           ............   *  ............      ............  *
+           User 0         *  User 0            User 1        *
+                          *                                  *
+                          ************************************
+</pre><a href="#section-2-9" class="pilcrow">¶</a>
+</div>
+<p id="section-2-10">In many systems, the AS and the DS are actually operated by the same
+entity and may even be the same server. However, they are logically
+distinct and, in other systems, may be operated by different entities.
+Other partitions are also possible, such as having a separate
+directory functionality or service.<a href="#section-2-10" class="pilcrow">¶</a></p>
+<p id="section-2-11">According to this architecture design, a typical group messaging
+scenario might look like this:<a href="#section-2-11" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="normal type-1" id="section-2-12">
+<li id="section-2-12.1">Alice, Bob and Charlie create accounts with a service
+provider and obtain credentials from the AS.<a href="#section-2-12.1" class="pilcrow">¶</a>
+</li>
+        <li id="section-2-12.2">Alice, Bob and Charlie authenticate to the DS and store
+some initial keying material which can be used to send encrypted
+messages to them for the first time. This keying material is
+authenticated with their long term credentials.<a href="#section-2-12.2" class="pilcrow">¶</a>
+</li>
+        <li id="section-2-12.3">When Alice wants to send a message to Bob and Charlie, she
+contacts the DS and looks up their initial keying material.
+She uses these keys to establish a new set of keys which she can
+use to send encrypted messages to Bob and Charlie. She then sends
+the encrypted message(s) to the DS, which forwards them to the
+recipients.<a href="#section-2-12.3" class="pilcrow">¶</a>
+</li>
+        <li id="section-2-12.4">Bob and/or Charlie respond to Alice's message. In addition, they
+might choose to update their key material which provides
+post-compromise security <a href="#fs-and-pcs" class="xref">Section 3.1.1</a>. As a consequence of that
+change, the group secrets are updated<a href="#section-2-12.4" class="pilcrow">¶</a>
+</li>
+      </ol>
+<p id="section-2-13">Clients may wish to do the following:<a href="#section-2-13" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-14.1">create a group by inviting a set of other clients;<a href="#section-2-14.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-14.2">add one or more clients to an existing group;<a href="#section-2-14.2" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-14.3">remove one or more members from an existing group;<a href="#section-2-14.3" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-14.4">update their own key material<a href="#section-2-14.4" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-14.5">join an existing group;<a href="#section-2-14.5" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-14.6">leave a group;<a href="#section-2-14.6" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-14.7">send a message to everyone in the group;<a href="#section-2-14.7" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-2-14.8">receive a message from someone in the group.<a href="#section-2-14.8" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="section-2-15">At the cryptographic level, clients (and by extension members in
+groups) have equal permissions. For instance, any member can add
+or remove another client in a group. This is in contrast to some
+designs in which there is a single group controller who can modify the
+group. MLS is compatible with having group administration restricted
+to certain users, but we assume that those restrictions are enforced
+by authentication and access control at the application layer.<a href="#section-2-15" class="pilcrow">¶</a></p>
+<p id="section-2-16">Thus, for instance, while the MLS protocol allows for any existing
+member of a group to add a new client, applications which use MLS
+might enforce additional restrictions for which only a subset of
+members can qualify, and thus will handle enforcing group policies
+(such as determining if a user is allowed to add new users to the
+group) at the application level.<a href="#section-2-16" class="pilcrow">¶</a></p>
+<div id="group-members-and-clients">
+<section id="section-2.1">
+        <h3 id="name-group-members-and-clients">
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-group-members-and-clients" class="section-name selfRef">Group, Members and Clients</a>
+        </h3>
+<p id="section-2.1-1">While informally, a group can be considered to be a set of users
+possibly using multiple endpoint devices to interact with the
+Service Provider, this definition is too simplistic.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">Formally, a Client is a set of cryptographic objects composed by
+public values such as a name (an identity), a public encryption key
+and a public signature key. Ownership of a Client by a user is
+determined by the fact that the user has knowledge of the
+associated secret values. When a Client is part of a Group, it is
+called a Member and its signature key pair uniquely defines its
+identity to other clients or members in the Group.
+In some messaging systems, clients belonging to the same user must
+all share the same identity key pair, but MLS does not assume this.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">Users will typically own multiple Clients, potentially one or more per
+end-user devices (phones, web clients or other devices...) and may
+choose to authenticate using the same signature key across devices,
+using one signature key per device or even one signature key per group.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-4">The formal definition of a Group in MLS is the set of clients that
+have knowledge of the shared group secret established in the group key
+establishment phase of the protocol and have contributed to it.
+Until a Member has contributed to the group secret, other members
+cannot assume they are a member of the group.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authentication-service">
+<section id="section-2.2">
+        <h3 id="name-authentication-service">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-authentication-service" class="section-name selfRef">Authentication Service</a>
+        </h3>
+<p id="section-2.2-1">The basic function of the Authentication Service (AS) is to provide a
+trusted mapping from user identities (usernames, phone numbers, etc.),
+to long-term identity keys, which may either be one per Client or may
+be shared amongst the clients attached to a user.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">The Authentication Service (AS) is expected to play multiple roles in the
+architecture:<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.2-3.1">A certification authority or similar service which signs some sort of
+portable credential binding an identity to a signature key.<a href="#section-2.2-3.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-2.2-3.2">A directory server which provides the key for a given identity
+(presumably this connection is secured via some form of transport
+security such as TLS).<a href="#section-2.2-3.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-2.2-4">The MLS protocol assumes a signature keypair for authentication of
+messages. It is important to note that this signature keypair might be
+the identity keypair itself, or a different signature keypair for
+which the public key has been, for example, signed by the identity
+private key. This flexibility allows for multiple infrastructure
+considerations and has the benefit of providing ways to use
+different signature keys across different groups by using hierarchical
+authentication keys. This flexibility also comes at the price of a
+security tradeoff, described in the security considerations, between
+potential unlinkability of the signature keys across groups and the
+amount of time required to reinstate authentication and secrecy of
+messages after the compromise of a device.<a href="#section-2.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.2-5">Ultimately, the only requirement is for the applications to be able to
+check the credential containing the protocol signing key and the
+identity against the Authentication Service at any time.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
+<p id="section-2.2-6">By definition, the Authentication Service is invested with a large
+amount of trust.  A malicious AS can impersonate -- or allow an
+attacker to impersonate -- any user of the system. As a corollary, by
+impersonating identities authorized to be members of a group, an AS
+can break confidentiality.<a href="#section-2.2-6" class="pilcrow">¶</a></p>
+<p id="section-2.2-7">This risk can be mitigated by publishing the binding between
+identities and keys in a public log such as Key Transparency (KT)
+<span>[<a href="#KeyTransparency" class="xref">KeyTransparency</a>]</span>. It is possible to build a functional MLS system
+without any kind of public key logging, but such a system will
+necessarily be somewhat vulnerable to attack by a malicious or
+untrusted AS.<a href="#section-2.2-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="delivery-service">
+<section id="section-2.3">
+        <h3 id="name-delivery-service">
+<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-delivery-service" class="section-name selfRef">Delivery Service</a>
+        </h3>
+<p id="section-2.3-1">The Delivery Service (DS) is expected to play multiple roles in the
+Service Provider architecture:<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.3-2.1">To act as a directory service providing the initial keying material
+for clients to use.
+This allows a client to establish a shared key and send encrypted
+messages to other clients even if the other client is offline.<a href="#section-2.3-2.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-2.3-2.2">To route messages between clients and to act as a message
+broadcaster, taking in one message and forwarding it to multiple
+clients (also known as "server side fanout").<a href="#section-2.3-2.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-2.3-3">Because the MLS protocol provides a way for Clients to send and receive
+application messages asynchronously, it only provides causal
+ordering of application messages from senders while it has to enforce
+global ordering of group operations to provide Group Agreement.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.3-4">Depending on the level of trust given by the group to the Delivery
+Service, the functional and privacy guarantees provided by MLS may
+differ but the Authentication and Confidentiality guarantees remain
+the same.<a href="#section-2.3-4" class="pilcrow">¶</a></p>
+<p id="section-2.3-5">Unlike the Authentication Service which is trusted for authentication
+and secrecy, the Delivery Service is completely untrusted regarding
+this property. While privacy of group membership might be a problem
+in the case of a DS server fanout, the Delivery Service can be
+considered as an active adaptative network attacker from the point of
+view of the security analysis.<a href="#section-2.3-5" class="pilcrow">¶</a></p>
+<div id="key-storage">
+<section id="section-2.3.1">
+          <h4 id="name-key-storage">
+<a href="#section-2.3.1" class="section-number selfRef">2.3.1. </a><a href="#name-key-storage" class="section-name selfRef">Key Storage</a>
+          </h4>
+<p id="section-2.3.1-1">Upon joining the system, each client stores its initial cryptographic
+key material with the Delivery Service. This key material, called
+KeyPackage, advertises the functional abilities of the Client such as
+supported protocol versions and extensions and the following
+cryptographic information:<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.3.1-2.1">A credential from the Authentication Service attesting to the
+binding between the identity and the client's signature key.<a href="#section-2.3.1-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.3.1-2.2">The client's asymmetric encryption public key material signed with
+the signature public key associated with the credential.<a href="#section-2.3.1-2.2" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-2.3.1-3">As noted above, users may own multiple clients, each with their
+own keying material, and thus there may be multiple entries
+stored by each user.<a href="#section-2.3.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.3.1-4">The Delivery Service is also responsible for allowing users to add,
+remove or update their initial keying material and to ensure
+that the identifier for these keys are unique across all keys
+stored on the DS.<a href="#section-2.3.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="key-retrieval">
+<section id="section-2.3.2">
+          <h4 id="name-key-retrieval">
+<a href="#section-2.3.2" class="section-number selfRef">2.3.2. </a><a href="#name-key-retrieval" class="section-name selfRef">Key Retrieval</a>
+          </h4>
+<p id="section-2.3.2-1">When a client wishes to establish a group, it first contacts the DS to
+request a KeyPackage for each other client, authenticate it using
+the signature keys, and then can use those to form the group.<a href="#section-2.3.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="delivery-guarantees">
+<section id="section-2.3.3">
+          <h4 id="name-delivery-of-messages-and-at">
+<a href="#section-2.3.3" class="section-number selfRef">2.3.3. </a><a href="#name-delivery-of-messages-and-at" class="section-name selfRef">Delivery of messages and attachments</a>
+          </h4>
+<p id="section-2.3.3-1">The main responsibility of the Delivery Service is to ensure delivery
+of messages. Specifically, we assume that DSs provide:<a href="#section-2.3.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.3.3-2.1">Reliable delivery: when a message is provided to the DS,
+it is eventually delivered to all clients.<a href="#section-2.3.3-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.3.3-2.2">In-order delivery: messages are delivered to the group
+in the order they are received by the Delivery Service
+and in approximately the order in which they are sent
+by clients. The latter is an approximate guarantee because
+multiple clients may send messages at the same time
+and so the DS needs some latitude in enforcing ordering
+across clients.<a href="#section-2.3.3-2.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.3.3-2.3">Consistent ordering: the DS must ensure that all clients
+have the same view of message ordering for cryptographically
+relevant operations. This means that the DS MUST enforce
+global consistency of the ordering of group operation messages.<a href="#section-2.3.3-2.3" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-2.3.3-3">Note that the protocol provides three important information
+within an MLSCiphertext message in order to provide ordering:<a href="#section-2.3.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.3.3-4.1">The Group Identifier (GID) to allow to distinguish the group for
+which the message has been sent;<a href="#section-2.3.3-4.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.3.3-4.2">The Epoch number, which represent the number of changes (version) of
+the group associated with a specific GID, and allows for
+lexicographical ordering of two messages from the same group;<a href="#section-2.3.3-4.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-2.3.3-4.3">The Content Type of the message, which allows the DS to determine
+the ordering requirement on the message.<a href="#section-2.3.3-4.3" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-2.3.3-5">The MLS protocol itself can verify these properties. For instance, if
+the DS reorders messages from a Client or provides different Clients
+with inconsistent orderings, then Clients can detect this
+misconduct. However, the protocol relies on the ordering, and on the
+fact that only one honest group operation message is fanned-out to
+clients per Epoch, to provide Clients with a consistent view of the
+evolving Group State.<a href="#section-2.3.3-5" class="pilcrow">¶</a></p>
+<p id="section-2.3.3-6">Note that some forms of DS misbehavior are still possible and
+difficult to detect. For instance, a DS can simply refuse
+to relay messages to and from a given client. Without some
+sort of side information, other clients cannot generally
+distinguish this form of Denial of Service (DoS) attack.<a href="#section-2.3.3-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="membership-knowledge">
+<section id="section-2.3.4">
+          <h4 id="name-membership-knowledge">
+<a href="#section-2.3.4" class="section-number selfRef">2.3.4. </a><a href="#name-membership-knowledge" class="section-name selfRef">Membership knowledge</a>
+          </h4>
+<p id="section-2.3.4-1">Group membership is itself sensitive information and MLS is designed
+to drastically limit the amount of persisted metadata. However, large
+groups often require an infrastructure which provides server fanout.
+In the case of client fanout, the destinations of a message is known by
+all clients, hence the server usually does not need this information.
+However, they may learn this information through traffic analysis.
+Unfortunately, in a server side fanout model, the DS can learn that a given
+client is sending the same message to a set of other clients. In
+addition, there may be applications of MLS in which the group
+membership list is stored on some server associated with the DS.<a href="#section-2.3.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.3.4-2">While this knowledge is not a break of authentication or
+confidentiality, it is a serious issue for privacy. In the case where
+metadata has to be persisted for functionality, it SHOULD be stored
+encrypted at rest.<a href="#section-2.3.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="membership-and-offline-members">
+<section id="section-2.3.5">
+          <h4 id="name-membership-and-offline-memb">
+<a href="#section-2.3.5" class="section-number selfRef">2.3.5. </a><a href="#name-membership-and-offline-memb" class="section-name selfRef">Membership and offline members</a>
+          </h4>
+<p id="section-2.3.5-1">Because Forward Secrecy (FS) and Post-Compromise Security (PCS) rely
+on the active deletion and replacement of keying material, any client
+which is persistently offline may still be holding old keying material
+and thus be a threat to both FS and PCS if it is later compromised.<a href="#section-2.3.5-1" class="pilcrow">¶</a></p>
+<p id="section-2.3.5-2">MLS cannot inherently defend against this problem, especially in the
+case where the Client hasn't processed messages but MLS-using
+systems can enforce some mechanism to try retaining these properties.
+Typically this will consist of evicting clients which are idle for too
+long, thus containing the threat of compromise. The precise details of
+such mechanisms are a matter of local policy and beyond the scope of
+this document.<a href="#section-2.3.5-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="functional-requirements">
+<section id="section-2.4">
+        <h3 id="name-functional-requirements">
+<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-functional-requirements" class="section-name selfRef">Functional Requirements</a>
+        </h3>
+<p id="section-2.4-1">MLS is designed as a large scale group messaging protocol and hence
+aims to provide performance and safety to its users.  Messaging
+systems that implement MLS provide support for conversations involving
+two or more members, and aim to scale to groups as large as 50,000 members,
+typically including many users using multiple devices.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+<div id="membership-changes">
+<section id="section-2.4.1">
+          <h4 id="name-membership-changes">
+<a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-membership-changes" class="section-name selfRef">Membership Changes</a>
+          </h4>
+<p id="section-2.4.1-1">MLS aims to provide agreement on group membership, meaning that all
+group members have agreed on the list of current group members.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.1-2">Some applications may wish to enforce ACLs to limit addition or
+removal of group members, to privileged clients or users. Others may
+wish to require authorization from the current group members or a
+subset thereof.  Regardless, MLS does not allow addition or removal of
+group members without informing all other members.<a href="#section-2.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-2.4.1-3">Once a client is part of a group, the set of devices controlled by the
+user can only be altered by an authorized member of the group.
+This authorization could depend on the application: some applications
+might want to allow certain other members of the group to add or
+remove devices on behalf of another member, while other applications
+might want a more strict policy and allow only the owner of the
+devices to add or remove them at the potential cost of weaker PCS
+guarantees.<a href="#section-2.4.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.4.1-4">Members who are removed from a group do not enjoy special privileges:
+compromise of a removed group member does not affect the security
+of messages sent after their removal but might affect previous messages
+if the group secrets have not been deleted properly.<a href="#section-2.4.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="parallel-groups">
+<section id="section-2.4.2">
+          <h4 id="name-parallel-groups">
+<a href="#section-2.4.2" class="section-number selfRef">2.4.2. </a><a href="#name-parallel-groups" class="section-name selfRef">Parallel Groups</a>
+          </h4>
+<p id="section-2.4.2-1">Any user may have membership in several Groups simultaneously.
+The set of members of any group may or may not form a subset of the
+members of another group. MLS guarantees that the FS and PCS goals are
+maintained and not weakened by user membership in multiple groups.<a href="#section-2.4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-of-attachments">
+<section id="section-2.4.3">
+          <h4 id="name-security-of-attachments">
+<a href="#section-2.4.3" class="section-number selfRef">2.4.3. </a><a href="#name-security-of-attachments" class="section-name selfRef">Security of Attachments</a>
+          </h4>
+<p id="section-2.4.3-1">The security properties expected for attachments in the MLS protocol
+are very similar to the ones expected from messages. The distinction
+between messages and attachments stems from the fact that the typical
+average time between the download of a message and the one from the
+attachments may be different. For many reasons (a typical reason being
+the lack of high bandwidth network connectivity), the lifetime of the
+cryptographic keys for attachments is usually higher than for
+messages, hence slightly weakening the PCS guarantees for attachments.<a href="#section-2.4.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="asynchronous-usage">
+<section id="section-2.4.4">
+          <h4 id="name-asynchronous-usage">
+<a href="#section-2.4.4" class="section-number selfRef">2.4.4. </a><a href="#name-asynchronous-usage" class="section-name selfRef">Asynchronous Usage</a>
+          </h4>
+<p id="section-2.4.4-1">No operation in MLS requires two distinct clients or members to be
+online simultaneously. In particular, members participating in
+conversations protected using MLS can update shared keys, add or
+remove new members, and send messages and attachments without waiting
+for another user's reply.<a href="#section-2.4.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.4-2">Messaging systems that implement MLS have to provide a transport layer
+for delivering messages asynchronously and reliably.<a href="#section-2.4.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="access-control">
+<section id="section-2.4.5">
+          <h4 id="name-access-control">
+<a href="#section-2.4.5" class="section-number selfRef">2.4.5. </a><a href="#name-access-control" class="section-name selfRef">Access Control</a>
+          </h4>
+<p id="section-2.4.5-1">The MLS protocol allows each member of the messaging group to perform
+operations equally. This is because all clients within a group
+(members) have access to the shared cryptographic material. However
+every service/infrastructure have control over policies applied to
+their own clients. Applications managing MLS clients can be configured
+to allow for specific Group operations. An application can, for
+example, decide to provide specific permissions to a group
+administrator that will be the one to perform add and remove
+operations, but the flexibility is immense here. On the other hand, in
+many settings such as open discussion forums, joining can be allowed
+for anyone.<a href="#section-2.4.5-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.5-2">The MLS protocol can in certain modes can exchange unencrypted group
+operation messages. This flexibility is to allow services to perform
+access control tasks on behalf of the group.<a href="#section-2.4.5-2" class="pilcrow">¶</a></p>
+<p id="section-2.4.5-3">While the Application messages will always be encrypted, having the
+handshake messages in plaintext has inconveniences in terms of privacy
+as someone could collect the signatures on the handshake messages and
+use it for tracking.<a href="#section-2.4.5-3" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-2.4.5-4.1">
+              <strong>RECOMMENDATION:</strong>
+Prefer using encrypted group operation messages to avoid privacy
+issues related to non-encrypted signatures.<a href="#section-2.4.5-4.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-2.4.5-5">Note that in the default case of encrypted handshake messages, the
+application level must make sure that the access control policies are
+consistent across all clients to make sure that they remain in sync.
+If two different policies were applied, the clients might not accept
+or reject a group operation and end-up in different cryptographic
+states, breaking their ability to communicate.<a href="#section-2.4.5-5" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-2.4.5-6.1">
+              <strong>RECOMMENDATION:</strong>
+Avoid using inconsistent access control policies in the case of
+encrypted group operations.<a href="#section-2.4.5-6.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="recovery-after-state-loss">
+<section id="section-2.4.6">
+          <h4 id="name-recovery-after-state-loss">
+<a href="#section-2.4.6" class="section-number selfRef">2.4.6. </a><a href="#name-recovery-after-state-loss" class="section-name selfRef">Recovery After State Loss</a>
+          </h4>
+<p id="section-2.4.6-1">Conversation participants whose local MLS state is lost or corrupted
+can reinitialize their state and continue participating in the
+conversation.<a href="#section-2.4.6-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.6-2">[[OPEN ISSUE: The previous statement seems too strong, establish
+what exact functional requirement we have regarding state recovery.
+Previously: "This may entail some level of message loss, but
+does not result in permanent exclusion from the group."]]<a href="#section-2.4.6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="support-for-multiple-devices">
+<section id="section-2.4.7">
+          <h4 id="name-support-for-multiple-device">
+<a href="#section-2.4.7" class="section-number selfRef">2.4.7. </a><a href="#name-support-for-multiple-device" class="section-name selfRef">Support for Multiple Devices</a>
+          </h4>
+<p id="section-2.4.7-1">It is typically expected for users within a Group to own different
+devices.<a href="#section-2.4.7-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.7-2">A new device can be added to a group and be considered as a new client
+by the protocol. This client will not gain access to the history even
+if it is owned by someone who owns another member of the Group.
+Restoring history is typically not allowed at the protocol level but
+applications can elect to provide such a mechanism outside of MLS.
+Such mechanisms, if used, may undermine the FS and PCS guarantees
+provided by MLS.<a href="#section-2.4.7-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="extensibility-pluggability">
+<section id="section-2.4.8">
+          <h4 id="name-extensibility-pluggability">
+<a href="#section-2.4.8" class="section-number selfRef">2.4.8. </a><a href="#name-extensibility-pluggability" class="section-name selfRef">Extensibility / Pluggability</a>
+          </h4>
+<p id="section-2.4.8-1">Messages that do not affect the group state can carry an arbitrary
+payload with the purpose of sharing that payload between group
+members. No assumptions are made about the format of the payload.<a href="#section-2.4.8-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="federation">
+<section id="section-2.4.9">
+          <h4 id="name-federation">
+<a href="#section-2.4.9" class="section-number selfRef">2.4.9. </a><a href="#name-federation" class="section-name selfRef">Federation</a>
+          </h4>
+<p id="section-2.4.9-1">The protocol aims to be compatible with federated environments. While
+this document does not specify all necessary mechanisms required for
+federation, multiple MLS implementations can interoperate to form
+federated systems if they use compatible authentication mechanisms
+and infrastructure functionalities.<a href="#section-2.4.9-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="compatibility-with-future-versions-of-mls">
+<section id="section-2.4.10">
+          <h4 id="name-compatibility-with-future-v">
+<a href="#section-2.4.10" class="section-number selfRef">2.4.10. </a><a href="#name-compatibility-with-future-v" class="section-name selfRef">Compatibility with future versions of MLS</a>
+          </h4>
+<p id="section-2.4.10-1">It is important that multiple versions of MLS be able to coexist in
+the future.  Thus, MLS offers a version negotiation mechanism; this
+mechanism prevents version downgrade attacks where an attacker would
+actively rewrite messages with a lower protocol version than the ones
+originally offered by the endpoints. When multiple versions of MLS are
+available, the negotiation protocol guarantees that the version agreed
+upon will be the highest version supported in common by the group.<a href="#section-2.4.10-1" class="pilcrow">¶</a></p>
+<p id="section-2.4.10-2">In MLS 1.0, the creator of the group is responsible for selecting the
+best ciphersuite proposed across clients. Each client is able to
+verify availability of protocol version, ciphersuites and extensions
+at all times once he has at least received the first group operation
+message.<a href="#section-2.4.10-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="security-and-privacy-considerations">
+<section id="section-3">
+      <h2 id="name-security-and-privacy-consid">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-and-privacy-consid" class="section-name selfRef">Security and Privacy Considerations</a>
+      </h2>
+<p id="section-3-1">MLS adopts the Internet threat model <span>[<a href="#RFC3552" class="xref">RFC3552</a>]</span> and therefore
+assumes that the attacker has complete control of the network. It is
+intended to provide the security services described in the face of
+such attackers.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">-- The attacker can monitor the entire network<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">-- The attacker can read unprotected messages<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4">-- The attacker can generate and inject any message in the unprotected
+   transport layer.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">In addition, these guarantees are intended to degrade gracefully in
+the presence of compromise of the transport security links as well as
+of both Clients and elements of the messaging system, as described in
+the remainder of this section.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">Generally, MLS is designed under the assumption that the transport
+layer is present to protect metadata and privacy in general, while the
+MLS protocol is providing stronger guarantees such as confidentiality,
+integrity and authentication guarantees. Stronger properties such as
+deniability can also be achieved in specific architecture designs.<a href="#section-3-6" class="pilcrow">¶</a></p>
+<div id="message-secrecy-authentication">
+<section id="section-3.1">
+        <h3 id="name-message-secrecy-and-authent">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-message-secrecy-and-authent" class="section-name selfRef">Message Secrecy and Authentication</a>
+        </h3>
+<p id="section-3.1-1">The trust establishment step of the MLS protocol is followed by a
+conversation protection step where encryption is used by clients to
+transmit authenticated messages to other clients through the DS.
+This ensures that the DS does not have access to the group's private
+content.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">MLS aims to provide secrecy, integrity and authentication for all
+messages.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">Message Secrecy in the context of MLS means that only intended
+recipients (current group members), can read any message sent to the
+group, even in the context of an active attacker as described in the
+threat model.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">Message Integrity and Authentication mean that an honest Client can
+only accept a message if it was sent by a group member and that no
+Client can send a message which other Clients accept as being from
+another Client.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">A corollary to this statement is that the AS and the DS cannot read
+the content of messages sent between Members as they are not Members
+of the Group. MLS optionally provides additional protections regarding
+traffic analysis so as to reduce the ability of attackers, or a
+compromised member of the messaging system, to deduce the content of
+the messages depending on (for example) their size. One of these
+protections includes padding messages in order to produce ciphertexts
+of standard length. While this protection is highly recommended it is
+not mandatory as it can be costly in terms of performance for clients
+and the SP.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1-6">Message content can be deniable if the signature keys are exchanged
+over a deniable channel prior to signing messages.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+<div id="fs-and-pcs">
+<section id="section-3.1.1">
+          <h4 id="name-forward-and-post-compromise">
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-forward-and-post-compromise" class="section-name selfRef">Forward and Post-Compromise Security</a>
+          </h4>
+<p id="section-3.1.1-1">MLS provides additional protection regarding secrecy of past messages
+and future messages. These cryptographic security properties are
+Forward Secrecy (FS) and Post-Compromise Security (PCS).<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-2">FS means that access to all encrypted traffic history combined with an
+access to all current keying material on clients will not defeat the
+secrecy properties of messages older than the oldest key of the
+compromised client.
+Note that this means that clients have the extremely important role of
+deleting appropriate keys as soon as they have been used with the
+expected message, otherwise the secrecy of the messages and the
+security for MLS is considerably weakened.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-3">PCS means that if a group member's state is compromised at some time t
+but the group member subsequently performs an update at some time t',
+then all MLS guarantees apply to messages sent by the member after
+time t', and by other members after they have processed the
+update. For example, if an attacker learns all secrets known to Alice
+at time t, including both Alice's long-term secret keys and all shared
+group keys, but Alice performs a key update at time t', then the
+attacker is unable to violate any of the MLS security properties after
+the updates have been processed.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-4">Both of these properties are satisfied even against compromised
+DSs and ASs.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="non-repudiation-vs-deniability">
+<section id="section-3.1.2">
+          <h4 id="name-non-repudiation-vs-deniabil">
+<a href="#section-3.1.2" class="section-number selfRef">3.1.2. </a><a href="#name-non-repudiation-vs-deniabil" class="section-name selfRef">Non-Repudiation vs Deniability</a>
+          </h4>
+<p id="section-3.1.2-1">MLS provides strong authentication within a group, such that a group member
+cannot send a message that appears to be from another group member.
+Additionally, some services require that a recipient be able to prove to the
+service provider that a message was sent by a given client, in order to report
+abuse. MLS supports both of these use cases. In some deployments, these services
+are provided by mechanisms which allow the receiver to prove a message's origin
+to a third party (this if often called "non-repudiation"), but it should also be
+possible to operate MLS in a "deniable" mode where such proof is not possible.<a href="#section-3.1.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="considerations-for-attacks-outside-of-the-threat-model">
+<section id="section-3.2">
+        <h3 id="name-considerations-for-attacks-">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-considerations-for-attacks-" class="section-name selfRef">Considerations for attacks outside of the threat model</a>
+        </h3>
+<p id="section-3.2-1">Physical attacks on devices storing and executing MLS principals are
+not considered in depth in the threat model of the MLS protocol.
+While non-permanent, non-invasive attacks can sometime be equivalent
+to software attacks, physical attacks are considered outside of the
+MLS threat model.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Compromise scenarios, typically consist in a software adversary, which
+can maintain active adaptative compromise and arbitrarily change the
+behavior of the client or service.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">On the other hand, security goals consider that honest clients will
+always run the protocol according to its specification. This relies on
+implementations of the protocol to securely implement the
+specification, which remains non-trivial.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.2-4.1">
+            <strong>RECOMMENDATION:</strong>
+Additional steps should be taken to protect the device and the MLS
+clients from physical compromise. In such setting, HSMs and secure
+enclaves can be used to protect signature keys.<a href="#section-3.2-4.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal ulEmpty" id="section-3.2-4.2">More information will be available in the Server-Assist draft.<a href="#section-3.2-4.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-3.2-5">[[TODO: Reference to server assist when the draft is available.]]<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="transport-security-links">
+<section id="section-3.3">
+        <h3 id="name-transport-security-links">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-transport-security-links" class="section-name selfRef">Transport Security Links</a>
+        </h3>
+<p id="section-3.3-1">Any secure channel can be used as a transport layer to protect MLS
+messages such as QUIC, TLS, WireGuard or TOR. Though the MLS protocol
+is designed to consider the following threat-model:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">-- The attacker can read and write arbitrary messages inside the
+   secure transport channel.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-3">This departs from most threat models where we consider that the secure
+channel used for transport always provides secrecy. The reason for
+this consideration is that in the group setting active malicious
+insiders or adversarial services are be considered.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+<div id="metadata-protection-for-unencrypted-group-operations">
+<section id="section-3.3.1">
+          <h4 id="name-metadata-protection-for-une">
+<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-metadata-protection-for-une" class="section-name selfRef">Metadata protection for unencrypted group operations</a>
+          </h4>
+<p id="section-3.3.1-1">The main use of the secure transport layer for MLS is to protect
+the already limited amount of metadata. Very little information is
+contained in the unencrypted header of the MLS Protocol message
+format for group operation messages, and application messages are
+always encrypted in MLS.<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-2">Contrary to popular messaging services, the full list of recipients
+cannot be sent to the server for dispatching messages because that
+list is potentially extremely large in MLS. So, the metadata typically
+consists of a pseudo-random Group Identifier (GID), an numerical
+index referring to the key needed to decrypt the ciphertext content and
+another numerical value to determine the epoch of the group (the
+number of group operations that have been performed).<a href="#section-3.3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-3">MLS protocol provides an authenticated "Authenticated Additional
+Data" field for application to make data available outside the
+MLSCiphertext.<a href="#section-3.3.1-3" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.3.1-4.1">
+              <strong>RECOMMENDATION:</strong>
+Use the "Authenticated Additional Data" field of the MLSCiphertext
+message instead of using other unauthenticated means of sending
+metadata throughout the infrastructure. If the data is private, the
+infrastructure should use encrypted Application messages instead.<a href="#section-3.3.1-4.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.3.1-5">Even though, some of these metadata information are not secret
+payloads, in correlation with other data, a network observer might be
+able to reconstruct sensitive information. Using a secure channel to
+transfer this information will prevent a network attacker to access
+this MLS protocol metadata if it cannot compromise the secure channel.<a href="#section-3.3.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.3.1-6">More importantly, there is one specific case where having no secure
+channel to exchange the MLS messages can have a serious impact on
+privacy. In the case of unencrypted group operation messages,
+observing the signatures of the Group Operation messages may lead an
+adversary to extract information about the group memberships.<a href="#section-3.3.1-6" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.3.1-7.1">
+              <strong>RECOMMENDATION:</strong>
+Never use the unencrypted mode for group operations without using a
+secure channel for the transport layer.<a href="#section-3.3.1-7.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="dos-protection">
+<section id="section-3.3.2">
+          <h4 id="name-dos-protection">
+<a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-dos-protection" class="section-name selfRef">DoS protection</a>
+          </h4>
+<p id="section-3.3.2-1">In general we do not consider Denial of Service (DoS) resistance to be
+the responsibility of the protocol. However, it should not be possible
+for anyone aside from the DS to perform a trivial DoS attack from
+which it is hard to recover. This can be achieved through the secure
+transport layer.<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.2-2">In the centralized setting DoS protection can typically be performed
+by using tickets or cookies which identify users to a service for a
+certain number of connections. Such a system helps preventing
+anonymous clients to send arbitrary numbers of Group Operation
+messages to the Delivery Service or the MLS clients.<a href="#section-3.3.2-2" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.3.2-3.1">
+              <strong>RECOMMENDATION:</strong>
+Anonymous credentials can be used in order to help DoS attacks
+prevention, in a privacy preserving manner. Note that the privacy of
+these mechanisms has to be adjusted in accordance with the privacy
+expected from the secure transport links. (See more discussion
+further down.)<a href="#section-3.3.2-3.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+<div id="message-suppression-and-error-correction">
+<section id="section-3.3.3">
+          <h4 id="name-message-suppression-and-err">
+<a href="#section-3.3.3" class="section-number selfRef">3.3.3. </a><a href="#name-message-suppression-and-err" class="section-name selfRef">Message suppression and error correction</a>
+          </h4>
+<p id="section-3.3.3-1">The MLS protocol is particularly sensitive about Group Operation
+message loss and reordering. This is because in the default setting,
+MLS clients have to process those specific messages in order to have a
+synchronized group state, after what the MLS protocol efficiently
+generates keys for application messages.<a href="#section-3.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3.3-2">The Delivery Service can have the role of helping with reliability,
+but is mainly useful for reliability in the asynchronous aspect of the
+communication between MLS clients.<a href="#section-3.3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3.3-3">While it is difficult or impossible to prevent a network adversary to
+suppress payloads in transit, in certain infrastructures such as banks
+or governments settings, unidirectional transports can be used and be
+enforced via electronic or physical devices such as diodes. This can
+lead to payload corruption which does not affect the security or
+privacy properties of the MLS Protocol but does affect the reliability
+of the service. In that case specific measures can be taken to ensure
+the appropriate level of redundancy and quality of service for MLS.<a href="#section-3.3.3-3" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.3.3-4.1">
+              <strong>RECOMMENDATION:</strong>
+If unidirectional transport is used for the secure transport
+channel, prefer using a protocol which provides Forward Error
+Correction.<a href="#section-3.3.3-4.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="delivery-service-compromise">
+<section id="section-3.4">
+        <h3 id="name-delivery-service-compromise">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-delivery-service-compromise" class="section-name selfRef">Delivery Service Compromise</a>
+        </h3>
+<p id="section-3.4-1">MLS is intended to provide strong guarantees in the face of compromise
+of the DS. Even a totally compromised DS should not be able to read
+messages or inject messages that will be acceptable to legitimate
+clients. It should also not be able to undetectably remove, reorder
+or replay messages.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-2">However, a DS can mount a variety of DoS attacks on the system,
+including total DoS attacks (where it simply refuses to forward any
+messages) and partial DoS attacks (where it refuses to forward
+messages to and from specific clients).
+As noted in <a href="#delivery-guarantees" class="xref">Section 2.3.3</a>, these attacks are only partially
+detectable by clients without an out-of-band channel. Ultimately,
+failure of the DS to provide reasonable service must be dealt with as
+a customer service matter, not via technology.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.4-3">Because the DS is responsible for providing the initial keying
+material to clients, it can provide stale keys. This does not
+inherently lead to compromise of the message stream, but does allow it
+to attack forward security to a limited extent. This threat can be
+mitigated by having initial keys expire.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<div id="privacy-of-delivery-and-push-notifications">
+<section id="section-3.4.1">
+          <h4 id="name-privacy-of-delivery-and-pus">
+<a href="#section-3.4.1" class="section-number selfRef">3.4.1. </a><a href="#name-privacy-of-delivery-and-pus" class="section-name selfRef">Privacy of delivery and push notifications</a>
+          </h4>
+<p id="section-3.4.1-1">An important mechanism that is often ignored from the privacy
+considerations are the push-tokens. In many modern messaging
+architectures, applications are using push notification mechanisms
+typically provided by OS vendors. This is to make sure that when
+messages are available at the Delivery Service (or by other mechanisms
+if the DS is not a central server), the recipient application on a
+device knows about it. Sometimes the push notification can contain the
+application message itself which saves a round trip with the DS.<a href="#section-3.4.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-2">To "push" this information to the device, the service provider and the
+OS infrastructures use unique per-device, per-application identifiers
+called push-tokens. This means that the push notification provider and
+the service provider have information on which devices receive
+information and at which point in time.<a href="#section-3.4.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-3">Even though they can't necessarily access the content, which is
+typically encrypted MLS messages, the service provider and the push
+notification provider have to be trusted to avoid making correlation
+on which devices are recipients of the same message.<a href="#section-3.4.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.4.1-4">For secure messaging systems, push notification are often sent
+real-time as it is not acceptable to create artificial delays for
+message retrieval.<a href="#section-3.4.1-4" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.4.1-5.1">
+              <strong>RECOMMENDATION:</strong>
+If real time notification are not necessary and that specific steps
+must be taken to improve privacy, one can delay notifications
+randomly across recipient devices using a mixnet or other
+techniques.<a href="#section-3.4.1-5.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.4.1-6">Note that it is quite easy for legal requests to ask the service
+provider for the push-token associated to an identifier and perform a
+second request to the company operating the push-notification system
+to get information about the device, which is often linked with a real
+identity via a cloud account, a credit card or other information.<a href="#section-3.4.1-6" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.4.1-7.1">
+              <strong>RECOMMENDATION:</strong>
+If stronger privacy guarantees are needed vis-a-vis of the push
+notification provider, the client can choose to periodically connect
+to the Delivery Service without the need of a dedicated push
+notification infrastructure.<a href="#section-3.4.1-7.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="authentication-service-compromise">
+<section id="section-3.5">
+        <h3 id="name-authentication-service-comp">
+<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-authentication-service-comp" class="section-name selfRef">Authentication Service Compromise</a>
+        </h3>
+<p id="section-3.5-1">The Authentication Service design is left to the infrastructure
+designers. In most designs, a compromised AS is a serious matter, as
+the AS can serve incorrect or attacker-provided identities to clients.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.5-2">-- The attacker can link an identity to a credential<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<p id="section-3.5-3">-- The attacker can generate new credentials<a href="#section-3.5-3" class="pilcrow">¶</a></p>
+<p id="section-3.5-4">-- The attacker can sign new credentials<a href="#section-3.5-4" class="pilcrow">¶</a></p>
+<p id="section-3.5-5">-- The attacker can publish or distribute credentials<a href="#section-3.5-5" class="pilcrow">¶</a></p>
+<p id="section-3.5-6">Infrastructures that provide cryptographic material or credentials in
+place of the MLS client (which is under the control of the user) have
+often the ability to use the associated secrets to perform operations
+on behalf of the user, which is unacceptable in many situations. Other
+mechanisms can be used to prevent this issue, such as the service
+blessing cryptographic material used by an MLS client.<a href="#section-3.5-6" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.5-7.1">
+            <strong>RECOMMENDATION:</strong>
+Make clients submit signature public keys to the AS, this is usually
+better than the AS generating public key pairs because the AS
+cannot sign on behalf of the client. This is a benefit of a Public
+Key Infrastructure in the style of the Internet PKI.<a href="#section-3.5-7.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-3.5-8">An attacker that can generate or sign new credential may or may not
+have access to the underlying cryptographic material necessary to
+perform such operations. In that last case, it results in windows of
+time for which all emitted credentials might be compromised.<a href="#section-3.5-8" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.5-9.1">
+            <strong>RECOMMENDATION:</strong>
+Using HSMs to store the root signature keys to limit the ability of
+an adversary with no physical access to extract the top-level
+signature key.<a href="#section-3.5-9.1" class="pilcrow">¶</a>
+</li>
+        </ul>
+<div id="authentication-compromise-ghost-users-and-impersonations">
+<section id="section-3.5.1">
+          <h4 id="name-authentication-compromise-g">
+<a href="#section-3.5.1" class="section-number selfRef">3.5.1. </a><a href="#name-authentication-compromise-g" class="section-name selfRef">Authentication compromise: Ghost users and impersonations</a>
+          </h4>
+<p id="section-3.5.1-1">One thing for which the MLS Protocol is designed for is to make sure
+that all clients know who is in the group at all times. This means
+that - if all Members of the group and the Authentication Service are
+honest - no other parties than the members of the current group can
+read and write messages protected by the protocol for that Group.<a href="#section-3.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-2">Beware though, the link between the cryptographic identity of the
+Client and the real identity of the User is important.
+With some Authentication Service designs, a private or centralized
+authority can be trusted to generate or validate signature keypairs
+used in the MLS protocol. This is typically the case in some of the
+biggest messaging infrastructures.<a href="#section-3.5.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-3">While this service is often very well protected from external
+attackers, it might be the case that this service is compromised.
+In such infrastructure, the AS could generate or validate a signature
+keypair for an identity which is not the expected one. Because a user
+can have many MLS clients running the MLS protocol, it possibly has
+many signature keypairs for multiple devices.<a href="#section-3.5.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-4">In the case where an adversarial keypair is generated for a specific
+identity, an infrastructure without any transparency mechanism or
+out-of-band authentication mechanism could inject a malicious client
+into a group by impersonating a user. This is especially the case in
+large groups where the UI might not reflect all the changes back the
+the users.<a href="#section-3.5.1-4" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.5.1-5.1">
+              <strong>RECOMMENDATION:</strong>
+Make sure that MLS clients reflect all the membership changes to the
+users as they happen. If a choice has to be made because the number
+of notifications is too high, a public log should be maintained in
+the state of the device so that user can examine it.<a href="#section-3.5.1-5.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.5.1-6">While the ways to handle MLS credentials are not defined by the
+protocol or the architecture documents, the MLS protocol has been
+designed with a mechanism that can be used to provide out-of-band
+authentication to users. The "authentication_secret" generated for
+each user at each epoch of the group is a one-time, per client,
+authentication secret which can be exchanged between users to prove
+their identity to each other. This can be done for instance using a QR
+code that can be scanned by the other parties.<a href="#section-3.5.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-7">Another way to improve the security for the users is to provide a
+transparency mechanism which allows each user to check if credentials
+used in groups have been published in the transparency log. Another
+benefit of this mechanism is for revocation. The users of a group
+could check for revoked keys (in case of compromise detection) using a
+mechanism such as CRLite or some more advanced privacy preserving
+technology.<a href="#section-3.5.1-7" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.5.1-8.1">
+              <strong>RECOMMENDATION:</strong>
+Provide a Key Transparency and Out-of-Band authentication mechanisms
+to limit the impact of an Authentication Service compromise.<a href="#section-3.5.1-8.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.5.1-9">We note, again, that as described prior to that section, the
+Authentication Service is facultative to design a working
+infrastructure and can be replaced by many mechanisms such as
+establishing prior one-to-one deniable channels, gossiping, or using
+TOFU for credentials used by the MLS Protocol.<a href="#section-3.5.1-9" class="pilcrow">¶</a></p>
+<p id="section-3.5.1-10">Another important consideration is the ease of redistributing new keys
+on client compromise, which helps recovering security faster in
+various cases.<a href="#section-3.5.1-10" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="privacy-of-the-group-membership">
+<section id="section-3.5.2">
+          <h4 id="name-privacy-of-the-group-member">
+<a href="#section-3.5.2" class="section-number selfRef">3.5.2. </a><a href="#name-privacy-of-the-group-member" class="section-name selfRef">Privacy of the Group Membership</a>
+          </h4>
+<p id="section-3.5.2-1">Often, expectation from users is that the infrastructure will not
+retain the ability to constantly map the user identity to signature
+public keys of the MLS protocol. Some infrastructures will keep a
+mapping between signature public keys of clients and user
+identities. This can benefit an adversary that has compromised the AS
+(or required access according to regulation) the ability of monitoring
+unencrypted traffic and correlate the messages exchanged within the
+same group.<a href="#section-3.5.2-1" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.5.2-2.1">
+              <strong>RECOMMENDATION:</strong>
+Always use encrypted group operation messages to reduce issues
+related to privacy.<a href="#section-3.5.2-2.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.5.2-3">In certain cases, the adversary can access to specific bindings
+between public keys and identities. If the signature keys are reused
+across groups, the adversary can get more information about the
+targeted user.<a href="#section-3.5.2-3" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.5.2-4.1">
+              <strong>RECOMMENDATION:</strong>
+Do not use the same signature keypair across groups.<a href="#section-3.5.2-4.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.5.2-5.1">
+              <strong>RECOMMENDATION:</strong>
+Separate the service binding the identities and the public keys from
+the service which generates or validates the credentials or
+cryptographic material of the Clients.<a href="#section-3.5.2-5.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="shared-considerations-regarding-adversarial-as-or-ds-services">
+<section id="section-3.6">
+        <h3 id="name-shared-considerations-regar">
+<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-shared-considerations-regar" class="section-name selfRef">Shared considerations regarding adversarial AS or DS services</a>
+        </h3>
+<div id="privacy-of-the-network-connections">
+<section id="section-3.6.1">
+          <h4 id="name-privacy-of-the-network-conn">
+<a href="#section-3.6.1" class="section-number selfRef">3.6.1. </a><a href="#name-privacy-of-the-network-conn" class="section-name selfRef">Privacy of the network connections</a>
+          </h4>
+<p id="section-3.6.1-1">There are many scenarios leading to communication between the
+application on a device and the Delivery Service or the Authentication
+Service. In particular when:<a href="#section-3.6.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.6.1-2.1">The application connects to the Authentication Service to generate
+or validate a new credential before distributing it.<a href="#section-3.6.1-2.1" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.6.1-2.2">The application fetches credentials at the Delivery Service prior to
+creating a messaging group (one-to-one or more than two clients).<a href="#section-3.6.1-2.2" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.6.1-2.3">The application fetches service provider information or messages on
+the Delivery Service.<a href="#section-3.6.1-2.3" class="pilcrow">¶</a>
+</li>
+            <li class="normal" id="section-3.6.1-2.4">The application sends service provider information or messages to
+the Delivery Service.<a href="#section-3.6.1-2.4" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.6.1-3">In all these cases, the application will often connect to the device
+via a secure transport which leaks information about the origin of the
+request such as the IP address and depending on the protocol the MAC
+address of the device.<a href="#section-3.6.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.6.1-4">Similar concern exist in the peer-to-peer use cases of MLS.<a href="#section-3.6.1-4" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.6.1-5.1">
+              <strong>RECOMMENDATION:</strong>
+In the case where privacy or anonymity is important, using adequate
+protection such as TOR or a VPN can improve metadata protection.<a href="#section-3.6.1-5.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.6.1-6">More generally, using anonymous credential in an MLS based
+architecture might not be enough to provide strong privacy or
+anonymity properties.<a href="#section-3.6.1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="client-compromise">
+<section id="section-3.7">
+        <h3 id="name-client-compromise">
+<a href="#section-3.7" class="section-number selfRef">3.7. </a><a href="#name-client-compromise" class="section-name selfRef">Client Compromise</a>
+        </h3>
+<p id="section-3.7-1">The MLS protocol adopts a threat model which includes multiple forms
+of Client compromises. While adversaries are in a very strong position
+if they have compromised an MLS client, there are still situations
+where security guarantees can be recovered thanks to the PCS
+properties achieved by the MLS protocol.<a href="#section-3.7-1" class="pilcrow">¶</a></p>
+<p id="section-3.7-2">In this section we will explore the consequences and recommendations
+regarding the following compromise scenarios:<a href="#section-3.7-2" class="pilcrow">¶</a></p>
+<p id="section-3.7-3">-- The attacker has access to a specific symmetric encryption key<a href="#section-3.7-3" class="pilcrow">¶</a></p>
+<p id="section-3.7-4">-- The attacker has access to the group secrets for one group<a href="#section-3.7-4" class="pilcrow">¶</a></p>
+<p id="section-3.7-5">-- The attacker has access to a signature oracle for any group<a href="#section-3.7-5" class="pilcrow">¶</a></p>
+<p id="section-3.7-6">-- The attacker has access to the signature key for one group<a href="#section-3.7-6" class="pilcrow">¶</a></p>
+<p id="section-3.7-7">-- The attacker has access to all secrets of a user for all groups
+   (full state compromise)<a href="#section-3.7-7" class="pilcrow">¶</a></p>
+<p id="section-3.7-8">[[TODO: Cite the research papers in the context of these compromise models]]<a href="#section-3.7-8" class="pilcrow">¶</a></p>
+<p id="section-3.7-9">Recall that the MLS protocol provides chains of AEAD keys, per sender
+that are generated from Group Secrets. These keys are used to protect
+MLS Plaintext messages which can be Group Operation or Application
+messages. The Group Operation messages offer an additional protection
+as the secret exchanged within the TreeKEM group key agreement are
+public-key encrypted to subgroups with HPKE.<a href="#section-3.7-9" class="pilcrow">¶</a></p>
+<div id="compromise-of-aead-key-material">
+<section id="section-3.7.1">
+          <h4 id="name-compromise-of-aead-key-mate">
+<a href="#section-3.7.1" class="section-number selfRef">3.7.1. </a><a href="#name-compromise-of-aead-key-mate" class="section-name selfRef">Compromise of AEAD key material</a>
+          </h4>
+<p id="section-3.7.1-1">In some circumstances, adversaries may have access to specific AEAD
+keys and nonces which protect an Application or a Group Operation
+message. While this is a very weak kind of compromise, it can be
+realistic in cases of implementation vulnerabilities where only part
+of the memory leaks to the adversary.<a href="#section-3.7.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.7.1-2">When an AEAD key is compromised, the adversary has access to a set of
+AEAD keys for the same chain and the same epoch, hence can decrypt
+messages sent using keys of this chain. An adversary cannot send a
+message to a group which appears to be from any valid client since
+they cannot forge the signature.<a href="#section-3.7.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.7.1-3">The MLS protocol will ensure that an adversary cannot compute any
+previous AEAD keys for the same epoch, or any other epochs.  Because
+of its Forward Secrecy guarantees, MLS will also retain secrecy of all
+other AEAD keys generated for <em>other</em> MLS clients, outside this
+dedicated chain of AEAD keys and nonces, even within the epoch of the
+compromise. However the MLS protocol does not provide Post Compromise
+Secrecy for AEAD encryption within an epoch. This means that if the
+AEAD key of a chain is compromised, the adversary can compute an
+arbitrary number of subsequent AEAD keys for that chain.<a href="#section-3.7.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.7.1-4">These guarantees are ensured by the structure of the MLS key schedule
+which provides Forward Secrecy for these AEAD encryptions, across the
+messages within the epoch and also across previous epochs.  Those
+chains are completely disjoint and compromising keys across the
+chains would mean that some Group Secrets have been compromised, which
+is not the case in this attack scenario (we explore stronger
+compromise scenarios as part of the following sections).<a href="#section-3.7.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.7.1-5">MLS provides Post-Compromise Secrecy against an active adaptative
+attacker across epochs for AEAD encryption, which means that as soon
+as the epoch is changed, if the attacker does not have access to more
+secret material they won't be able to access any protected messages
+from future epochs.<a href="#section-3.7.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.7.1-6">In the case of an Application message, an AEAD key compromise means
+that the encrypted application message will be leaked as well as the
+signature over that message. This means, that the compromise has both
+confidentiality and privacy implications on the future AEAD
+encryptions of that chain.
+In the case of a Group Operation message, only the privacy is
+affected, as the signature is revealed, because the secrets themselves
+are protected by HPKE encryption.<a href="#section-3.7.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.7.1-7">Note that under that compromise scenario, authentication is not
+affected in neither of these cases.  As every member of the group can
+compute the AEAD keys for all the chains (they have access to the
+Group Secrets) in order to send and receive messages, the
+authentication provided by the AEAD encryption layer of the common
+framing mechanism is very weak. Successful decryption of an AEAD
+encrypted message only guarantees that a member of the group sent the
+message.<a href="#section-3.7.1-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="compromise-of-the-group-secrets-of-a-single-group-for-one-or-more-group-epochs">
+<section id="section-3.7.2">
+          <h4 id="name-compromise-of-the-group-sec">
+<a href="#section-3.7.2" class="section-number selfRef">3.7.2. </a><a href="#name-compromise-of-the-group-sec" class="section-name selfRef">Compromise of the Group Secrets of a single group for one or more group epochs</a>
+          </h4>
+<p id="section-3.7.2-1">The attack scenario considering an adversary gaining access to a set
+of Group secrets is significantly stronger. This can typically be the
+case when a member of the group is compromised.
+For this scenario, we consider that the signature keys are not
+compromised. This can be the case for instance if the adversary has
+access to part of the memory containing the group secrets but not to
+the signature keys which might be stored in a secure enclave.<a href="#section-3.7.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.7.2-2">In this scenario, the adversary gains the ability to compute any
+number of AEAD encryption keys for any AEAD chains and can encrypt and
+decrypt all messages for the compromised epochs.<a href="#section-3.7.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.7.2-3">If the adversary is passive, it is expected from the PCS properties of
+the MLS protocol that, as soon as an honest Commit message is sent by
+the compromised party, the next epochs will provide message secrecy.<a href="#section-3.7.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.7.2-4">If the adversary is active, the adversary can follow the protocol and
+perform updates on behalf of the compromised party with no ability to
+an honest group to recover message secrecy. However, MLS provides PCS
+against active adaptative attackers through its Remove group
+operation. This means that, as long as other members of the group are
+honest, the protocol will guarantee message secrecy for all messages
+exchanged in the epochs after the compromised party has been removed.<a href="#section-3.7.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="compromise-by-an-active-adversary-with-the-ability-to-sign-messages">
+<section id="section-3.7.3">
+          <h4 id="name-compromise-by-an-active-adv">
+<a href="#section-3.7.3" class="section-number selfRef">3.7.3. </a><a href="#name-compromise-by-an-active-adv" class="section-name selfRef">Compromise by an active adversary with the ability to sign messages</a>
+          </h4>
+<p id="section-3.7.3-1">Under such a scenario, where an active adversary has compromised an
+MLS client, two different settings emerge. In the strongest compromise
+scenario, the attacker has access to the signing key and can forge
+authenticated messages. In a weaker, yet realistic scenario, the
+attacker has compromised a client but the client signature keys are
+protected with dedicated hardware features which do not allow direct
+access to the value of the private key and instead provide a signature
+API.<a href="#section-3.7.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.7.3-2">When considering an active adaptative attacker with access to a
+signature oracle, the compromise scenario implies a significant
+impact on both the secrecy and authentication guarantees of the
+protocol, especially if the attacker also has access to the group
+secrets. In that case both secrecy and authentication are broken.
+The attacker can generate any message, for the current and future
+epochs until an honest update from the compromised client happens.<a href="#section-3.7.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.7.3-3">Note that under this compromise scenario, the attacker can perform all
+operations which are available to an legitimate client even without
+access to the actual value of the signature key.<a href="#section-3.7.3-3" class="pilcrow">¶</a></p>
+<p id="section-3.7.3-4">Without access to the group secrets, the adversary will not have the
+ability to generate messages which look valid to other members of the
+group and to the infrastructure as they need to have access to group
+secrets to compute the encryption keys or the membership tag.<a href="#section-3.7.3-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="compromise-of-the-authentication-with-access-to-a-signature-key">
+<section id="section-3.7.4">
+          <h4 id="name-compromise-of-the-authentic">
+<a href="#section-3.7.4" class="section-number selfRef">3.7.4. </a><a href="#name-compromise-of-the-authentic" class="section-name selfRef">Compromise of the authentication with access to a signature key</a>
+          </h4>
+<p id="section-3.7.4-1">DISCLAIMER: Significant work remains in this section.
+[[TODO: Remove disclaimer.]]<a href="#section-3.7.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.7.4-2">The difference between having access to the value of the signature key
+and only having access to a signing oracle is not about the ability of
+an active adaptative network attacker to perform different operations
+during the time of the compromise, the attacker can perform every
+operations available to a legitimate client in both cases.<a href="#section-3.7.4-2" class="pilcrow">¶</a></p>
+<p id="section-3.7.4-3">There is a significant difference, however in terms of recovery after
+a compromise.<a href="#section-3.7.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.7.4-4">Because of the PCS guarantees provided by the MLS protocol, when a
+previously compromised client performs an honest Commit which is not
+under the control of the adversary, both secrecy and authentication of
+messages can be recovered in the case where the attacker didn't get
+access to the key. Because the adversary doesn't have the key and has
+lost the ability to sign messages, they cannot authenticate messages
+on behalf of the compromised party, even if they still have control
+over some group keys by colluding with other members of the group.<a href="#section-3.7.4-4" class="pilcrow">¶</a></p>
+<p id="section-3.7.4-5">This is in contrast with the case where the signature key is leaked.
+In that case PCS of the MLS protocol will eventually allow recovery of
+the authentication of messages for future epochs but only after
+compromised parties refresh their credentials securely.<a href="#section-3.7.4-5" class="pilcrow">¶</a></p>
+<p id="section-3.7.4-6">Beware that in both oracle and private key access, an active
+adaptative attacker, can follow the protocol and request to update its
+own credential. This in turn induce a signature key rotation which
+could provide the attacker with part or the full value of the private
+key depending on the architecture of the service provider.<a href="#section-3.7.4-6" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.7.4-7.1">
+              <strong>RECOMMENDATION:</strong>
+Signature private keys should be compartmentalized from other
+secrets and preferably protected by an HSM or dedicated hardware
+features to allow recovery of the authentication for future messages
+after a compromised.<a href="#section-3.7.4-7.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.7.4-8">Even if the dedicated hardware approach is used, ideally, neither the
+Client or the Authentication service alone should provide the
+signature private key. Both should contribute to the key and it should
+be stored securely by the client with no direct access.<a href="#section-3.7.4-8" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-consideration-in-the-context-of-a-full-state-compromise">
+<section id="section-3.7.5">
+          <h4 id="name-security-consideration-in-t">
+<a href="#section-3.7.5" class="section-number selfRef">3.7.5. </a><a href="#name-security-consideration-in-t" class="section-name selfRef">Security consideration in the context of a full state compromise</a>
+          </h4>
+<p id="section-3.7.5-1">In real-world compromise scenarios, it is often the case that
+adversaries target specific devices to obtain parts of the memory or
+even the ability to execute arbitrary code in the targeted device.<a href="#section-3.7.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.7.5-2">Also, recall that in this setting, the application will often retain
+the unencrypted messages. If so, the adversary does not have to break
+encryption at all to access sent and received messages. Messages may
+also be send by using the application to instruct the protocol
+implementation.<a href="#section-3.7.5-2" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.7.5-3.1">
+              <strong>RECOMMENDATION:</strong>
+If messages are stored on the device, they should be protected using
+encryption at rest, and the keys used should be stored
+securely using dedicated mechanisms on the device.<a href="#section-3.7.5-3.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.7.5-4.1">
+              <strong>RECOMMENDATION:</strong>
+If the threat model of the system is against an adversary which can
+access the messages on the device without even needing to attack
+MLS, the application should delete plaintext messages and
+ciphertexts immediately after encryption or decryption.<a href="#section-3.7.5-4.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.7.5-5">Even though, from the strict point of view of the security
+formalization, a ciphertext is always public and will forever be,
+there is no loss in trying to erase ciphertexts as much as possible.<a href="#section-3.7.5-5" class="pilcrow">¶</a></p>
+<p id="section-3.7.5-6">Note that this document makes a clear distinction between the way
+signature keys and other group shared secrets must be handled.
+In particular, a large set of group secrets cannot necessarily assumed
+to be protected by an HSM or secure enclave features. This is
+especially true because these keys are extremely frequently used and
+changed with each message received by a client.<a href="#section-3.7.5-6" class="pilcrow">¶</a></p>
+<p id="section-3.7.5-7">However, the signature private keys are mostly used by clients to send
+a message. They also are providing the strong authentication
+guarantees to other clients, hence we consider that their protection
+by additional security mechanism should be a priority.<a href="#section-3.7.5-7" class="pilcrow">¶</a></p>
+<p id="section-3.7.5-8">Overall there is no way to detect or prevent these compromise, as
+discussed in the previous sections, performing separation of the
+application secret states can help recovery after compromise, this is
+the case for signature keys but similar concern exists for the
+encryption private key used in the TreeKEM Group Key Agreement.<a href="#section-3.7.5-8" class="pilcrow">¶</a></p>
+<ul class="normal ulEmpty">
+<li class="normal ulEmpty" id="section-3.7.5-9.1">
+              <strong>RECOMMENDATION:</strong>
+The secret keys used for public key encryption should be stored
+similarly to the way the signature keys are stored as key can be
+used to decrypt the group operation messages and contain the secret
+material used to compute all the group secrets.<a href="#section-3.7.5-9.1" class="pilcrow">¶</a>
+</li>
+          </ul>
+<p id="section-3.7.5-10">Even if secure enclaves are not perfectly secure, or even completely
+broken, adopting additional protections for these keys can ease
+recovery of the secrecy and authentication guarantees after a
+compromise where for instance, an attacker can sign messages without
+having access to the key. In certain contexts, the rotation of
+credentials might only be triggered by the AS through ACLs, hence be
+outside of the capabilities of the attacker.<a href="#section-3.7.5-10" class="pilcrow">¶</a></p>
+<p id="section-3.7.5-11">[[TODO: Considerations for Signature keys being reused or not across groups]]<a href="#section-3.7.5-11" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="more-attack-scenarios">
+<section id="section-3.7.6">
+          <h4 id="name-more-attack-scenarios">
+<a href="#section-3.7.6" class="section-number selfRef">3.7.6. </a><a href="#name-more-attack-scenarios" class="section-name selfRef">More attack scenarios</a>
+          </h4>
+<p id="section-3.7.6-1">[[TODO: Make examples for more complex attacks, cross groups,
+multi collusions...]]<a href="#section-3.7.6-1" class="pilcrow">¶</a></p>
+<p id="section-3.7.6-2">[[TODO: Do we discuss PCFS in this document? If yes, where?]]<a href="#section-3.7.6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-4">
+      <h2 id="name-iana-considerations">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-4-1">This document makes no requests of IANA.<a href="#section-4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="contributors">
+<section id="section-5">
+      <h2 id="name-contributors">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-contributors" class="section-name selfRef">Contributors</a>
+      </h2>
+<ul class="normal">
+<li class="normal" id="section-5-1.1">
+          <p id="section-5-1.1.1">Katriel Cohn-Gordon<a href="#section-5-1.1.1" class="pilcrow">¶</a></p>
+<p id="section-5-1.1.2">
+University of Oxford<a href="#section-5-1.1.2" class="pilcrow">¶</a></p>
+<p id="section-5-1.1.3">
+me@katriel.co.uk<a href="#section-5-1.1.3" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-1.2">
+          <p id="section-5-1.2.1">Cas Cremers<a href="#section-5-1.2.1" class="pilcrow">¶</a></p>
+<p id="section-5-1.2.2">
+University of Oxford<a href="#section-5-1.2.2" class="pilcrow">¶</a></p>
+<p id="section-5-1.2.3">
+cremers@cispa.de<a href="#section-5-1.2.3" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-1.3">
+          <p id="section-5-1.3.1">Thyla van der Merwe<a href="#section-5-1.3.1" class="pilcrow">¶</a></p>
+<p id="section-5-1.3.2">
+Royal Holloway, University of London<a href="#section-5-1.3.2" class="pilcrow">¶</a></p>
+<p id="section-5-1.3.3">
+thyla.van.der@merwe.tech<a href="#section-5-1.3.3" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-1.4">
+          <p id="section-5-1.4.1">Jon Millican<a href="#section-5-1.4.1" class="pilcrow">¶</a></p>
+<p id="section-5-1.4.2">
+Facebook<a href="#section-5-1.4.2" class="pilcrow">¶</a></p>
+<p id="section-5-1.4.3">
+jmillican@fb.com<a href="#section-5-1.4.3" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-1.5">
+          <p id="section-5-1.5.1">Raphael Robert<a href="#section-5-1.5.1" class="pilcrow">¶</a></p>
+<p id="section-5-1.5.2">
+Wire<a href="#section-5-1.5.2" class="pilcrow">¶</a></p>
+<p id="section-5-1.5.3">
+raphael@wire.com<a href="#section-5-1.5.3" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<section id="section-6">
+      <h2 id="name-informative-references">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+      </h2>
+<dl class="references">
+<dt id="KeyTransparency">[KeyTransparency]</dt>
+      <dd>
+<span class="refAuthor">Google, .</span>, <span class="refTitle">"Key Transparency"</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://KeyTransparency.org">https://KeyTransparency.org</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="MLSPROTO">[MLSPROTO]</dt>
+      <dd>
+<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Beurdouche, B.</span>, <span class="refAuthor">Millican, J.</span>, <span class="refAuthor">Omara, E.</span>, <span class="refAuthor">Cohn-Gordon, K.</span>, and <span class="refAuthor">R. Robert</span>, <span class="refTitle">"Messaging Layer Security Protocol"</span>, <time datetime="2018" class="refDate">2018</time>. </dd>
+<dd class="break"></dd>
+<dt id="RFC3552">[RFC3552]</dt>
+      <dd>
+<span class="refAuthor">Rescorla, E.</span> and <span class="refAuthor">B. Korver</span>, <span class="refTitle">"Guidelines for Writing RFC Text on Security Considerations"</span>, <span class="seriesInfo">BCP 72</span>, <span class="seriesInfo">RFC 3552</span>, <span class="seriesInfo">DOI 10.17487/RFC3552</span>, <time datetime="2003-07" class="refDate">July 2003</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc3552">https://datatracker.ietf.org/doc/html/rfc3552</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6120">[RFC6120]</dt>
+      <dd>
+<span class="refAuthor">Saint-Andre, P.</span>, <span class="refTitle">"Extensible Messaging and Presence Protocol (XMPP): Core"</span>, <span class="seriesInfo">RFC 6120</span>, <span class="seriesInfo">DOI 10.17487/RFC6120</span>, <time datetime="2011-03" class="refDate">March 2011</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc6120">https://datatracker.ietf.org/doc/html/rfc6120</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7049">[RFC7049]</dt>
+      <dd>
+<span class="refAuthor">Bormann, C.</span> and <span class="refAuthor">P. Hoffman</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR)"</span>, <span class="seriesInfo">RFC 7049</span>, <span class="seriesInfo">DOI 10.17487/RFC7049</span>, <time datetime="2013-10" class="refDate">October 2013</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7049">https://datatracker.ietf.org/doc/html/rfc7049</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7159">[RFC7159]</dt>
+      <dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">RFC 7159</span>, <span class="seriesInfo">DOI 10.17487/RFC7159</span>, <time datetime="2014-03" class="refDate">March 2014</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc7159">https://datatracker.ietf.org/doc/html/rfc7159</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8446">[RFC8446]</dt>
+    <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/rfc8446">https://datatracker.ietf.org/doc/html/rfc8446</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<div id="authors-addresses">
+<section id="section-appendix.a">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Emad Omara</span></div>
+<div dir="auto" class="left"><span class="org">Google</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:emadomara@google.com" class="email">emadomara@google.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Benjamin Beurdouche</span></div>
+<div dir="auto" class="left"><span class="org">Inria &amp; Mozilla</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:benjamin.beurdouche@inria.fr" class="email">benjamin.beurdouche@inria.fr</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Eric Rescorla</span></div>
+<div dir="auto" class="left"><span class="org">Mozilla</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:ekr@rtfm.com" class="email">ekr@rtfm.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Srinivas Inguva</span></div>
+<div dir="auto" class="left"><span class="org">Twitter</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:singuva@twitter.com" class="email">singuva@twitter.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Albert Kwon</span></div>
+<div dir="auto" class="left"><span class="org">MIT</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:kwonal@mit.edu" class="email">kwonal@mit.edu</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Alan Duric</span></div>
+<div dir="auto" class="left"><span class="org">Wire</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:alan@wire.com" class="email">alan@wire.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>

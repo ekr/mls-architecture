@@ -1,0 +1,3295 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2021-05-20T00:43:23.045920+00:00",
+  "repo": "mlswg/mls-architecture",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "",
+      "color": "ce373a"
+    },
+    {
+      "name": "duplicate",
+      "description": "",
+      "color": "ffffff"
+    },
+    {
+      "name": "enhancement",
+      "description": "",
+      "color": "95c9f4"
+    },
+    {
+      "name": "help wanted",
+      "description": "",
+      "color": "73e29a"
+    },
+    {
+      "name": "invalid",
+      "description": "",
+      "color": "ffffff"
+    },
+    {
+      "name": "question",
+      "description": "",
+      "color": "d4dd54"
+    },
+    {
+      "name": "wontfix",
+      "description": null,
+      "color": "ffffff"
+    },
+    {
+      "name": "editorial",
+      "description": "",
+      "color": "ffccef"
+    },
+    {
+      "name": "discussion",
+      "description": "",
+      "color": "08768e"
+    },
+    {
+      "name": "ready for review (by editors)",
+      "description": "",
+      "color": "08768e"
+    },
+    {
+      "name": "ready to merge",
+      "description": "",
+      "color": "08768e"
+    },
+    {
+      "name": "work in progress",
+      "description": "",
+      "color": "08768e"
+    },
+    {
+      "name": "? follow-up",
+      "description": "",
+      "color": "ffffff"
+    },
+    {
+      "name": "? stall",
+      "description": "",
+      "color": "ffffff"
+    },
+    {
+      "name": "terminology",
+      "description": "",
+      "color": "ffc6d6"
+    },
+    {
+      "name": "functionality",
+      "description": "",
+      "color": "95c9f4"
+    },
+    {
+      "name": "performance",
+      "description": "",
+      "color": "2c52aa"
+    },
+    {
+      "name": "security",
+      "description": "",
+      "color": "ce373a"
+    },
+    {
+      "name": "privacy",
+      "description": "",
+      "color": "ce373a"
+    },
+    {
+      "name": "recommendation",
+      "description": "",
+      "color": "f7c9b7"
+    },
+    {
+      "name": "website",
+      "description": "",
+      "color": "ffccef"
+    }
+  ],
+  "issues": [
+    {
+      "number": 9,
+      "id": "MDU6SXNzdWUyODkwMDIzNTA=",
+      "title": "Unlinkability / Repudiability",
+      "url": "https://github.com/mlswg/mls-architecture/issues/9",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "As discussed I merged the current PRs...\r\nThe current text include potential properties such as unlinkability and repudiability.\r\n\r\nRemove the reference to those properties if we don't want them...",
+      "createdAt": "2018-01-16T18:00:52Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "closedAt": "2018-02-02T05:27:51Z",
+      "comments": [
+        {
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "body": "Regarding Unlikability / Repudiability / Deniability, we have 3 options:\r\n\r\n - a) Just drop it from the document (because we don't know how to achieve it and/or because we don't think it is a desirable property). The risk is that someone will bring it up at a later point in time.\r\n\r\n - b) Mention it and see if someone (else) can come up with a good design.\r\n\r\n - c) Mention it and take an active stance against it. C.f. http://phrack.org/issues/68/14.html (OTR and deniability)",
+          "createdAt": "2018-01-29T11:05:51Z",
+          "updatedAt": "2018-01-29T11:05:51Z"
+        },
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "I support a variant of (c): we don't object to deniability but it is lower priority than our main goals.",
+          "createdAt": "2018-01-29T11:47:41Z",
+          "updatedAt": "2018-01-29T11:47:41Z"
+        },
+        {
+          "author": "eomara",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with Katriel, it is nice to have but not a goal",
+          "createdAt": "2018-01-30T06:13:02Z",
+          "updatedAt": "2018-01-30T06:13:02Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "The text has been removed already, let's close this, we can revisit or not depending on the WG's opinion...",
+          "createdAt": "2018-02-02T05:27:51Z",
+          "updatedAt": "2018-02-02T05:27:51Z"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "MDU6SXNzdWUyOTA0NjE2NzM=",
+      "title": "Discuss the malicious insider threat model",
+      "url": "https://github.com/mlswg/mls-architecture/issues/10",
+      "state": "CLOSED",
+      "author": "katrielalex",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "katrielalex"
+      ],
+      "labels": [],
+      "body": "As per Jan MLS meetup, malicious insiders should be considered as a potential threat, though perhaps in a restricted set of scenarios.\r\n\r\nIt is probably bad if a malicious group member can trivially DoS people, for example, as in na\u00efve ART.",
+      "createdAt": "2018-01-22T13:16:10Z",
+      "updatedAt": "2018-01-31T17:35:23Z",
+      "closedAt": "2018-01-31T17:35:23Z",
+      "comments": []
+    },
+    {
+      "number": 29,
+      "id": "MDU6SXNzdWUyOTk0NDI1MDU=",
+      "title": "Prominently explain the role of the two documents",
+      "url": "https://github.com/mlswg/mls-architecture/issues/29",
+      "state": "CLOSED",
+      "author": "katrielalex",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "katrielalex"
+      ],
+      "labels": [
+        "editorial"
+      ],
+      "body": "A number of people have pinged me to try to figure out why there are two separate documents, often assuming that there are two competing IETF efforts. We should probably have an explanation at the top of both documents describing their roles and linking to each other.",
+      "createdAt": "2018-02-22T17:33:20Z",
+      "updatedAt": "2021-01-11T08:49:36Z",
+      "closedAt": "2021-01-11T08:49:36Z",
+      "comments": []
+    },
+    {
+      "number": 30,
+      "id": "MDU6SXNzdWUzMzczMjE4MzM=",
+      "title": "Transfer these repositories to the mlswg Github org",
+      "url": "https://github.com/mlswg/mls-architecture/issues/30",
+      "state": "CLOSED",
+      "author": "katrielalex",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "I made a Github MLSWG org; shall we transfer this and mls-protocol to that?",
+      "createdAt": "2018-07-01T21:01:57Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "closedAt": "2018-07-01T21:05:49Z",
+      "comments": [
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "Oops, I read emails out of order. Closing this until after IETF102 to see whether the MLS WG adopts the drafts first.",
+          "createdAt": "2018-07-01T21:05:49Z",
+          "updatedAt": "2018-07-01T21:05:49Z"
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "MDU6SXNzdWUzNjQ1NjEyMjg=",
+      "title": "de-2119 the draft",
+      "url": "https://github.com/mlswg/mls-architecture/issues/35",
+      "state": "CLOSED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "seanturner"
+      ],
+      "labels": [],
+      "body": "In some sense there's a bit of style to this, but we do not necessary need to use 2119-language in this document.  As discussed at the [27-28 September 2019 Interim meeting](https://github.com/mlswg/wg-materials/blob/master/interim-2018-09/agenda.md) during our ways of working section, we decided that we did not need to use 2119 language.  In fact there was only one instance and it could be removed.",
+      "createdAt": "2018-09-27T16:40:52Z",
+      "updatedAt": "2019-01-05T11:38:53Z",
+      "closedAt": "2019-01-05T11:38:53Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "This seems done, should we close ?",
+          "createdAt": "2018-10-14T12:00:47Z",
+          "updatedAt": "2018-10-14T12:00:47Z"
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "MDU6SXNzdWUzOTkwMDYzNDI=",
+      "title": "Terminology",
+      "url": "https://github.com/mlswg/mls-architecture/issues/43",
+      "state": "CLOSED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "beurdouche"
+      ],
+      "labels": [],
+      "body": "Need to align terminology with -protocol draft.\r\n\r\nNeed terminology to explain what inputs are used in the protocol.\r\n\r\nSee PR #40.",
+      "createdAt": "2019-01-14T17:59:15Z",
+      "updatedAt": "2019-02-27T14:06:05Z",
+      "closedAt": "2019-02-27T14:06:05Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Done, the terminology was changed in the Protocol document",
+          "createdAt": "2019-02-27T14:06:05Z",
+          "updatedAt": "2019-02-27T14:06:05Z"
+        }
+      ]
+    },
+    {
+      "number": 44,
+      "id": "MDU6SXNzdWUzOTkwMDc5NDg=",
+      "title": "Ghost Users / Authn Security Considerations",
+      "url": "https://github.com/mlswg/mls-architecture/issues/44",
+      "state": "CLOSED",
+      "author": "bifurcation",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [
+        "editorial",
+        "security"
+      ],
+      "body": "In some authentication regimes, it is possible for the authentication service to attest that a public key is bound to an identity, when in reality the holder of the identity does not hold the corresponding private key.  This problem is related to the question of how the problem of re-instantiating users after device loss/failure.   We should discuss what should go in the document around these problems.",
+      "createdAt": "2019-01-14T18:03:30Z",
+      "updatedAt": "2021-01-20T09:34:39Z",
+      "closedAt": "2021-01-20T09:34:39Z",
+      "comments": [
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "We discussed this at the interim; cc @joncallas and @ekr to write a paragraph in the architecture document. While we have a single authentication service, we don't want to rule out having other ways to verify its actions (e.g., fingerprint QR scans, or key transparency logs).",
+          "createdAt": "2019-01-14T22:15:35Z",
+          "updatedAt": "2019-01-14T22:15:35Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Fixed by ca3ccb293856fb6c786bd4acde759a03bcdabc54",
+          "createdAt": "2021-01-20T09:34:39Z",
+          "updatedAt": "2021-01-20T09:34:39Z"
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "id": "MDU6SXNzdWUzOTkwMTA1MzY=",
+      "title": "Access control policy",
+      "url": "https://github.com/mlswg/mls-architecture/issues/45",
+      "state": "CLOSED",
+      "author": "bifurcation",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The architecture document should discuss the application of policies that control which users can take which group actions (e.g., Add, Remove), and how such policies can be implemented in a given protocol deployment.  It seems like there are broadly two cases:\r\n\r\n* If handshake messages are unencrypted, then the server can enforce policy at the stage when it does handshake message sequencing and fanout\r\n\r\n* If handshake messages are encrypted, then policy needs to be enforced by clients\r\n\r\nIn either case, the policy needs to be consistent -- all clients need to make the same decision as to whether to apply a change or not.",
+      "createdAt": "2019-01-14T18:10:45Z",
+      "updatedAt": "2021-01-20T09:34:08Z",
+      "closedAt": "2021-01-20T09:34:08Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "279fda82c2046b1ff10deeea0d8eb728937c7ae6",
+          "createdAt": "2021-01-20T09:34:08Z",
+          "updatedAt": "2021-01-20T09:34:08Z"
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "id": "MDU6SXNzdWUzOTkxMDk3NjQ=",
+      "title": "More clarity around the privacy specifications",
+      "url": "https://github.com/mlswg/mls-architecture/issues/47",
+      "state": "CLOSED",
+      "author": "katrielalex",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "beurdouche",
+        "raphaelrobert"
+      ],
+      "labels": [],
+      "body": "Currently, section 3.1.5 gives a vague discussion about privacy. We should be more concrete about which things we aim to protect (e.g. hiding the list of identities from the server is something we might try).",
+      "createdAt": "2019-01-14T22:49:13Z",
+      "updatedAt": "2021-01-20T09:35:06Z",
+      "closedAt": "2021-01-20T09:35:05Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Fixed in multiple commits",
+          "createdAt": "2021-01-20T09:35:05Z",
+          "updatedAt": "2021-01-20T09:35:05Z"
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "id": "MDU6SXNzdWU0MTAxNzU4NDc=",
+      "title": "Description of the formal security guarantees that the protocol MUST provide",
+      "url": "https://github.com/mlswg/mls-architecture/issues/48",
+      "state": "OPEN",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "bifurcation",
+        "beurdouche",
+        "cascremers",
+        "claucece",
+        "raphaelrobert"
+      ],
+      "labels": [
+        "work in progress"
+      ],
+      "body": "- [ ]  Forward secrecy\r\n\r\nSof\u00eda noted: \"We are also unsure on the 'type' of forward secrecy provided. The Signal's X3DH\r\nprotocol, for example, provides a forward secrecy between strong and weak. We\r\nare unsure if the way the Delivery Service, as defined in MLS, when providing the\r\nauthentication keys and initial keying material, achieves which type of forward\r\nsecrecy. But, of course, this can be a misunderstood from our side.\"",
+      "createdAt": "2019-02-14T08:06:15Z",
+      "updatedAt": "2021-03-08T13:32:05Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "claucece",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Mmm.. not sure what is the state of this now @beurdouche .. but I can take a look the upcoming week... is it useful for IETF018?",
+          "createdAt": "2020-07-23T07:56:27Z",
+          "updatedAt": "2020-07-23T07:56:27Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Hi Sof\u00eda, no need to take action yet. I have to check if I can make the 108 meeting but the current plan is\r\n(I have yet to send an email to the ML) that I will take significant time in **September** to rewrite the security guarantees we expect from MLS according to the protocol we have then. I'll open a large discussion with the WG to make sure we have a really comprehensive section for security considerations :) \r\nIn the meantime feel free to keep opening issues for the document, that will help making sure we don't forget anything then ;)",
+          "createdAt": "2020-07-23T08:38:23Z",
+          "updatedAt": "2020-07-23T08:47:53Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "CC. @kkohbrok @br-hale @psyoptix @karthikbhargavan \r\n(Apparently, I can't assign you with me for some reason, but the intent is there...)",
+          "createdAt": "2020-07-23T08:45:41Z",
+          "updatedAt": "2020-07-23T08:47:10Z"
+        },
+        {
+          "author": "claucece",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Oh, for sure @beurdouche ! I'll open some issues by rereading the current state of the drafts (which I haven't read in a while ;)) Happy to help you on that on September as well ;)\r\n\r\nI think this links also to the #50 issue. ",
+          "createdAt": "2020-07-23T08:46:31Z",
+          "updatedAt": "2020-07-23T08:46:31Z"
+        },
+        {
+          "author": "claucece",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Just re-read the draft @beurdouche and looks awesome so far! I'm going to list here the properties that should be analyzed and clarified:\r\n\r\n- Forward secrecy\r\n- Post-compromise security\r\n- Authentication: to the group, with respect to the sender\r\n- End-to-end security\r\n- Metadata-Resistance\r\n- Integrity\r\n- Confidentiality (Message Secrecy)\r\n\r\nit might be also worth listing the threats, such as DDoS attacks, replay attacks, etc.\r\n\r\nOver the upcoming months, I'll analyze more in depth the protocol and see how the current definitions map into it. I'll start a docu somewhere, so @br-hale , @raphaelrobert , @bifurcation , @cascremers and, perhaps, @Bren2010 , let me know if you want to be included.\r\n",
+          "createdAt": "2020-07-28T04:14:00Z",
+          "updatedAt": "2020-07-28T04:14:10Z"
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "MDU6SXNzdWU0MTAxOTEzNzc=",
+      "title": "Provide recommandations for Key Update",
+      "url": "https://github.com/mlswg/mls-architecture/issues/49",
+      "state": "OPEN",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "recommendation"
+      ],
+      "body": "Sof\u00eda notes: \"At some points, it might be nice to give recommendations in the spec:\r\n\"It is left to the application to determine the interval of time between Update\r\nmessages.\". It is maybe good to provide an example of this time frame.\"",
+      "createdAt": "2019-02-14T08:53:02Z",
+      "updatedAt": "2021-03-08T13:31:46Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 50,
+      "id": "MDU6SXNzdWU0MTAxOTM5Mjk=",
+      "title": "Provide details about Deniability",
+      "url": "https://github.com/mlswg/mls-architecture/issues/50",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Why we do/do not want to achieve it by default and how it is possible to add it in that case.\r\n\r\nSof\u00eda noted: \"\r\n\r\nWe are unsure if there is a will of including deniability in this. On some\r\npoints it states:\r\n\r\n\"\"\"\r\n[[ OPEN ISSUE: Signatures under the identity keys, while simple, have\r\n  the side-effect of preclude deniability.  We may wish to allow other\r\n  options, such as (ii) a key chained off of the identity key, or (iii)\r\n  some other key obtained through a different manner, such as a\r\n  pairwise channel that provides deniability for the message\r\n  contents.]]\r\n\"\"\"\r\n\r\n\"\"\"\r\nNon-Repudiation and Deniability\r\nAs described in {{client-compromise}}, MLS provides data origin authentication\r\nwithin a group, such that one group member cannot send a message that appears to\r\nbe from another group member. Additionally, some services require that a\r\nrecipient be able to prove to the messaging service that a message was sent by\r\na given Client, in order to report abuse. MLS supports both of these use cases.\r\nIn some deployments, these services are provided by mechanisms which allow the\r\nreceiver to prove a message's origin to a third party (this if often called\r\n\"non-repudiation\"), but it should also be possible to operate MLS in a \"deniable\"\r\nmode where such proof is not possible. [[OPEN ISSUE: Exactly how to supply this\r\nis still a protocol question.]]\r\n\"\"\"\r\n\r\nIf this is something that wants to be included, we will be very happy to answer\r\nquestions. Nevertheless, there is no way, currently, to achieve the same deniability\r\nproperties OTRv4 has in a group setting.\"",
+      "createdAt": "2019-02-14T09:00:10Z",
+      "updatedAt": "2021-01-20T09:38:30Z",
+      "closedAt": "2021-01-20T09:38:29Z",
+      "comments": [
+        {
+          "author": "burdges",
+          "authorAssociation": "NONE",
+          "body": "Among humans, there are afaik no realistic user stories in which deniability actually protects people who lack power because message circumstances are always considered compelling in practice.  Yet, there are plentiful user stories in which very powerful people are protected by deniability in combination with their ability to manipulate media, corrupt courts, etc.  \r\n\r\nI'd thus tentatively conclude that deniability is actually harmful when widely deployed because deniability can only protect powerful people from powerless people, and almost never the reverse.  There is a similar argument that deniability enables framing more often than claims of being framed can provide protection.\r\n\r\nAlso, it appears deniability can always be broken post-compromise because one party could transition their conversation end into a secure enclave, thanks to forward secrecy.  In a legal setting, you cannot even protect both side by running both ends in a secure enclave from the beginning. \r\n\r\nIt's possible deniability serves some use cases among people of approximately equal power.  As an example, a family member who engages in a behavior another family member considers distasteful being able to lie to another family member who discovers their messages.  It's questionable if such defenses really work much in practice, but they do not appear nearly as unlikely as when the two parties differ in power. \r\n\r\nAvoiding signatures has use cases in automated communications, like in extremely low CPU settings, but maybe that's beyond the project scope. ",
+          "createdAt": "2019-02-20T09:23:17Z",
+          "updatedAt": "2019-02-20T09:23:17Z"
+        },
+        {
+          "author": "kdenhartog",
+          "authorAssociation": "NONE",
+          "body": "I liken non-repudiation to always being on the record with a reporter. Given these are digital circumstances and UXs typically eliminate the deniability you're likely right that it doesn't provide any additional guarantees in a practical or legal setting.\r\n\r\nI'd personally like to see it added if it doesn't remove additional properties in the hopes that legal systems may support arguments of deniability in the future. Practically speaking the strongest argument for making deniability by default would be to reduce the computational requirements as @burdges pointed out above. We're looking at trying to use this protocol with IoT devices, so having that reduction in computational overhead (even if it's minimal) could be helpful in expanding to some very edge IoT use cases.",
+          "createdAt": "2019-05-17T23:10:57Z",
+          "updatedAt": "2019-05-17T23:10:57Z"
+        },
+        {
+          "author": "burdges",
+          "authorAssociation": "NONE",
+          "body": "It's clear deniability only amplifies injustice whenever power imbalances exist:  \r\n\r\nAll legal systems accept circumstantial evidence, meaning deniability could never exclude evidence in court.  You could only use deniability to make a counter accusation that evidence was intentionally forged, but courts give little or no weight to such counter accusations.  In short, courts would never themselves make deniability arguments broadly accessible.  And ditto legislators. \r\n\r\nIf otoh you hold significant wealth and power already, then you can corrupt judges or more likely sew distrust in the public sphere.  These are deniability arguments, but they increases injustice.  \r\n\r\nIn short, deniability amplifies injustice by never supporting weak parties and favoring parties who already wield significant power. \r\n\r\n---\r\n\r\nAs an amusing aside, there is the CSI effect in which juries came to expect more forensic evidence due to watching the TV show CSI.  Could juries come to expect more cryptographic evidence?  As a rule, forensics is represented far more accurately in fiction than physics or mathematics or computer science, making this exact scenario unlikely.  Yet, if real cryptographic evidence became ubiquitous then yes maybe it would eventually be represented correctly, and then juries might demand it more.  Is this possible?  Yes maybe, but amusingly it becomes almost impossible if people already use deniable messengers.  ",
+          "createdAt": "2019-05-19T00:05:39Z",
+          "updatedAt": "2019-05-19T09:33:05Z"
+        },
+        {
+          "author": "kdenhartog",
+          "authorAssociation": "NONE",
+          "body": "With regards to deniability in court systems, I think your points ring true in my anecdotal experience. Given I want to take this back to a broader community and make the case for what you're articulating, are there any examples I can give to support these claims further?\r\n\r\nAlso, what are the effects deniability provides on privacy preserving system? One of the things that we're looking to do is build a correlation resistant system on top of this to prevent metadata analysis whenever possible. Does the use of non-repudiation by default vs deniability by default reveal additional meta that could be used to adversely correlate a user?\r\n\r\nThe main reason, I'm asking this is because I understand that a large portion of this group has a strong understanding of the implications of this. I want to be able to use strong logic based arguments if I'm going to bring this to the community I'm working with who has pushed strongly for deniability by default with the option of non-repudiation as an addition. ",
+          "createdAt": "2019-05-20T10:15:30Z",
+          "updatedAt": "2019-05-20T10:15:30Z"
+        },
+        {
+          "author": "dhh1128",
+          "authorAssociation": "NONE",
+          "body": "One of the problems with the term \"deniability\" (or \"repudiation\", a term I'm more accustomed to) is that it is often debated without any specific scope. It's fine to hold someone accountable *in a context*; it's another thing entirely to make that accountability immediately and permanently global. I am fine sending a message to my bank that I can't deny *to my bank*; I am not necessarily fine with the idea that the bank can show that message to any arbitrary third party that they choose, whenever they choose, under whatever circumstances they choose, without telling me, just because the communication used MLS. They undoubtedly have third-party audit requirements--but I want them to have to ask me to go on the record for auditors, and I want to be able to send an MLS message to them that doesn't give away that freedom until I've formally consented.\r\n\r\nThe Hyperledger community, and in particular the Aries and Indy projects (which would like to use the MLS standard when it is mature enough) requires repudiation (meaning the ability to deny origin to anybody except the intended recipient of a message) as an option. Their analysis of its importance is here: https://github.com/hyperledger/indy-hipe/blob/master/text/0037-repudiation/README.md. A pithy summary is these two sentences:\r\n\r\n```If Alice tells a secret to Carol, who should decide whether the secret is reshared--Alice, or Carol? In an SSI paradigm, the proper, desirable default is that a sender of secrets should retain the ability to decide if their secrets are shareable, not give that guarantee away.```\r\n\r\nI don't disagree with @burdges that deniability can make certain abuses worse--but I do disagree with a premise in some earlier comments, which is that because human power imbalances will inevitably exist, we should build into the MLS architecture a kludge that removes precision and power from the system. That line of thinking would have us eliminate strong encryption, too, since abusive governments are better key management and sophisticated configuration choices than private individuals.\r\n\r\nWhat we should do instead is create technology that's just as easy and safe to use for a peon as for a powerful government or corporation--technology that makes it clear when a message is sent whether it is repudiable, so abusers of power can be held accountable for bad behavior instead of letting them throw up their hands and say, \"Sorry, we had to demand that you talk to us on the record, because that's the only thing the technology allows.\" If all MLS messages are non-repudiable, there is only on-the-record communication, which eliminates whistleblowing and #MeToo reporting.\r\n",
+          "createdAt": "2019-05-21T23:36:46Z",
+          "updatedAt": "2019-05-21T23:39:39Z"
+        },
+        {
+          "author": "claucece",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hey!\r\n\r\nI'm replying into this after some long time; but better now than never.\r\n\r\n@burdges , thanks for the comments!\r\n\r\n> Among humans, there are afaik no realistic user stories in which deniability actually protects people who lack power because message circumstances are always considered compelling in practice. Yet, there are plentiful user stories in which very powerful people are protected by deniability in combination with their ability to manipulate media, corrupt courts, etc.\r\n\r\nAs real-world examples, there are many actually, as this is the reason why 'off-the-record' is a journalist term, and it has been always used to protect sources. Corrupted people have used deniability from a legal standpoint by using pausible deniability, which is not the same as off-the-record, nor deniability in cryptographic terms.\r\n\r\nI agree that deniability have not been used in court case; but many cryptographic properties have not been used as well. It is well know that judges accept plaintext as evidence, without any authentication mechanism related to it. But should we wait until these systems introduce and understand these properties, or protect prior to?\r\n\r\n> I'd thus tentatively conclude that deniability is actually harmful when widely deployed because deniability can only protect powerful people from powerless people, and almost never the reverse. There is a similar argument that deniability enables framing more often than claims of being framed can provide protection\r\n\r\nThe same can be said to other properties, as anonymity. The case around deniability is that, in the real world, we have deniability because, unless recorded, we can always deny having said or done something (even if it is an action that is considered malicious). Creating systems that undermine those rights, set up precedences for other rights to be taken away as well as confusing users (I'm sure that many of the users that use messaging applications don't think that the records of their conversations to which they have been authenticated, will last forever and are shocked when those records are used against them on court systems).\r\n\r\n> Also, it appears deniability can always be broken post-compromise because one party could transition their conversation end into a secure enclave, thanks to forward secrecy. In a legal setting, you cannot even protect both side by running both ends in a secure enclave from the beginning.\r\n\r\nThat is true for offline deniability; but not for online deniability.\r\n\r\n\r\n@kdenhartog, thanks for the comments as well:\r\n\r\n> Also, what are the effects deniability provides on privacy preserving system? One of the things that we're looking to do is build a correlation resistant system on top of this to prevent metadata analysis whenever possible. Does the use of non-repudiation by default vs deniability by default reveal additional meta that could be used to adversely correlate a user?\r\n\r\nMetadata, by default, is deniable, as it is not authenticated. This is the misunderstanding around deniability: a protocol is deniable in its authentication if the authenticating parties can authenticate themselves; but there is no proof of this authentication that can be presented to anyone, as anyone could have simulated the authentication. Often metadata is not authenticated, which means that anyone could have created it. If it is authenticated then there is always a correlation between your identity and the data, and, then deniability comes into play: by proving an authentication mechanism with no evidence.\r\n\r\n@dhh1128 , thanks for the comments as well!\r\n\r\n> One of the problems with the term \"deniability\" (or \"repudiation\", a term I'm more accustomed to) is that it is often debated without any specific scope. It's fine to hold someone accountable in a context; it's another thing entirely to make that accountability immediately and permanently global. I am fine sending a message to my bank that I can't deny to my bank; I am not necessarily fine with the idea that the bank can show that message to any arbitrary third party that they choose, whenever they choose, under whatever circumstances they choose, without telling me, just because the communication used MLS. They undoubtedly have third-party audit requirements--but I want them to have to ask me to go on the record for auditors, and I want to be able to send an MLS message to them that doesn't give away that freedom until I've formally consented.\r\n\r\nThis is an amazing definition and what deniability is really about: being able to authenticate; but that authentication cannot be proven by or for anyone else.\r\n\r\n> The Hyperledger community, and in particular the Aries and Indy projects (which would like to use the MLS standard when it is mature enough) requires repudiation (meaning the ability to deny origin to anybody except the intended recipient of a message) as an option. Their analysis of its importance is here: https://github.com/hyperledger/indy-hipe/blob/master/text/0037-repudiation/README.md. A pithy summary is these two sentences:\r\n\r\nI'll for sure check this out.\r\n\r\nThere are many systems wanting to achieve deniability nowadays: image an abuse report system in which you want to report something but that this report does not have a link to your identity so no one can afterwards blame you. And yet you want that the reportee is assured of your identity but this person cannot prove it to anyone else. This is deniability helping unbalanced situations.\r\n",
+          "createdAt": "2020-07-28T04:43:41Z",
+          "updatedAt": "2020-07-28T04:43:41Z"
+        },
+        {
+          "author": "claucece",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Just adding here as well some of the open issues or sections on the mls documents that refer to deniability:\r\n\r\n```\r\n<!-- OPEN ISSUE: Signatures under the identity keys, while simple, have the side-effect of precluding \r\ndeniability. We may wish to allow other options, such as (ii) a key chained off of the identity key, or (iii) \r\nsome other key obtained through a different manner, such as a pairwise channel that provides deniability \r\nfor the message contents. -->\r\n```\r\n\r\n```\r\n<!-- OPEN ISSUE: This scheme, in which the tree hash covers the parent hash, is designed to allow for \r\nmore deniable deployments, since a signature by a member covers only its direct path. The other possible \r\nscheme, in which the parent hash covers the tree hash, provides better group agreement properties, \r\nsince a member's signature covers the entire membership of the trees it is in. Further discussion is needed \r\nto determine whether the benefits to deniability justify the harm to group agreement properties, or \r\nwhether there are alternative approaches to deniability that could be compatible with the other approach. -->\r\n```\r\n\r\n\r\n\r\n```\r\n#### Non-Repudiation vs Deniability\r\n\r\nAs described in {{client-compromise}}, MLS provides strong authentication within a group, such that a \r\ngroup member cannot send a message that appears to be from another group member. Additionally, \r\nsome services require that a recipient be able to prove to the service provider that a message was sent \r\nby a given client, in order to report abuse. MLS supports both of these use cases. In some deployments, \r\nthese services are provided by mechanisms which allow the receiver to prove a message's origin to a third \r\nparty (this if often called \"non-repudiation\"), but it should also be possible to operate MLS in a \"deniable\" \r\nmode where such proof is not possible. [[OPEN ISSUE: Exactly how to supply this is still a protocol\r\nquestion.]]\r\n```",
+          "createdAt": "2020-07-28T05:23:42Z",
+          "updatedAt": "2020-07-28T05:26:26Z"
+        },
+        {
+          "author": "burdges",
+          "authorAssociation": "NONE",
+          "body": "> As real-world examples, there are many actually,\r\n\r\nI'm listening..  \r\n\r\n> as this is the reason why 'off-the-record' is a journalist term, and it has been always used to protect sources.\r\n\r\nThis is not an example.  Anonymity could prevent a journalist from revealing a source, but deniability cannot help because a journalist can always reveal anything they know.  I'd expect the journalist would be believed and the source would face retaliation, unless the source holds enough power to make believing the journalist inconvenient for others. \r\n\r\n> The same can be said to other properties, as anonymity. \r\n\r\nNo.  Anonymity works because being anonymous avoids involving other power relationships, so anonymity levels the playing field.  Almost all cryptographic properties work this way, but employing deniability involves other power relationships and even exacerbates them.\r\n\r\n> The case around deniability is that, in the real world, we have deniability because, unless recorded, we can always deny having said or done something (even if it is an action that is considered malicious). \r\n\r\nWe're already exposed to all other power relationships when we attempt to deny.  Imagine a corporation doing illegal toxic dumping:  \r\n- We've whistleblower W who exposes this, but later gets exposed herself.  W cannot benefit from deniability because her adversary accepts paintext evidence and possesses vast resources.   \r\n- We've an executive E who ordered the dumping too.  E benefits from deniability because they possess resources comparable with those prosecuting them, i.e. large skilled legal team, PR experts, political contacts, etc.\r\n\r\n> I agree that deniability have not been used in court case; but many cryptographic properties have not been used as well. \r\n\r\nWe mostly know what happens in both legal courts and the court of public opinion:  You could exploit deniability only if you're powerful otherwise.  We mostly focus on cryptographic properties that do not require legal tests.  ;)\r\n\r\n> It is well know that judges accept plaintext as evidence, without any authentication mechanism related to it.\r\n\r\nThere is authentication of a sort being used, like \"Another person said the denier said something similar on another occasion\" or \"The user lacks the knowledge to edit the application's database\" or \"It's complex to call this powerful entity, cop, etc. a liar so I'll just believe them\".  \r\n\r\n> But should we wait until these systems introduce and understand these properties, or protect prior to?\r\n\r\nAmong the user stories I've seen discussed thus far, cryptographic deniability protects only powerful people.\r\n\r\nAs for online deniability, it's been years since I looked into Nick's nice papers, so maybe I've forgotten details, but..   I'd expect ring signatures would provide the worst option in practice because they prove that one participant said something, so the powerful participant can always blame the powerless one.  It's especially bad for whistleblowers because a document merely existing in the chat incriminates them.\r\n\r\n---\r\n\r\nThere are related ideas that appear actually useful however:  \r\n\r\nImagine a messaging application that employs signatures non-deniably but erases them after verification and whose user interface limits attribution:  It provides a shared editable document like a hackmd, so writes anywhere they please, but make conversation possible inserting text like \"Speaker: \" or whatever.  It might encourages editing conversation history into a more concise and useful form too, although not sure exactly how.\r\n\r\nA religious parent cannot so easily accept such a document as evidence that their child is gay because the partner could trivially be playing a joke.  A court cannot so easily accept this document because both sides could trivially edit one anothers' text and were encouraged to do so.  It does not help whistleblowers much however..",
+          "createdAt": "2020-07-28T07:31:56Z",
+          "updatedAt": "2020-07-28T07:31:56Z"
+        },
+        {
+          "author": "claucece",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> I'm listening..\r\n\r\nI already told you.\r\n\r\n> This is not an example. Anonymity could prevent a journalist from revealing a source, but deniability cannot help because a journalist can always reveal anything they know. I'd expect the journalist would be believed and the source would face retaliation, unless the source holds enough power to make believing the journalist inconvenient for others.\r\n\r\nNo, it can't. Journalists are aware of the identity of the source; and many times are required to know the identity, as to know that the data provided is true. There are many examples of journalists that have historically use off-the-record, that I wont be listing here, as a quick search will do for you.\r\n\r\n> No. Anonymity works because being anonymous avoids involving other power relationships, so anonymity levels the playing field. Almost all cryptographic properties work this way, but employing deniability involves other power relationships and even exacerbates them.\r\n\r\nNot a valid point for me, as the same can be applied to deniability.\r\n\r\n> We're already exposed to all other power relationships when we attempt to deny. Imagine a corporation doing illegal toxic dumping:\r\n> We've whistleblower W who exposes this, but later gets exposed herself. W cannot benefit from deniability because her adversary accepts paintext evidence and possesses vast resources.\r\n> We've an executive E who ordered the dumping too. E benefits from deniability because they possess resources comparable with those prosecuting them, i.e. large skilled legal team, PR experts, political contacts, etc.\r\n\r\nWith enough resources, anything can be proven in a court and make your case win. If that is your threat model then nothing will work for you. If your threat model is a corrupted legal system like in many countries, then no system will ever work for you as: evidence could be fabricated, judges can be bought, illegal access to systems can be made, fake testimonies can be provided, etc.\r\n\r\nMy point is that if what you are focusing is a corrupt system where the one with vast resources win, then nothing works.\r\n\r\n> We mostly know what happens in both legal courts and the court of public opinion: You could exploit deniability only if you're powerful otherwise. We mostly focus on cryptographic properties that do not require legal tests. ;)\r\n\r\nThis is conflating legal terms with cryptographic ones.\r\n\r\n> There is authentication of a sort being used, like \"Another person said the denier said something similar on another occasion\" or \"The user lacks the knowledge to edit the application's database\" or \"It's complex to call this powerful entity, cop, etc. a liar so I'll just believe them\".\r\n\r\nThat is authentication from a legal stand point of view, and I'm talking of authentication as a cryptographic property. \r\n\r\n> Among the user stories I've seen discussed thus far, cryptographic deniability protects only powerful people.\r\n\r\nWhich exact real-world stories that have actually happened using deniability as a cryptographic property? Can you please list them?\r\n\r\n> As for online deniability, it's been years since I looked into Nick's nice papers, so maybe I've forgotten details, but.. I'd expect ring signatures would provide the worst option in practice because they prove that one participant said something, so the powerful participant can always blame the powerless one. It's especially bad for whistleblowers because a document merely existing in the chat incriminates them.\r\n\r\nI think you should re-read the papers ;)\r\n\r\nI think you are pretty convinced about deniability so I won't be trying to convince you.  Further on the issue I will focus on the aspects that pertain MLS, as I don't think a discussion around the legality of deniability pertains here.\r\n",
+          "createdAt": "2020-07-28T08:24:10Z",
+          "updatedAt": "2020-07-28T08:29:36Z"
+        },
+        {
+          "author": "burdges",
+          "authorAssociation": "NONE",
+          "body": "I'll quickly address these two point:  \r\n\r\n> Journalists are aware of the identity of the source; and many times are required to know the identity, as to know that the data provided is true.\r\n\r\nIt depends upon the journalists skills.  We've high profile examples that worked without this knowledge.  Anonymity can work, but yes anonymity is very hard to use.  I do think \"hard to use\" tools remain a social good.  I'm arguing that deniability is not merely hard to use, but heavily limits who uses it, which makes it unlikely to increase justice.\r\n\r\n> My point is that if what you are focusing is a corrupt system where the one with vast resources win, then nothing works.\r\n\r\nI think the correct threat model is \"pragmatic judge\", or even \"slightly corrupt\", so just not some some idealized system that'll probably never exist. \r\n\r\nIn fact, the court of public opinion provides about the best example judge, as it drives our political processes, and it fits this \"slightly corrupt\" model:  Individual have their ideology and prejudices for which they largely reject change, but their views can be shifted by PR campaigns (expensive and corrupt) and sufficiently strong proof explained well (cheap and juste), so the \"truth\" has some significant advantage. \r\n\r\nI'm less worried about judges being outright bought, etc. than about judges simply \"taking the easy way out\", which covers all the individuals who make up the court of public opinion.  In my example, we've judges who accepts plaintext against W just because they want to punish someone and they've more evidence against W than against anyone else, but who simultaneously rejects plaintext evidence against executive E because prosecuting E sounds like too much trouble, risks damaging the economy, etc. ",
+          "createdAt": "2020-07-29T09:27:33Z",
+          "updatedAt": "2020-07-29T09:30:06Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "We decided to handle deniability in a separate document since it will be handled via an extension.",
+          "createdAt": "2021-01-20T09:38:29Z",
+          "updatedAt": "2021-01-20T09:38:29Z"
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "MDU6SXNzdWU0MTIzMDA4MjA=",
+      "title": "Authentication service required?  TOFU?",
+      "url": "https://github.com/mlswg/mls-architecture/issues/51",
+      "state": "OPEN",
+      "author": "burdges",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Authentication services actually required?  Or would TOFU be as secure as it usually is? \r\n\r\nAt least one distributed group messenger (Riot/Matrix) has the *extremely* insecure practice of prompting users to verify keys with a pop-up.  Is there perhaps some problem with TOFU in the group messaging setting?\r\n\r\nIt's probably good to address TOFU regardless, even if only saying that you do not know if it's security properties change.",
+      "createdAt": "2019-02-20T08:25:26Z",
+      "updatedAt": "2021-03-08T13:32:28Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "kdenhartog",
+          "authorAssociation": "NONE",
+          "body": "It talks about this a bit (implicitly describing solutions) in the last paragraph of the [authentication service section](https://github.com/mlswg/mls-architecture/blob/master/draft-ietf-mls-architecture.md#authentication-service). Would you think it would be useful to add additional details about handling TOFU? \r\n\r\nThe only additional thing I can think that could be done do to add additional trust is to use randomart images for users to verify and image in an out-of-band channel. This is a slightly better UX than what's in most e2e apps today, but doesn't change the security properties in any way so I would consider it out of scope for this spec.",
+          "createdAt": "2019-05-17T22:56:06Z",
+          "updatedAt": "2019-05-17T22:56:06Z"
+        },
+        {
+          "author": "ntninja",
+          "authorAssociation": "NONE",
+          "body": "After reading the architectural draft today (me: random crypto-interested developer), I was surprised that there was no mention of out-of-band authentication to protect against malicious/compromised Authentication Services at all. Specifying the UX in *how* that happens (QR codes, emojis, identicons, what-have-you) is understandably out-of-scope, but the idea of giving users the ability of verifying each other's crystallographic identifiers in-person, seems like a very strong mitigating of this risk \u2013 even if not practical in every scenario. ",
+          "createdAt": "2020-11-11T10:05:37Z",
+          "updatedAt": "2020-11-11T10:05:37Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Noted, thanks ! : )",
+          "createdAt": "2020-11-11T10:19:10Z",
+          "updatedAt": "2020-11-11T10:19:10Z"
+        }
+      ]
+    },
+    {
+      "number": 52,
+      "id": "MDU6SXNzdWU0MTI1MzE5MDU=",
+      "title": "Delivery assumption",
+      "url": "https://github.com/mlswg/mls-architecture/issues/52",
+      "state": "CLOSED",
+      "author": "burdges",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm curious about the delivery assumption on the Delivery Service in 2.3.3.  There are sensible transports that violate all of reliable delivery, in-order delivery, and consistent ordering.   Anyone commented about the failure modes when violating these assumptions? \r\n\r\nAt least in-order delivery requirement appears quite soft, except the metadata gets leaked if not protected by MLS.  If so, applications should modify MLS by adding header encryption, like in good Axolotl ratchet implementations.\r\n\r\nThere is already a hash iteration ratchet which I suppose helps address these problems. ",
+      "createdAt": "2019-02-20T17:02:35Z",
+      "updatedAt": "2021-03-08T13:30:21Z",
+      "closedAt": "2021-03-08T13:30:21Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "This section has been rewritten and should be better now...",
+          "createdAt": "2021-03-08T13:30:21Z",
+          "updatedAt": "2021-03-08T13:30:21Z"
+        }
+      ]
+    },
+    {
+      "number": 54,
+      "id": "MDU6SXNzdWU0MTkyMDAzODE=",
+      "title": "Review from Joel Alwen",
+      "url": "https://github.com/mlswg/mls-architecture/issues/54",
+      "state": "OPEN",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "beurdouche"
+      ],
+      "labels": [
+        "editorial"
+      ],
+      "body": "```Hi everyone,\r\n\r\nI've read over the architecture draft and put together some thoughts\r\nthat came to mind. Some are just small typos while others are a bit more\r\nsubstantial. Feel free to incorporate, ignore or talk to me about whatever!\r\n\r\n- Jo\u00ebl\r\n\r\n\r\n------------------------- Comments on MLS Architecture --------------------\r\n\r\n- Abstract : \"It is meant to protect against eavesdropping, tampering,\r\nand message forgery.\" This omits PCS and FS which, IMO, is quite central\r\nto what we are doing. Thus, already in the abstract, I'd add something\r\nreferring/hinting to FS and PCS (e.g. protecting against \"past or future\r\ndevice compromises\" or something else along those lines). The same goes\r\nfor the Introduction as it currently also only talks about E2E security.\r\nAfter all, for the security notions outlined in the abstract and intro\r\n(i.e. basic E2E authentication and privacy) we could use MUCH simpler\r\nprotocols (e.g. a static group key decided upon during group setup. Even\r\njust FS would be much easier E.g. a hash ratchet would do the trick.).\r\nThis, is why I believe much (most?) of what we are doing (on the\r\nprotocol level at least) is about getting PCS and FS on top of the usual\r\nE2E security. Despite this, as far as I can tell the first mention of FS\r\nand PCS are only in 2.3.5 under the heading \"Membership and offline\r\nmembers\".\r\n\r\n\r\n- It is not really clear to me why we require the Authentication Service\r\n(AS) to issue credentials binding identities to keys. I believe this\r\nshould be optional. In particular, if users are able to ensure this\r\nbinding on their own (e.g. using an external authenticated channel to,\r\nsay, comparing key fingerprints or scan each others 2D barcodes) then it\r\ndoes not seem necessary to have the AS provide these credentials. My\r\nconcern is that by not making this optional we are more restrictive than\r\nreally need be. Ultimately what the MS should do is provide *some*\r\nmechanism for verifying the binding of identities to keys. Whether its\r\nvia certificates from an AS attesting to the binding or some other\r\nmechanism performed by end users them selves seems less important to the\r\nrest of the MLS protocol.\r\n\r\n- I'm not a fan of having the DS do key storage for initial key material\r\nbut have the AS store member (public) key material. (I also think the AS\r\nshould store client public keys along with member identity (public)\r\nkeys.) In general, to me a natural logical separation is that the AS is\r\nin charge of public key storage and dissemination while the DS handles\r\nof storage (buffering) and dissemination of traffic. Additionally, some\r\nissues with the current division of labor between the AS and DS that\r\ncould then be avoided are:\r\n    - Its not clear why ordering for the storage of initial key material\r\nshould matter.\r\n        - 3.1.5 \"The DS must only persist data required for the delivery\r\nof messages and avoid Personally Identifiable Information (PII) or other\r\nsensitive metadata wherever possible.\" This sentence doesn't seem very\r\ncompatible to me with the DS also persistently maintaining initial keys;\r\nespecially together with credentials ultimately binding them to a member\r\n(or at least client's) identity.\r\n\r\n- At the meeting in Paris we very brief discussed that it could\r\neventually make sense to have \"the server\" maintain some of the group\r\nstate on behalf of clients (but, of course, without introducing any\r\ntrust in the server beyond the current \"universal ordering\" and \"no-DOS\"\r\nassumptions). With that in mind it may eventually make sense to mention\r\nthis role as part of the DS's tasks. Alternatively, this could be\r\nconsidered part of the AS's role or even a third service exclusive to\r\nthis purpose.\r\n\r\n- 2.3.1 I'd specify that the initial *public* key material is stored\r\nwith the DS.\r\n\r\n- 2.3.1 I don't see why the AS should be involved in binding the Client\r\nkeys to the Member keys. It should suffice for the Client public key to\r\nbe signed by owning member's keys. As far as I can tell this doesn't\r\ninvolve the AS.\r\n\r\n- I think a brief, 1 or 2 sentences clarifying key material names would\r\nbe helpful. Something like: a member has one pair of long term \"identity\r\nkeys\", a client has one pair of medium term \"client keys\" and many short\r\nterm \"initial keys\". For example, this could come right after the\r\nconcepts of Member's vs. Clients is introduced.\r\n\r\n- 3.1.4 \"affect the group state\". IMO the transcript (i.e. chat history)\r\nis part of group state. So appending a message to the transcript is a\r\ngroup state change. I guess what is meant here is the group's metadata?\r\nGiven that this metadata is also referred to in other places (e.g.\r\n3.1.5) would it make sense to include a sentence or two somewhere making\r\na bit clearer the terms \"group state\",  \"group metadata\" and \"group's\r\nprivate content\" (as used in 3.2.2 for e.g.). In any case the difference\r\nbetween \"state\" in 3.1.4 vs. \"metadata\" in 3.1.5 isn't too clear to me.\r\n\r\n- 3.1.5.  \"A Messaging Service provider that has control over both the\r\nAS and the DS, will not be able to correlate encrypted messages\r\nforwarded by the DS, with the initial public keys signed by the AS.\"\r\nThis seems like a very strong property to shoot for. (Also, given the\r\ndiscussion in Paris, deniability didn't seem to be a serious goal of\r\nMLS.) At the very least it would require the protocol packets not to be\r\nlinkable to long term identities (OK but we must be careful with\r\nsignatures) but also that the DS authenticate clients via (pseudonymous)\r\nidentities. After all, if the DS does not identify clients at all, say,\r\nwhen they request packets buffered in some queue) then, at the very\r\nleast, traffic analysis becomes too easy to perform (or alternatively\r\nDOS attacks become too easy if the queue is emptied). So just to be\r\nsure, is deniability with respect to compromised AS and DS really what\r\nwe mean here?\r\n\r\n- 3.1.7 typo: the word \"messages\" is repeated.\r\n\r\n- 3.2.2 Message Integrity and Authentication: \"and that one Client must\r\nnot be able to send a message which other Clients accept as being from\r\nanother Client.\" This seems weaker than what we want and get (from both\r\nthe ART and TreeKEM drafts). Instead, we want that \"no coalition of\r\nClients can send a message which other Clients accept as being from a\r\nClient not already part of that coalition.\" A similar change should be\r\nmade to the first sentence in 3.2.2.5 and 4.4.\r\n\r\n- 3.2.2.1 \"MLS provides additional protection regarding secrecy of past\r\nmessages and future messages.\" I suggest changing this to \"...regarding\r\nsecrecy and authenticity of past...\" Especially in the PCS case\r\nauthenticity is just as much a goal as privacy. But also for past\r\n(undelivered) messages when compromising a sender we still expect (and\r\nget) authenticity. In particular the sending keys are already deleted so\r\nthe attacker is expected to not be able to create an alternative\r\nciphertext for that AEAD encryption key. In more detail, authenticity\r\nshould also be mentioned (next to privacy) in the more detailed\r\nparagraphs on FS and PCS in that subsection.\r\n\r\n- 3.2.2.1 The PCS version described here is too strong. MLS really only\r\nguarantees PCS if between time t and t' the attacker did not forge a\r\nmessage on behalf of the compromised client. (Not only can a forged\r\nmessage not be prevented by MLS, it also causes the compromised client's\r\nstate to come out of sync with the rest of the group.) So instead, one\r\nsolution is to say something like \"MLS provides PCS security when the\r\nattacker remains passive between times t and t'\". Although this is a\r\nsomewhat stronger restriction on the adversary than we really need to\r\nget PCS it is a clear, succinct yet still reasonable notion we do satisfy.)\r\n\r\n- 3.2.2.1 \"Regardless, MLS does not allow addition or removal of group\r\nmembers without informing all other members.\" Out of curiosity is this\r\nreally true for ART and TreeKEM? Suppose A, B and C are in a group. A is\r\ncorrupt so she sends a add-member message to B informing B that D has\r\njoined the group. We specified that the DS shouldn't \"know\" about group\r\nmembership so it should permit forwarding this only to B. A priori, now\r\nB thinks D is in the group but C doesn't right? In fact, if B sends\r\nmessage to the group (not maybe an update though) its not clear to me\r\nthat C will realize B thinks D is in the group... Worse, D will actually\r\nbe able to decrypt the message. In fact, if D gets their hands on a\r\nmessages sent by C they could also decrypt them (at least before an\r\nupdate occurs) since they are protected only by the group key which D\r\nknows. Any way, it might just be me, but I'm not too clear if, or at\r\nleast, to which extent or in which sense we really get this property.\r\n\r\n- 3.2.2.3 \"hence slightly weakening the PCS guarantees for attachments.\"\r\nI'd probably phrase this as \"hence potentially extending the time before\r\nPCS guarantees take effect.\" rather than use the term \"weaken\" as its\r\nthe same security notion. (I believe that in crypto papers the terms\r\n\"stronger\" and \"weaker\" are normally used to describe security games\r\nthat strictly imply (or are implie by) each other. But, the parameters t\r\nand t' in PCS are not part of the definition of security game. Rather,\r\nthey are a function of the adversary and all inputs and random coins\r\nused in the security game.)\r\n\r\n- 3.2.2.5 My take on the discussion about deniability in Paris was that\r\nthere was a general consensus that deniability is not an interesting\r\ngoal for MLS because what we could achieve is too weak to be interesting\r\nwhile notions strong enough to be worth it in practice are out of our\r\nreach... but to be sure I'd recommend at least checking the notes from\r\nthe meeting to confirm.\r\n\r\n- 4 First paragraph. Typo: \"in\" repeated twice.\r\n\r\n- 4.1. Realistically we might want to also add leaking meta-data. E.g.\r\nwho talks when to whom and how much they say as well as when updates are\r\nperformed vs messages exchanged.\r\n\r\n- 4.4 \"It will also be able to send messages impersonating the\r\ncompromised Client until the Client updates its keying material (see\r\nSection 3.2.2.1).\" I think, at least if an update has been forged on\r\nbehalf of a compromised Client then even if the Client updates its key\r\nmaterial it still wont be able to send messages. In fact, in this cast\r\nAFAIK A) forging can continue and B) the Client can no longer rejoin the\r\ngroup; at least not without wiping its state completely and re-joining\r\nfrom scratch. If this is true then we might consider adding a caveat to\r\nthe quoted sentence reflecting that updates only recover sending\r\ncapabilities if no update was forged in the meantime.```",
+      "createdAt": "2019-03-10T15:50:08Z",
+      "updatedAt": "2021-03-08T13:32:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 56,
+      "id": "MDU6SXNzdWU0MjU0OTIwMjc=",
+      "title": "Server Initiated Removal considerations",
+      "url": "https://github.com/mlswg/mls-architecture/issues/56",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2019-03-26T15:34:45Z",
+      "updatedAt": "2021-03-08T13:29:49Z",
+      "closedAt": "2021-03-08T13:29:49Z",
+      "comments": []
+    },
+    {
+      "number": 62,
+      "id": "MDU6SXNzdWU1OTEwMzA5Njg=",
+      "title": "Clarification wanted: Messaging Service",
+      "url": "https://github.com/mlswg/mls-architecture/issues/62",
+      "state": "CLOSED",
+      "author": "GaPhil",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the context of this document, the meaning of the term _Messaging Service (MS)_ seems a little unclear to me. The document states that the protocol is _intended to be embedded in a concrete protocol such as XMPP_. However, is a MS meant to be a messaging service such as SMS or MMS? Or a service on the application layer, such as FB or WhatsApp? Essentially who provides / controls the AS and DS? I would be grateful for some clarification on this. Thanks.",
+      "createdAt": "2020-03-31T11:32:31Z",
+      "updatedAt": "2020-04-01T17:19:25Z",
+      "closedAt": "2020-04-01T17:19:25Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "It is meant to mean application layer, would changing that to \"service provider\" work better for you?",
+          "createdAt": "2020-03-31T13:10:04Z",
+          "updatedAt": "2020-03-31T13:10:04Z"
+        },
+        {
+          "author": "GaPhil",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thank you. I do think that the term _service provider_ is less ambiguous.",
+          "createdAt": "2020-04-01T15:43:59Z",
+          "updatedAt": "2020-04-01T15:43:59Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Ack, will fix soon.",
+          "createdAt": "2020-04-01T15:45:13Z",
+          "updatedAt": "2020-04-01T15:45:13Z"
+        },
+        {
+          "author": "GaPhil",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I can make a PR, if you want?",
+          "createdAt": "2020-04-01T15:45:26Z",
+          "updatedAt": "2020-04-01T15:45:26Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "> I can make a PR, if you want?\r\n\r\nSure, please go for it.",
+          "createdAt": "2020-04-01T15:46:24Z",
+          "updatedAt": "2020-04-01T15:46:24Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Fixed by #63 ",
+          "createdAt": "2020-04-01T17:19:24Z",
+          "updatedAt": "2020-04-01T17:19:24Z"
+        }
+      ]
+    },
+    {
+      "number": 68,
+      "id": "MDU6SXNzdWU2NTU0OTk2ODA=",
+      "title": "Handling user permissions in MLS versus implementations",
+      "url": "https://github.com/mlswg/mls-architecture/issues/68",
+      "state": "CLOSED",
+      "author": "chelseakomlo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The last paragraph of the \"General Settings\" section states: \r\n\r\n> At the cryptographic level, clients (and by extension members in groups) have equal permissions. For instance, any member can add or remove another client in a group. This is in contrast to some designs in which there is a single group controller who can modify the group. MLS is compatible with having group administration restricted to certain users, but we assume that those restrictions are enforced by authentication and access control at the application layer. Thus, for instance, while it might be cryptographically possible for any member to send a message adding a new client to a group, the group might have the policy that only certain members are allowed to make changes and thus other members can ignore or reject such a message from an unauthorized user.\r\n\r\nIsn't the last sentence overly prescriptive of how group messaging applications that implement MLS might handle unauthorized user actions? The current wording makes it sound like members (i.e, users) themselves are responsible for ignoring/rejecting unauthorized user messages, which seems not quite right. \r\n\r\nIf applications will actually handle enforcing these policies as part of their UX, I recommend changing the last sentence to something like \"Thus, for instance, while the MLS protocol allows for any existing member of a group to add a new client, the group messaging application which implements MLS might allow for group administration policies for which only a subset of members can qualify, and thus will handle enforcing group policies (such as determining if a user is allowed to add new users to the group) at the application level.\"\r\n\r\n",
+      "createdAt": "2020-07-12T23:43:57Z",
+      "updatedAt": "2020-07-21T12:07:28Z",
+      "closedAt": "2020-07-21T12:07:28Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks for the comment! : ) \r\nI tried to clarify that paragraph in https://github.com/mlswg/mls-architecture/commit/a2200df1e0007a56aeb2c6ea9a7da5df7e47b6bb",
+          "createdAt": "2020-07-21T12:07:28Z",
+          "updatedAt": "2020-07-21T12:07:28Z"
+        }
+      ]
+    },
+    {
+      "number": 70,
+      "id": "MDU6SXNzdWU2NjI4NjEzODY=",
+      "title": "Editor's copy points to a 404.",
+      "url": "https://github.com/mlswg/mls-architecture/issues/70",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "website"
+      ],
+      "body": "The build and GH actions script seem to work now, thanks @Bren2010 .\r\n\r\nThe README points to an Editor's copy which is 404.\r\nhttps://mlswg.github.io/mls-architecture/#go.draft-ietf-mls-architecture.html\r\n\r\nThe artifact seem to build properly though:\r\nhttps://github.com/mlswg/mls-architecture/actions/runs/176901329\r\n\r\n@katrielalex @Bren2010 Are we missing a redirect or something?",
+      "createdAt": "2020-07-21T10:36:14Z",
+      "updatedAt": "2020-07-23T09:05:31Z",
+      "closedAt": "2020-07-23T09:05:31Z",
+      "comments": [
+        {
+          "author": "Bren2010",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "- It doesn't look like Pages it on. You can try turning it off and back on in the Settings tab and that will trigger a new deploy.\r\n- Leave the domain for Pages as the default, not \"architecture.messaginglayersecurity.rocks\" or something similar",
+          "createdAt": "2020-07-21T16:12:07Z",
+          "updatedAt": "2020-07-21T16:18:39Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "@katrielalex I think, only you can do that, I only have write access, so I don't have the \"Settings\" tab... :/",
+          "createdAt": "2020-07-23T08:50:26Z",
+          "updatedAt": "2020-07-23T08:50:26Z"
+        },
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "Hm strange: \r\n![image](https://user-images.githubusercontent.com/315959/88268657-b5932180-ccca-11ea-92fa-f77069f7784c.png)\r\n",
+          "createdAt": "2020-07-23T08:56:27Z",
+          "updatedAt": "2020-07-23T08:56:27Z"
+        },
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "Turned it off and on again and now I see\r\n\r\n![image](https://user-images.githubusercontent.com/315959/88269008-33efc380-cccb-11ea-9de9-b7367e31baf6.png)\r\n",
+          "createdAt": "2020-07-23T08:59:37Z",
+          "updatedAt": "2020-07-23T08:59:37Z"
+        },
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "mls-protocol shows\r\n\r\n![image](https://user-images.githubusercontent.com/315959/88269046-4538d000-cccb-11ea-8dc5-0569cf9b6820.png)\r\n\r\nso I think this might just need another commit to trigger the build",
+          "createdAt": "2020-07-23T09:00:08Z",
+          "updatedAt": "2020-07-23T09:00:08Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Yay, it seems to work now !! \ud83d\udc4d Thanks a lot Katriel and Brendan !!",
+          "createdAt": "2020-07-23T09:05:31Z",
+          "updatedAt": "2020-07-23T09:05:31Z"
+        }
+      ]
+    },
+    {
+      "number": 71,
+      "id": "MDU6SXNzdWU2NjQxMTMzMDM=",
+      "title": "Definition of a group member can be strengthened",
+      "url": "https://github.com/mlswg/mls-architecture/issues/71",
+      "state": "OPEN",
+      "author": "chelseakomlo",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "In the section \"Groups, Members, and Clients\", the definition of a group in MLS is the set of clients that have knowledge of the shared group key, which is established in the group key exchange. \r\n\r\nThe spec then goes on to say that \"Until a Member has contributed to the group secret, other members cannot assume she is a member of the group.\"\r\n\r\nThis phrasing of what constitutes a group member is quite weak and does not actually reflect the security properties of the underlying group key exchange. If a member has not contributed to the shared group secret, she cannot be considered a member of the group, as 1) she should not be able to learn the group key  (without acting adversarially outside of the protocol), and 2) other members cannot verify her membership\r\n\r\nInstead, I would rephrase this description of a member/non-member to say something stronger, like \"Until a Member has been added to the group by another member---thereby requiring that she contributes to the group secret in this process in such a way that is verifiable to other group members--she will not be able to participate as a member of the group.\"",
+      "createdAt": "2020-07-22T23:38:36Z",
+      "updatedAt": "2021-03-08T13:33:03Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 72,
+      "id": "MDU6SXNzdWU2NjU3Mzc0Mjg=",
+      "title": "Open a section for attacks outside the threat model?",
+      "url": "https://github.com/mlswg/mls-architecture/issues/72",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "beurdouche"
+      ],
+      "labels": [
+        "editorial"
+      ],
+      "body": "",
+      "createdAt": "2020-07-26T08:42:38Z",
+      "updatedAt": "2021-03-08T13:28:12Z",
+      "closedAt": "2021-03-08T13:28:12Z",
+      "comments": []
+    },
+    {
+      "number": 74,
+      "id": "MDU6SXNzdWU2NjY4NTIyNjI=",
+      "title": "Review from Sof\u00eda Celi",
+      "url": "https://github.com/mlswg/mls-architecture/issues/74",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "```\r\nDear, list,\r\n\r\nThank you so much for all your efforts into developing MLS.\r\n\r\nAfter re-reading the architecture and protocol drafts, I have some\r\ncomments. Please, excuse me if I got anything wrong. Apologies as well\r\nif this have been already discussed.\r\n\r\n- While it is clear on the architecture draft that 'Client' refers to a\r\ndevice that a user has, it is unclear on the protocol draft and might\r\ngenerate confusion, specifically, by the definition:\r\n\r\n\"\"\"\r\nClient:\r\n: An agent that uses this protocol to establish shared cryptographic\r\n state with other clients.  A client is defined by the\r\n cryptographic keys it holds.\r\n\"\"\"\r\n\r\nMight be good to clarify here the relationship with devices and users,\r\nas this is something often enforced by messaging protocols, such as XMPP.\r\n\r\n- It is unclear if any member can 'Add' another one. In the case of\r\n'Remove', it is clear, as:\r\n\r\n\"\"\"\r\nMembers are removed from the group in a similar way. Any member of the\r\ngroup can send a _Remove_ proposal followed by a _Commit_ message, which\r\nadds new entropy to the group state that's known to all except for the\r\nremoved member.\r\nNote that this does not necessarily imply that any member is actually\r\nallowed to evict other members; groups can enforce access control\r\npolicies on top of these basic mechanism.\r\n\"\"\"\r\n\r\nIt might be good to add the same note to the 'Add' mechanism, as some\r\nprotocols might enforce only some members to be able to add others (an\r\nadmin, for example). I think this is clearer on the architecture draft.\r\n\r\n- While there is a deletion schedule section, it should perhaps be\r\nenforced on several sections where deletion is critical: reuse of\r\nKeyPackages, key/nonce pair reuse, etc. It will be good to specially\r\nrefer where these values should be safely deleted, even in regars that,\r\non some occasions, key/nonce pairs, for example, should be kept in\r\nmemory for delayed messages.\r\n\r\n- It will be good to enforce a time, as part of an structure to which\r\nretention occurs:\r\n\r\n\"\"\"\r\nFor usability, MLS clients might be required to keep the AEAD key\r\nand nonce for a certain amount of time to retain the ability to decrypt\r\ndelayed or out of order messages, possibly still in transit while a\r\ndecryption is being done.\r\n\"\"\"\r\n\r\nThis time, I think should be enforced by the application but could be\r\npart of an struct and periodically be checked. After the times passes,\r\nthe values should be deleted.\r\n\r\n- I'm not really sure of this section:\r\n\r\n\"\"\"\r\nDecryption is done by decrypting the metadata, then the message, and\r\nthen verifying the content signature.\r\n\"\"\"\r\n\r\nWouldn't it be better to first verify the signature and then decrypt the\r\nmessage? I can imagine that, as it is written, an application can show\r\nthe messages to the end users without verifying the identity (and I\r\nassume integrity, as well).\r\n\r\n- What happens if a proposal or message is invalid?\r\n\r\nOn these sections:\r\n\r\n\"\"\"\r\nAn invited member receiving a _Welcome_ message can recognize group\r\ncreation if the number of entries in the `members` array is equal to the\r\nnumber of leaves in the tree minus one.  A client receiving a _Welcome_\r\nmessage SHOULD verify whether it is a newly created group, and if so,\r\nSHOULD verify that the above process was followed by reconstructing the\r\n_Add_ and _Commit_ messages, and verifying that the resulting transcript\r\nhashes and epoch secret match those found in the Welcome message.\r\n\r\nand\r\n\r\nThe sender of a _Commit_ MUST include all valid proposals that it has\r\nreceived during the current epoch. Invalid proposals include, for\r\nexample, proposals with an invalid signature or proposals that are\r\nsemantically invalid, such as an _Add_ when the sender does not have the\r\napplication-level permission to add new users.\r\n\"\"\"\r\n\r\nWhat will be the correct behaviour when failure? Should the messages be\r\nignored or ask to be resent? I assumed ignored; but might be worth noting.\r\n\r\n\r\n- Will it be better to use a MAC key?\r\nOn the section:\r\n\r\n\"\"\"\r\nTo prevent counter manipulation by the server, the counter's integrity\r\ncan be ensured by including the counter in a signed message envelope.\r\n\"\"\"\r\n\r\nMight be better to somehow derive a MAC key and attach it to the counter...\r\n\r\n- Security level:\r\n\r\nOn the section:\r\n\r\n\"\"\"\r\nrequirements, clients can choose between two security levels (roughly\r\n128-bit and 256-bit). Within the security levels clients can choose\r\nbetween faster\r\n\"\"\"\r\n\r\nAs I see that ed448 is used, it is worth noting that is security level\r\nis of 224-bit, as stated over: https://tools.ietf.org/html/rfc8032#section-1\r\n\r\nI'll keep on reviewing some other parts in the future in more detail.\r\n\r\nI submitted two pull request with some grammar fixes as well and can put\r\nthese thoughts on issues on the repository.\r\n\r\nThanks!\r\n```",
+      "createdAt": "2020-07-28T07:58:33Z",
+      "updatedAt": "2021-01-20T09:42:22Z",
+      "closedAt": "2021-01-20T09:42:22Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "The Arch specific parts have been handled, modulo the security considerations that are gonna be updated as we discuss as a group.",
+          "createdAt": "2021-01-20T09:42:22Z",
+          "updatedAt": "2021-01-20T09:42:22Z"
+        }
+      ]
+    },
+    {
+      "number": 75,
+      "id": "MDU6SXNzdWU3MjQ3MjU2MjQ=",
+      "title": " Track Expected Types of Deployments",
+      "url": "https://github.com/mlswg/mls-architecture/issues/75",
+      "state": "OPEN",
+      "author": "Bren2010",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "This ticket is meant to collect all of the use-cases and types of deployments that we support, or types of deployments that we've chosen not to support. In the future, I'd like us to take some time to make a sorta taxonomy of deployments -- think through the architecture / protocol decisions you need to achieve each use-case, and the security properties you get.\r\n\r\nI'll start with a few:\r\n\r\n- **Centralized Deployment:** Optimally simple client-side implementation.\r\n  - Authentication Service: Endpoint run by service provider. Either trusted to act correctly or built with transparency technology.\r\n  - Delivery Service: Endpoint run by service provider. Ensures a linear ordering of Commits.\r\n  - Proposals and Commits are left as plaintext.\r\n  - *Properties:*\r\n    - The DS knows of all groups and which members are in each group, as well as the value of the group's ratchet tree.\r\n    - Since the DS ensures a linear ordering of Commits, members can process Commits in the naive way.\r\n    - The DS must process messages and maintain a copy of the ratchet tree.\r\n    - New members can get a copy of a group's ratchet tree from the DS, meaning Welcome messages can be smaller.\r\n    - Members are aware of all the other members in each group.\r\n- **Broadcast Channel Deployment:** Server-side implementation that doesn't require strong coordination.\r\n  - Authentication Service: Endpoint run by service provider. Either trusted to act correctly or built with transparency technology.\r\n  - Delivery Service: Broadcast channel that sends new messages to all group members indiscriminately, combined with a separate mechanism for KeyPackage distribution.\r\n  - Proposals and Commits are encrypted.\r\n  - *Properties:*\r\n    - The DS can infer which groups exist and which members are in each group, but this isn't required for it to operate. It does not know the ratchet tree.\r\n    - Members must use a consensus protocol to decide on which Commit to accept if multiple are sent at once. This may imply forking or reverting to a previous state.\r\n    - Since the ratchet tree isn't stored centrally, Welcome messages must be larger to accommodate the serialized tree.\r\n    - Members are aware of all the other members in each group.\r\n- **Anonymous Deployment:** Attempts to hide the membership of each group but does not attempt to hide the number of groups / number of members in each group.\r\n  - Authentication Service: Endpoint run by service provider. Either trusted to act correctly or built with transparency technology. Must be accessed anonymously.\r\n  - Delivery Service: Oblivious to *both* who writes a message to a given group, and who read that message. An onion network could be used, as long as a new circuit is created for each message. Ensures a linear ordering of Commits.\r\n  - Proposals and Commits are encrypted. No additional framing is used beyond what the onion network dictates.\r\n  - *Properties:*\r\n    - The DS knows of all groups and how many members are in each group. It does not know the ratchet tree or the identities of group members.\r\n    - Since the DS ensures a linear ordering of Commits, members can process Commits in the naive way.\r\n    - Since the ratchet tree isn't stored centrally, Welcome messages must be larger to accommodate the serialized tree.\r\n    - Members are aware of all the other members in each group.\r\n\r\nSome that I need to think more about:\r\n\r\n- **Hidden-Membership Deployment:** Allows groups where group members are unable to determine the identity of other members. All communication is either from/to the group creator.\r\n- **Deniable Deployment:** Avoids signing messages sent to a group with a binding private key.\r\n- **Federated Deployment:** Allows the users of multiple cooperating AS and DS providers to inter-communicate.\r\n",
+      "createdAt": "2020-10-19T15:18:50Z",
+      "updatedAt": "2021-03-08T13:33:17Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 76,
+      "id": "MDU6SXNzdWU3OTc3NTkwODA=",
+      "title": "Client-side fanout",
+      "url": "https://github.com/mlswg/mls-architecture/issues/76",
+      "state": "OPEN",
+      "author": "ShivanKaul",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [
+        "question"
+      ],
+      "body": "There is some text in a couple of places in the architecture draft that mentions client-side vs server-side fanout. The main tradeoff seems to be performance vs the DS learning metadata. Would some implementations might want to err more on the side of the server learning less - would this be useful guidance to have in the arch draft? Separate draft? Else, if the thought is that this is totally out-of-scope, it would be worthwhile calling it out explicitly.",
+      "createdAt": "2021-01-31T17:05:11Z",
+      "updatedAt": "2021-03-08T13:33:32Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTUxMjYxODE2",
+      "title": "General setting",
+      "url": "https://github.com/mlswg/mls-architecture/pull/1",
+      "state": "MERGED",
+      "author": "ekr",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2017-11-08T00:08:16Z",
+      "updatedAt": "2020-12-27T12:50:57Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "cc3d5ec8c256f9036eae95f937f176e816c2eb33",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "general_setting",
+      "headRefOid": "0f3274377abd05b1124dc60a3827c860e0a1f8e0",
+      "closedAt": "2017-11-08T00:08:23Z",
+      "mergedAt": "2017-11-08T00:08:23Z",
+      "mergedBy": "ekr",
+      "mergeCommit": {
+        "oid": "844ca9e6d6132c8290e0755151bbd4bc190836ca"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 2,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTUxMjY3NjA2",
+      "title": "added a few requirement sentences",
+      "url": "https://github.com/mlswg/mls-architecture/pull/2",
+      "state": "MERGED",
+      "author": "singuva",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2017-11-08T00:52:34Z",
+      "updatedAt": "2020-12-27T12:50:57Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "844ca9e6d6132c8290e0755151bbd4bc190836ca",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "requirements",
+      "headRefOid": "edb3ef5f39761c2b3a91e8a7737f7bb823869605",
+      "closedAt": "2017-11-08T00:55:44Z",
+      "mergedAt": "2017-11-08T00:55:44Z",
+      "mergedBy": "singuva",
+      "mergeCommit": {
+        "oid": "f875429f747d33ff13b42c18459e966fe6ee0016"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTUxNTk5MDQy",
+      "title": "Progress on Threat model",
+      "url": "https://github.com/mlswg/mls-architecture/pull/3",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2017-11-09T09:27:19Z",
+      "updatedAt": "2018-08-13T12:15:31Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "b25c0bda3133884a051b7ee1a686516cc3c9bdf1",
+      "headRepository": "beurdouche/mls-architecture",
+      "headRefName": "master",
+      "headRefOid": "383b1391214594336194ab8de9d514395cb1ef5f",
+      "closedAt": "2018-01-16T17:50:21Z",
+      "mergedAt": "2018-01-16T17:50:21Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "9e9a821f82211f7889d78caac00a7fd0950394da"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NzU0MzUxODQ=",
+          "commit": {
+            "abbreviatedOid": "044fb27"
+          },
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2017-11-09T13:26:04Z",
+          "updatedAt": "2017-11-09T13:26:04Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "Unfortunately, I think that we will need to deal with two kinds of threat models:\r\n\r\n- The one you mention here where the server is completely untrusted\r\n- One where the server is trusted to do certain things and not others\r\n\r\nI think we'll probably want to analyze this in both the case where the server delivers messages correctly and in order and the case where it does not, for instance.",
+              "createdAt": "2017-11-09T13:26:04Z",
+              "updatedAt": "2018-01-16T17:44:34Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3ODU0MDUzMjg=",
+          "commit": {
+            "abbreviatedOid": "23f4d43"
+          },
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2017-12-22T22:43:04Z",
+          "updatedAt": "2017-12-31T03:41:48Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I would reverse this\r\n\"In order to mitigate.. the design of the protocol must consider\"",
+              "createdAt": "2017-12-22T22:43:04Z",
+              "updatedAt": "2018-01-16T17:44:34Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "You could just strike the first sentence and start the second one with \"We assume an adversary which has\"",
+              "createdAt": "2017-12-22T22:43:41Z",
+              "updatedAt": "2018-01-16T17:44:34Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "I don't think you need this sentence. I would just merge this graf with the next one",
+              "createdAt": "2017-12-22T22:44:16Z",
+              "updatedAt": "2018-01-16T17:44:34Z"
+            },
+            {
+              "originalPosition": 18,
+              "body": "s/compromissions/compromise/",
+              "createdAt": "2017-12-22T22:44:31Z",
+              "updatedAt": "2018-01-16T17:44:34Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "I would rewrite this section as desiderata, rather than guarantees. I.e., \"the protocol should provide\"",
+              "createdAt": "2017-12-22T22:45:20Z",
+              "updatedAt": "2018-01-16T17:44:34Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "This section seems inadequate, given the emphasis on partial compromise, PCS and PFS. ",
+              "createdAt": "2017-12-22T22:46:29Z",
+              "updatedAt": "2018-01-16T17:44:34Z"
+            },
+            {
+              "originalPosition": 44,
+              "body": "Well, the MS can't really provide bogus keys unless the AS is compromised as well. That's why I separated out the AS in the beginning. So I'm not sure this is the right taxonomy. I think what you want to say here is that the MS can manipulate messages any way that it wants, but it can't mess with the crypto, right?",
+              "createdAt": "2017-12-31T03:41:06Z",
+              "updatedAt": "2018-01-16T17:44:34Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTUxNjA5MTEw",
+      "title": "Clarify the naming of services",
+      "url": "https://github.com/mlswg/mls-architecture/pull/4",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "The current naming is confusing:\r\nMS stands for \"Message Switch\" and \"Messaging Server\" but not for \"Messaging Service\"\r\nAS stands for \"Authentication Server\" and \"Authentication Service\".\r\n\r\nThe proposed change gives:\r\nMS as \"Messaging Service\" (AS* + DS)\r\nAS as \"Authentication Service\"\r\nDS as \"Delivery Service\"\r\nthe \"Server\"s being the endpoints and not the functionality\r\n",
+      "createdAt": "2017-11-09T10:10:28Z",
+      "updatedAt": "2018-08-13T12:15:31Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "b25c0bda3133884a051b7ee1a686516cc3c9bdf1",
+      "headRepository": "beurdouche/mls-architecture",
+      "headRefName": "change_service_names",
+      "headRefOid": "2da52ba86dcdbf436611213a9a0bc7659176d8d4",
+      "closedAt": "2017-12-31T03:55:17Z",
+      "mergedAt": "2017-12-31T03:55:17Z",
+      "mergedBy": "ekr",
+      "mergeCommit": {
+        "oid": "73fb01fbb96f97ea93a0c631dd99f0c37a23eac5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 5,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTUxODU3MDc0",
+      "title": "Progress on General Setting / Clients",
+      "url": "https://github.com/mlswg/mls-architecture/pull/5",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2017-11-10T09:06:12Z",
+      "updatedAt": "2018-08-13T12:15:31Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "9e9a821f82211f7889d78caac00a7fd0950394da",
+      "headRepository": "beurdouche/mls-architecture",
+      "headRefName": "general_clients",
+      "headRefOid": "2ed5357087f0bf3bd7c2b375b5652a3641ffedb4",
+      "closedAt": "2018-01-16T17:51:27Z",
+      "mergedAt": "2018-01-16T17:51:27Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "14e818516f8449778ca3a23bb50da751b0b3e960"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3ODYwNDAyNDY=",
+          "commit": {
+            "abbreviatedOid": "e97e760"
+          },
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2017-12-31T03:57:00Z",
+          "updatedAt": "2017-12-31T03:57:23Z",
+          "comments": [
+            {
+              "originalPosition": 12,
+              "body": "I don't think \"federated\" is what you want to say here. I would rewrite this by saying:\r\n\r\n\"A single end-user may operate multiple devices simultaneously (e.g., a desktop and a phone) or sequentially (e.g., replacing one phone with another).\"\r\n",
+              "createdAt": "2017-12-31T03:57:00Z",
+              "updatedAt": "2018-01-16T17:51:15Z"
+            },
+            {
+              "originalPosition": 22,
+              "body": "This text seems OK but it doesn't belong here.",
+              "createdAt": "2017-12-31T03:57:20Z",
+              "updatedAt": "2018-01-16T17:51:15Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTUxODU3MjM0",
+      "title": "Progress on attachments",
+      "url": "https://github.com/mlswg/mls-architecture/pull/6",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Seems unclear to me why we do a distinction between messages and attachments.\r\nIs there a specific reason ?",
+      "createdAt": "2017-11-10T09:07:14Z",
+      "updatedAt": "2018-08-13T12:15:31Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "b25c0bda3133884a051b7ee1a686516cc3c9bdf1",
+      "headRepository": "beurdouche/mls-architecture",
+      "headRefName": "attachments",
+      "headRefOid": "eafe7ef4cb30a89c94b97bc55d799056a568f894",
+      "closedAt": "2018-01-24T21:20:21Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm not entirely sure either. Perhaps because they might be a lot bigger and delivered separetely?\r\n",
+          "createdAt": "2017-12-31T03:58:12Z",
+          "updatedAt": "2017-12-31T03:58:12Z"
+        },
+        {
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@juberti @jmillican ?",
+          "createdAt": "2017-12-31T03:59:11Z",
+          "updatedAt": "2017-12-31T03:59:11Z"
+        },
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "Yes, I think it is because attachments are normally delivered by separately encrypting them and sending the key over the messaging channel.\r\n\r\nI'm not sure we need to say much about that in this draft, though perhaps it is worth mentioning it since _everybody_ will implement it. (For example, we could require authenticated encryption.)",
+          "createdAt": "2018-01-22T13:14:33Z",
+          "updatedAt": "2018-01-22T13:14:33Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTUxODgxNDIy",
+      "title": "Progress on General Setting / Messaging Server",
+      "url": "https://github.com/mlswg/mls-architecture/pull/7",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Writing down my current (probably incorrect) understanding of the Message Switch/Delivery service",
+      "createdAt": "2017-11-10T11:07:44Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "43ca3d9cc6ab1e56f27b35cae9c82d64b87c9c40",
+      "headRepository": "beurdouche/mls-architecture",
+      "headRefName": "general_message_server",
+      "headRefOid": "788be139f0d245a9956dfab3ac6031dc29e57a7e",
+      "closedAt": "2018-01-16T17:55:10Z",
+      "mergedAt": "2018-01-16T17:55:10Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "e5f66ef6bafe4901ae2bdf28764fb2ed97bf8e11"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 8,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTUzMDExNDcz",
+      "title": "Progress on Message Protection",
+      "url": "https://github.com/mlswg/mls-architecture/pull/8",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "As usual, rough push. Multiple passes needed.",
+      "createdAt": "2017-11-16T11:06:54Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "b25c0bda3133884a051b7ee1a686516cc3c9bdf1",
+      "headRepository": "beurdouche/mls-architecture",
+      "headRefName": "system_message_protection",
+      "headRefOid": "fabb0de6299cdf34c8faa5a82a7e7d3fb2d692f8",
+      "closedAt": "2018-01-16T17:53:10Z",
+      "mergedAt": "2018-01-16T17:53:10Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "43ca3d9cc6ab1e56f27b35cae9c82d64b87c9c40"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3ODYwNDAyOTE=",
+          "commit": {
+            "abbreviatedOid": "dea83f9"
+          },
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2017-12-31T04:01:30Z",
+          "updatedAt": "2017-12-31T04:10:11Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "I don't think we're planning to provide either repudiability or unlinkability, actually.",
+              "createdAt": "2017-12-31T04:01:30Z",
+              "updatedAt": "2017-12-31T16:50:32Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "optionally only has one n",
+              "createdAt": "2017-12-31T04:08:33Z",
+              "updatedAt": "2017-12-31T16:50:32Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "These seem like they are properties of the key system more than the symmetric encryption, no?",
+              "createdAt": "2017-12-31T04:09:21Z",
+              "updatedAt": "2017-12-31T16:50:32Z"
+            },
+            {
+              "originalPosition": 58,
+              "body": "As above, I don't think we're trying to provide this.",
+              "createdAt": "2017-12-31T04:10:02Z",
+              "updatedAt": "2017-12-31T16:50:32Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY1Njc3NDAw",
+      "title": "Add user stories",
+      "url": "https://github.com/mlswg/mls-architecture/pull/11",
+      "state": "MERGED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Add user stories",
+      "createdAt": "2018-01-29T11:19:11Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "5d5be32e93758e28145b6344d2a14ce46628bd1f",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "raphaelrobert",
+      "headRefOid": "a02b40d52b49078b2c657ce3d140222ff6ee59ab",
+      "closedAt": "2018-01-29T11:21:14Z",
+      "mergedAt": "2018-01-29T11:21:14Z",
+      "mergedBy": "raphaelrobert",
+      "mergeCommit": {
+        "oid": "a132f6eac990976f07bca47b6dbf41bbf9c6fc20"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY1Njg0NzUx",
+      "title": "Added missing functional requirements",
+      "url": "https://github.com/mlswg/mls-architecture/pull/12",
+      "state": "MERGED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-01-29T11:55:56Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "a132f6eac990976f07bca47b6dbf41bbf9c6fc20",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "raphaelrobert",
+      "headRefOid": "3a3a23dc01ead69167dae42d2e056ecd47b485e9",
+      "closedAt": "2018-01-29T11:56:31Z",
+      "mergedAt": "2018-01-29T11:56:31Z",
+      "mergedBy": "raphaelrobert",
+      "mergeCommit": {
+        "oid": "df2d6c38caa10e3a0a16ef1b60a4796ddc05f941"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY1OTQ1NTcx",
+      "title": "TvdM pass up to end of Groups, Members and Clients",
+      "url": "https://github.com/mlswg/mls-architecture/pull/13",
+      "state": "MERGED",
+      "author": "tvdmerwe",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "A few minor edits to (hopefully) improve readability, and a few comments in square braces ([ ]).",
+      "createdAt": "2018-01-30T10:47:24Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "aad6378fa8d92e70f98c07282fdd5bd62aaf1f7d",
+      "headRepository": null,
+      "headRefName": "edit",
+      "headRefOid": "e23a0b41dd4fa36f10727844fea6bd87c56463ca",
+      "closedAt": "2018-01-30T12:04:43Z",
+      "mergedAt": "2018-01-30T12:04:43Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "10ecc727965c8afe3fe0b62278b8378d5683449b"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "<img width=\"1671\" alt=\"yikes\" src=\"https://user-images.githubusercontent.com/1193431/35562433-a278a7a4-05b3-11e8-91b3-b3bd2195402b.png\">\r\nSomething looks wrong with your text editor... ;)",
+          "createdAt": "2018-01-30T10:49:50Z",
+          "updatedAt": "2018-01-30T10:49:50Z"
+        },
+        {
+          "author": "tvdmerwe",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Arg! Will fix, sorry about this. ",
+          "createdAt": "2018-01-30T10:52:03Z",
+          "updatedAt": "2018-01-30T10:52:03Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 14,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2MDMyMzk1",
+      "title": "PR to prepare discussion about ephemeral signature scheme",
+      "url": "https://github.com/mlswg/mls-architecture/pull/14",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "beurdouche"
+      ],
+      "labels": [],
+      "body": "DO NOT MERGE !\r\n- Case where we want to rotate signature key to avoid using long term identity keys for signing.\r\n\r\n\r\n",
+      "createdAt": "2018-01-30T16:35:09Z",
+      "updatedAt": "2018-02-01T10:28:54Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "f68eb16bfc3426ebd7e3d94874d28fac5dcfb95a",
+      "headRepository": "beurdouche/mls-architecture",
+      "headRefName": "master",
+      "headRefOid": "f68eb16bfc3426ebd7e3d94874d28fac5dcfb95a",
+      "closedAt": "2018-02-01T10:28:54Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "body": "I _really really_ wanted to merge this but I restrained my :trollface: impulses. Just saying.",
+          "createdAt": "2018-01-30T16:40:32Z",
+          "updatedAt": "2018-01-30T16:40:32Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3OTI3MDczNTg=",
+          "commit": {
+            "abbreviatedOid": "de6fb66"
+          },
+          "author": "ekr",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-01-30T20:19:59Z",
+          "updatedAt": "2018-01-30T20:19:59Z",
+          "comments": [
+            {
+              "originalPosition": 73,
+              "body": "I thought we had agreed *not* to push on this. I really am not seeing a huge amount of value here.",
+              "createdAt": "2018-01-30T20:19:59Z",
+              "updatedAt": "2018-02-01T10:28:54Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3OTI3MTIxNTk=",
+          "commit": {
+            "abbreviatedOid": "de6fb66"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-01-30T20:36:24Z",
+          "updatedAt": "2018-01-30T20:36:24Z",
+          "comments": [
+            {
+              "originalPosition": 73,
+              "body": "That's probably my padawan cryptographer free spirit revealed here, but I really don't feel comfortable with signing every messages under the same long term identity key, while we can probably do much better... Not sure but just ratchet a new signing key and broadcast its next public key with every message sent (or even only once in a while)... I might be wrong but it might just be the cost of one crypto operation on send/receive and storing N keys which would be super easy.\r\n\r\nOf course I'll follow the general opinion, but I am curious... :)",
+              "createdAt": "2018-01-30T20:36:24Z",
+              "updatedAt": "2018-02-01T10:28:54Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2Mjc3MDI0",
+      "title": "Add a few inline comments to the architecture doc",
+      "url": "https://github.com/mlswg/mls-architecture/pull/15",
+      "state": "MERGED",
+      "author": "jmillican",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-01-31T14:38:41Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "c70a6d6cab56e5e6646718b240f0e358dbc919d5",
+      "headRepository": null,
+      "headRefName": "a_few_comments",
+      "headRefOid": "1899fcc98c857e46255a12c01160a97963b8e4e6",
+      "closedAt": "2018-01-31T14:38:48Z",
+      "mergedAt": "2018-01-31T14:38:48Z",
+      "mergedBy": "jmillican",
+      "mergeCommit": {
+        "oid": "83bba6dfffa828608eeeec86e34af314b23dead5"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 16,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2MzI3NTY2",
+      "title": "Comment on DoS by malicious clients",
+      "url": "https://github.com/mlswg/mls-architecture/pull/16",
+      "state": "MERGED",
+      "author": "katrielalex",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #10 ",
+      "createdAt": "2018-01-31T17:33:59Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "849a3dd520f017f4ec1fcab15a3a82fffb539146",
+      "headRepository": null,
+      "headRefName": "master",
+      "headRefOid": "e9d63c91071fac57b03e7e5b446093608fcaaafe",
+      "closedAt": "2018-01-31T17:35:23Z",
+      "mergedAt": "2018-01-31T17:35:23Z",
+      "mergedBy": "katrielalex",
+      "mergeCommit": {
+        "oid": "cf36eedb02ea75cf538d6691bc464b112587d80c"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 17,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2NDg3NjA0",
+      "title": "TvdM edit pass up to end of Delivery of messages and attachements",
+      "url": "https://github.com/mlswg/mls-architecture/pull/17",
+      "state": "MERGED",
+      "author": "tvdmerwe",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "An edit pass - minor changes for readability. ",
+      "createdAt": "2018-02-01T09:46:00Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "cf36eedb02ea75cf538d6691bc464b112587d80c",
+      "headRepository": null,
+      "headRefName": "edit",
+      "headRefOid": "fd1362a2dfbbe23b8b30378cf8f233e8d79c7829",
+      "closedAt": "2018-02-01T09:54:56Z",
+      "mergedAt": "2018-02-01T09:54:56Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "f68eb16bfc3426ebd7e3d94874d28fac5dcfb95a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 18,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2NTU1NDYx",
+      "title": "Edits",
+      "url": "https://github.com/mlswg/mls-architecture/pull/18",
+      "state": "MERGED",
+      "author": "cascremers",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Editing pass throughout.",
+      "createdAt": "2018-02-01T14:41:31Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "f68eb16bfc3426ebd7e3d94874d28fac5dcfb95a",
+      "headRepository": null,
+      "headRefName": "edits",
+      "headRefOid": "4dfcf4265cdf86ac9547a369bfe52d81282eee25",
+      "closedAt": "2018-02-01T14:45:38Z",
+      "mergedAt": "2018-02-01T14:45:38Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "dd017bbf0c9456b992b0e676be090d3ba094c611"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 19,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2NTU1Njky",
+      "title": "PCS fixes.",
+      "url": "https://github.com/mlswg/mls-architecture/pull/19",
+      "state": "MERGED",
+      "author": "cascremers",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Clarifications on PCS and cross-reference on first occurrence.",
+      "createdAt": "2018-02-01T14:42:22Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "f68eb16bfc3426ebd7e3d94874d28fac5dcfb95a",
+      "headRepository": null,
+      "headRefName": "pcs",
+      "headRefOid": "9297a6b512042190cbbcebb9252175aa6cde7774",
+      "closedAt": "2018-02-01T14:47:46Z",
+      "mergedAt": "2018-02-01T14:47:45Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "2b84fe76f59f5cee441fca306850fe665a7d3dc9"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 20,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2NTU1ODUw",
+      "title": "More technical changes and TODOs left that require more reflection.",
+      "url": "https://github.com/mlswg/mls-architecture/pull/20",
+      "state": "MERGED",
+      "author": "cascremers",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "More subtle changes and TODOs.",
+      "createdAt": "2018-02-01T14:42:58Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "f68eb16bfc3426ebd7e3d94874d28fac5dcfb95a",
+      "headRepository": null,
+      "headRefName": "tech-and-todos",
+      "headRefOid": "4fb9115c5d408fc119d6f113913e08d7001c22be",
+      "closedAt": "2018-02-01T14:51:04Z",
+      "mergedAt": "2018-02-01T14:51:04Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "1de0f3ac8c4fe1aaa6b8587472595c3e14524e44"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 21,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2NjI4Njc5",
+      "title": "Mention deniability",
+      "url": "https://github.com/mlswg/mls-architecture/pull/21",
+      "state": "MERGED",
+      "author": "raphaelrobert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-02-01T19:24:25Z",
+      "updatedAt": "2020-12-27T12:50:56Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "2b6e4ee242d23dba9d8c26c6bec707c881b57072",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "raphaelrobert",
+      "headRefOid": "6366f50961c7469c639e35f3fc627c305a1c4079",
+      "closedAt": "2018-02-01T19:24:50Z",
+      "mergedAt": "2018-02-01T19:24:50Z",
+      "mergedBy": "raphaelrobert",
+      "mergeCommit": {
+        "oid": "55c05eece94be8666168679d90f6f57e91af619a"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2NjQ3NzU2",
+      "title": "TvdM edit pass",
+      "url": "https://github.com/mlswg/mls-architecture/pull/22",
+      "state": "MERGED",
+      "author": "tvdmerwe",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Minor edits. ",
+      "createdAt": "2018-02-01T20:48:38Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "107737c571e457788e8038e9d6c05f1138c4bec4",
+      "headRepository": null,
+      "headRefName": "edit",
+      "headRefOid": "153971031b4ae9761b952f53262887b99be94ad9",
+      "closedAt": "2018-02-01T20:50:46Z",
+      "mergedAt": "2018-02-01T20:50:46Z",
+      "mergedBy": "tvdmerwe",
+      "mergeCommit": {
+        "oid": "c4c30b165e9d3dc00fe9b9f9b023534307eef110"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 23,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2NjYyMzI1",
+      "title": "Architecture authors",
+      "url": "https://github.com/mlswg/mls-architecture/pull/23",
+      "state": "MERGED",
+      "author": "eomara",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As discussed, changed the file name and authors orders",
+      "createdAt": "2018-02-01T21:54:22Z",
+      "updatedAt": "2020-12-27T12:50:55Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "c4c30b165e9d3dc00fe9b9f9b023534307eef110",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "architecture-authors",
+      "headRefOid": "cdc85b8acf23cc9187062f7865e19d44054ce476",
+      "closedAt": "2018-02-01T22:21:13Z",
+      "mergedAt": "2018-02-01T22:21:13Z",
+      "mergedBy": "bifurcation",
+      "mergeCommit": {
+        "oid": "6b7ec7bcb96d0072648041d01c2cb8265612952b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3OTM0NjA5ODc=",
+          "commit": {
+            "abbreviatedOid": "cdc85b8"
+          },
+          "author": "katrielalex",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-02-01T22:26:29Z",
+          "updatedAt": "2018-02-01T22:26:29Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "I particularly appreciate that Github has decided that the `E.` and the `.com` did not move even though everything else did.",
+              "createdAt": "2018-02-01T22:26:29Z",
+              "updatedAt": "2018-02-01T22:26:29Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3OTM0NjI0NDc=",
+          "commit": {
+            "abbreviatedOid": "cdc85b8"
+          },
+          "author": "bifurcation",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-02-01T22:32:04Z",
+          "updatedAt": "2018-02-01T22:32:05Z",
+          "comments": [
+            {
+              "originalPosition": 8,
+              "body": "Conservation of first initials and final labels is an important design principle.",
+              "createdAt": "2018-02-01T22:32:04Z",
+              "updatedAt": "2018-02-01T22:32:05Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2ODI2MzQz",
+      "title": "update doc title",
+      "url": "https://github.com/mlswg/mls-architecture/pull/24",
+      "state": "MERGED",
+      "author": "eomara",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-02-02T15:13:02Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "8b5c8a2cb1f90f57c508862edb3d1030263fe91e",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "emadomara",
+      "headRefOid": "05ab6dfb119fd136b9014d2f420b19f7ef9dc1d5",
+      "closedAt": "2018-02-02T17:10:24Z",
+      "mergedAt": "2018-02-02T17:10:24Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "e1f26172db69fcfc0ac7fc520c51abcb6f45ccb8"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 25,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2ODY0NjM5",
+      "title": "Presubmit revisions",
+      "url": "https://github.com/mlswg/mls-architecture/pull/25",
+      "state": "MERGED",
+      "author": "ekr",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-02-02T17:52:39Z",
+      "updatedAt": "2020-12-27T12:51:28Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "e198875b501593803286ec3d503c015a90352362",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "presubmit_revisions",
+      "headRefOid": "f7d6af594708d9c21254d92b9a7bc27401888ea1",
+      "closedAt": "2018-02-02T18:17:56Z",
+      "mergedAt": "2018-02-02T18:17:56Z",
+      "mergedBy": "eomara",
+      "mergeCommit": {
+        "oid": "516c6df652e6ce80a84106c97dfed112e0377353"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3OTM3MDU0NzQ=",
+          "commit": {
+            "abbreviatedOid": "f570e63"
+          },
+          "author": "eomara",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-02-02T18:07:24Z",
+          "updatedAt": "2018-02-02T18:07:24Z",
+          "comments": [
+            {
+              "originalPosition": 315,
+              "body": "Should it be more restrict and remove the word \"trivial\" ? It is not clear what is trivial and what is not",
+              "createdAt": "2018-02-02T18:07:24Z",
+              "updatedAt": "2018-02-02T18:14:54Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3OTM3MDgyOTQ=",
+          "commit": {
+            "abbreviatedOid": "f7d6af5"
+          },
+          "author": "eomara",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2018-02-02T18:17:40Z",
+          "updatedAt": "2018-02-02T18:17:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2ODY1OTY1",
+      "title": "add KT reference",
+      "url": "https://github.com/mlswg/mls-architecture/pull/26",
+      "state": "MERGED",
+      "author": "eomara",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-02-02T17:58:58Z",
+      "updatedAt": "2020-12-27T12:51:27Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "e1f26172db69fcfc0ac7fc520c51abcb6f45ccb8",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "emadomara",
+      "headRefOid": "cfb488315ba53a97c978c62ec88da9c63949e092",
+      "closedAt": "2018-02-02T17:59:56Z",
+      "mergedAt": "2018-02-02T17:59:56Z",
+      "mergedBy": "ekr",
+      "mergeCommit": {
+        "oid": "e198875b501593803286ec3d503c015a90352362"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 27,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2ODcwMjA1",
+      "title": "Move, rename threat model",
+      "url": "https://github.com/mlswg/mls-architecture/pull/27",
+      "state": "MERGED",
+      "author": "ekr",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-02-02T18:19:52Z",
+      "updatedAt": "2020-12-27T12:51:28Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "516c6df652e6ce80a84106c97dfed112e0377353",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "rename_threat_model",
+      "headRefOid": "e1596b31c7ed8c01051ecc6523bc706f7a3ba95a",
+      "closedAt": "2018-02-02T18:19:59Z",
+      "mergedAt": "2018-02-02T18:19:59Z",
+      "mergedBy": "ekr",
+      "mergeCommit": {
+        "oid": "584d8b11c615d1d5616ec48783a010792e53143d"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 28,
+      "id": "MDExOlB1bGxSZXF1ZXN0MTY2ODgyNzY2",
+      "title": "Minor editorial fixes",
+      "url": "https://github.com/mlswg/mls-architecture/pull/28",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-02-02T19:21:53Z",
+      "updatedAt": "2018-08-13T12:15:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "584d8b11c615d1d5616ec48783a010792e53143d",
+      "headRepository": "beurdouche/mls-architecture",
+      "headRefName": "master",
+      "headRefOid": "2aed49617ae4d6c39502a70edd1fce33194c981e",
+      "closedAt": "2018-02-02T19:23:34Z",
+      "mergedAt": "2018-02-02T19:23:34Z",
+      "mergedBy": "ekr",
+      "mergeCommit": {
+        "oid": "faf498010ded487c6bd3796c120b28ce24d29da8"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 31,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjA4NzA1OTY4",
+      "title": "Rename draft-omara to draft-ietf",
+      "url": "https://github.com/mlswg/mls-architecture/pull/31",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2018-08-15T23:11:54Z",
+      "updatedAt": "2019-03-10T17:47:38Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "7f962d782fca85e8df1da65083e4e176ab4e9fa5",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "mlswg-rename",
+      "headRefOid": "d5486fd505ee4f3927e02ed8802c7e295e082a76",
+      "closedAt": "2018-08-15T23:28:45Z",
+      "mergedAt": "2018-08-15T23:28:45Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "57ea617437bde016cf4736b57f46ebc32416825c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTQ2NjU1NTQ3",
+          "commit": {
+            "abbreviatedOid": "d5486fd"
+          },
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2018-08-15T23:25:51Z",
+          "updatedAt": "2018-08-15T23:25:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjE2NjkyNjkx",
+      "title": "Review from Dave Cridland",
+      "url": "https://github.com/mlswg/mls-architecture/pull/32",
+      "state": "MERGED",
+      "author": "dwd",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "* Change reference to XMPP to the current RFC.\r\n* Change heading of \"Deniability\" section, which also discusses non-repudiation, to \"Non-Repudiation and Deniability\".\r\n\r\nI wondered if that latter section should note that a third-party (ie, non-Member) cannot identify a sender from a given encrypted message, but then I wondered if that was the case or not.",
+      "createdAt": "2018-09-19T15:58:33Z",
+      "updatedAt": "2018-10-14T11:58:37Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "151f87569a008ab3711e0494ab86a34e43d7b88b",
+      "headRepository": "dwd/mls-architecture",
+      "headRefName": "patch-1",
+      "headRefOid": "c12ba58606c99564b96ce4cc14e25607cafaef5c",
+      "closedAt": "2018-10-14T11:58:33Z",
+      "mergedAt": "2018-10-14T11:58:33Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "1477c0c71e54ebdee3f63b350d97d5a7bb9f30f8"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks @dwd !",
+          "createdAt": "2018-10-14T11:58:37Z",
+          "updatedAt": "2018-10-14T11:58:37Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTU3MDUwNDUx",
+          "commit": {
+            "abbreviatedOid": "c12ba58"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2018-09-19T22:40:30Z",
+          "updatedAt": "2018-09-19T22:40:30Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjE2NzQ4MDYy",
+      "title": "Fix broken links to point directly to Github",
+      "url": "https://github.com/mlswg/mls-architecture/pull/33",
+      "state": "MERGED",
+      "author": "katrielalex",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Previously they pointed to mlswg.github.io/... but that doesn't work now that we use it for an actual homepage",
+      "createdAt": "2018-09-19T19:20:27Z",
+      "updatedAt": "2018-09-19T19:20:45Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "151f87569a008ab3711e0494ab86a34e43d7b88b",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "fix-links",
+      "headRefOid": "13d25d6db001aae9ca8ca8b7d1d8b704cb5c0f8c",
+      "closedAt": "2018-09-19T19:20:43Z",
+      "mergedAt": "2018-09-19T19:20:43Z",
+      "mergedBy": "katrielalex",
+      "mergeCommit": {
+        "oid": "d179bfdb2fa0fc0d91575cfe866be1f085366fde"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 34,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjE4NzE3NTQ2",
+      "title": "Adding gh-info to Intro",
+      "url": "https://github.com/mlswg/mls-architecture/pull/34",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Text stolen from mls-protocol to let people know where to find the GH pages.",
+      "createdAt": "2018-09-27T16:37:26Z",
+      "updatedAt": "2018-10-14T11:46:30Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "d179bfdb2fa0fc0d91575cfe866be1f085366fde",
+      "headRepository": "seanturner/mls-architecture",
+      "headRefName": "gh_info",
+      "headRefOid": "3d4a598369fb153b8529a0cfe0500f6106306377",
+      "closedAt": "2018-10-14T11:46:30Z",
+      "mergedAt": "2018-10-14T11:46:30Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "0b4aeb225a102a0595a71ad17a4baaa154430517"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 36,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjE5MDE1MDc2",
+      "title": "adding IANA considerations section",
+      "url": "https://github.com/mlswg/mls-architecture/pull/36",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "bifurcation"
+      ],
+      "labels": [
+        "editorial"
+      ],
+      "body": "We need an IANA considerations section even if we make no requests of them.  It's just part of the process and the section can be removed during the final publication phase.",
+      "createdAt": "2018-09-28T16:01:23Z",
+      "updatedAt": "2018-11-08T06:53:11Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "d179bfdb2fa0fc0d91575cfe866be1f085366fde",
+      "headRepository": "seanturner/mls-architecture",
+      "headRefName": "iana_con",
+      "headRefOid": "911ac2a3a5b00a8a6529b50d211b686ae7de5b97",
+      "closedAt": "2018-11-08T06:53:11Z",
+      "mergedAt": "2018-11-08T06:53:11Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "70979ea0a3cc4ef879d713b01fdb0a16617edeae"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 37,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjIyNjY2MzA2",
+      "title": "removing 2119 language",
+      "url": "https://github.com/mlswg/mls-architecture/pull/37",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Removing 2119 \"MUST\" as agreed in Paris.  Note that this is the minimal change and in another PR I will suggest removing as many lower case instances of must, should, etc. as possible.",
+      "createdAt": "2018-10-13T18:12:41Z",
+      "updatedAt": "2018-10-14T11:47:34Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "d179bfdb2fa0fc0d91575cfe866be1f085366fde",
+      "headRepository": "seanturner/mls-architecture",
+      "headRefName": "de_2119",
+      "headRefOid": "b63a754b1bf2d2d882dea3797e68e60b290ea655",
+      "closedAt": "2018-10-14T11:47:34Z",
+      "mergedAt": "2018-10-14T11:47:34Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "f0dc2b0b10abc9cf61b845c01cdb6ec4a1432615"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 38,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjIyNjY4MDc3",
+      "title": "requirements language shift",
+      "url": "https://github.com/mlswg/mls-architecture/pull/38",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "This takes the \"de_2119\" idea a little bit further by making the requirements less aspirational.  For example instead of saying \"MLS should be able to does this cool thing..\" we just say \"MLS does this cool thing\".  Obviously, we will need to ensure that the claims are in fact true before we go final.\r\n\r\nAlso, by getting rid of lower case should, must, etc. we will avoid the \"did you mean to upper case that\" kind of questions that are bound to come with requirements documents.\r\n\r\nThere are also some other editorial nits here.",
+      "createdAt": "2018-10-13T18:44:26Z",
+      "updatedAt": "2018-10-14T12:00:17Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "d179bfdb2fa0fc0d91575cfe866be1f085366fde",
+      "headRepository": "seanturner/mls-architecture",
+      "headRefName": "de_reqts_lang",
+      "headRefOid": "a3430a028e053302b21a3cf307a2e07f5dc23c4c",
+      "closedAt": "2018-10-14T11:54:39Z",
+      "mergedAt": "2018-10-14T11:54:39Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "7ad3167fc2fe346cc83faa34bc72f1e7b1b335c4"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks Sean @seanturner !",
+          "createdAt": "2018-10-14T12:00:17Z",
+          "updatedAt": "2018-10-14T12:00:17Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjIyNjczMDUx",
+      "title": "just nits",
+      "url": "https://github.com/mlswg/mls-architecture/pull/39",
+      "state": "MERGED",
+      "author": "seanturner",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Just some nits I noticed.",
+      "createdAt": "2018-10-13T20:14:25Z",
+      "updatedAt": "2018-10-14T11:57:34Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "7ad3167fc2fe346cc83faa34bc72f1e7b1b335c4",
+      "headRepository": "seanturner/mls-architecture",
+      "headRefName": "spt_nits_0",
+      "headRefOid": "38943b67dafd571b5529355312c6c45f3afec795",
+      "closedAt": "2018-10-14T11:57:34Z",
+      "mergedAt": "2018-10-14T11:57:34Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "06a93abedba3f368733bd3e62315d50644ec9a05"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 40,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjIyNzEyMjg2",
+      "title": "Use 'MLS Protocol' terminology in the Architecture document.",
+      "url": "https://github.com/mlswg/mls-architecture/pull/40",
+      "state": "CLOSED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [
+        "beurdouche"
+      ],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Work in progress, please do NOT merge...",
+      "createdAt": "2018-10-14T12:23:22Z",
+      "updatedAt": "2019-03-10T17:47:41Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "2062e1294afe3f1e5984bf99591be53d8f823716",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "bb_align_language",
+      "headRefOid": "68e00b3fec063f9b3809f5410ccd42eac24313cd",
+      "closedAt": "2019-03-10T15:00:52Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "The terminology of this document was adopted instead of the reverse.",
+          "createdAt": "2019-03-10T15:00:52Z",
+          "updatedAt": "2019-03-10T15:00:52Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 41,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjI0NTIzMzE4",
+      "title": "Updates based on a review in advance of the November 2018 IETF meeting.",
+      "url": "https://github.com/mlswg/mls-architecture/pull/41",
+      "state": "MERGED",
+      "author": "jmillican",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "- Remove \"join an existing group\" from architecture doc, based on UserAdd having been removed from the protocol doc.\r\n- Remove statement that message delivery cannot be correlated between AS identities and DS delivery channels. This seems generally very difficult to achieve. It may be possible at times, but does not seem to be grounded in discussions that we have had at the working group meetings.\r\n- Note that federation requires compatible wire encodings.\r\n- Note that communication with the AS requires TLS or alternative authentication.\r\n- Note that out-of-band channels may facilitate detection of misbehaviour. \r\n- Some grammar fixes.",
+      "createdAt": "2018-10-21T07:25:10Z",
+      "updatedAt": "2018-10-22T16:03:29Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "2062e1294afe3f1e5984bf99591be53d8f823716",
+      "headRepository": "jmillican/mls-architecture",
+      "headRefName": "review_21_October_2018",
+      "headRefOid": "8942b5143247dc39db563a9936190d549067f065",
+      "closedAt": "2018-10-22T16:03:29Z",
+      "mergedAt": "2018-10-22T16:03:29Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "24221a12eb155eff43dc336d51e085a6e6a2af74"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTY2Nzc0ODIx",
+          "commit": {
+            "abbreviatedOid": "0f660fe"
+          },
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-10-21T08:07:55Z",
+          "updatedAt": "2018-10-21T08:11:15Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "I suppose this relates to UserAdd having been removed from the protocol draft?\r\nIf so, the idea was to re-introduce it later, so I'm wondering if this requirement shouldn't stay in the architecture draft in the meantime (as a goal for the protocol)",
+              "createdAt": "2018-10-21T08:07:55Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            },
+            {
+              "originalPosition": 54,
+              "body": "\"This excludes the DS\" -> \"This excludes the DS as an attacker\"",
+              "createdAt": "2018-10-21T08:10:20Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTY2Nzc1NzY0",
+          "commit": {
+            "abbreviatedOid": "0f660fe"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2018-10-21T08:39:09Z",
+          "updatedAt": "2018-10-21T08:47:15Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "I agree with Raphael, this should be kept.",
+              "createdAt": "2018-10-21T08:39:09Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            },
+            {
+              "originalPosition": 13,
+              "body": "Please revert this change, this is not an editorial decision. Moreover I disagree with removing it except if we have consensus that we cannot achieve it.",
+              "createdAt": "2018-10-21T08:39:34Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            },
+            {
+              "originalPosition": 36,
+              "body": "What do you mean here ?",
+              "createdAt": "2018-10-21T08:41:28Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            },
+            {
+              "originalPosition": 54,
+              "body": "You can revert this change. \"Anyone\" is already contains the DS.",
+              "createdAt": "2018-10-21T08:45:47Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "What do you mean here ?",
+              "createdAt": "2018-10-21T08:46:59Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTY2Nzk2OTYx",
+          "commit": {
+            "abbreviatedOid": "0f660fe"
+          },
+          "author": "jmillican",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-10-21T19:06:43Z",
+          "updatedAt": "2018-10-21T19:06:43Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "Oh sorry @beurdouche, I meant that the DS is able to DoS, as opposed to anyone else who shouldn't be able to. Will update to @raphaelrobert's suggestion.",
+              "createdAt": "2018-10-21T19:06:43Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTY2Nzk3MDA2",
+          "commit": {
+            "abbreviatedOid": "0f660fe"
+          },
+          "author": "jmillican",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-10-21T19:07:52Z",
+          "updatedAt": "2018-10-21T19:07:52Z",
+          "comments": [
+            {
+              "originalPosition": 13,
+              "body": "Fair enough :) I wanted to include as a point for discussion, as it seems a fundamentally unrealistic goal to achieve. Let's discuss on the list.",
+              "createdAt": "2018-10-21T19:07:52Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTY2Nzk3MDQ4",
+          "commit": {
+            "abbreviatedOid": "0f660fe"
+          },
+          "author": "jmillican",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-10-21T19:09:02Z",
+          "updatedAt": "2018-10-21T19:09:02Z",
+          "comments": [
+            {
+              "originalPosition": 36,
+              "body": "We claim the MLS should be secure even without any sort of transport security. This makes sense for the DS, but if we are to have an AS which authoritatively authenticates identities, this will have to be authenticated.",
+              "createdAt": "2018-10-21T19:09:02Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTY2Nzk3MTMx",
+          "commit": {
+            "abbreviatedOid": "0f660fe"
+          },
+          "author": "jmillican",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2018-10-21T19:11:15Z",
+          "updatedAt": "2018-10-21T19:11:15Z",
+          "comments": [
+            {
+              "originalPosition": 66,
+              "body": "It feels like too strong an assertion to claim that there can be no technical solution to detecting a targeted DoS by the DS. Something out of band might work; such as a transparency protocol.",
+              "createdAt": "2018-10-21T19:11:15Z",
+              "updatedAt": "2018-10-21T19:19:02Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MTY2OTg2ODE2",
+          "commit": {
+            "abbreviatedOid": "8942b51"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2018-10-22T16:03:01Z",
+          "updatedAt": "2018-10-22T16:03:01Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjQyNDM1ODA2",
+      "title": "Add dependencies for continuous integration build",
+      "url": "https://github.com/mlswg/mls-architecture/pull/42",
+      "state": "MERGED",
+      "author": "katrielalex",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "Just as in the protocol document, add dependencies for the CI build to compile the md to html.",
+      "createdAt": "2019-01-05T11:37:50Z",
+      "updatedAt": "2019-01-05T11:38:15Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "70979ea0a3cc4ef879d713b01fdb0a16617edeae",
+      "headRepository": "katrielalex/mls-architecture",
+      "headRefName": "dependencies-for-build",
+      "headRefOid": "576fc385ac4c8e402f18a59027691259743b63f0",
+      "closedAt": "2019-01-05T11:38:15Z",
+      "mergedAt": "2019-01-05T11:38:15Z",
+      "mergedBy": "katrielalex",
+      "mergeCommit": {
+        "oid": "06773194b7b4206dc1958dbd90976e7cdd1efa43"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 46,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjQ0NTU4NTY2",
+      "title": "Add certified to the Gemfile",
+      "url": "https://github.com/mlswg/mls-architecture/pull/46",
+      "state": "MERGED",
+      "author": "katrielalex",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2019-01-14T19:26:05Z",
+      "updatedAt": "2019-01-14T19:33:14Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "06773194b7b4206dc1958dbd90976e7cdd1efa43",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "ci-update",
+      "headRefOid": "39924ad42333bd88d62ed890d587f2a5f0c54432",
+      "closedAt": "2019-01-14T19:33:10Z",
+      "mergedAt": "2019-01-14T19:33:10Z",
+      "mergedBy": "katrielalex",
+      "mergeCommit": {
+        "oid": "93a8f9a9bbe0ff6cccb346d3906b30ff9be0e582"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 53,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjU5NzY1MjEw",
+      "title": "Align language and syntax with protocol document",
+      "url": "https://github.com/mlswg/mls-architecture/pull/53",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "Mostly lowercase everything and fixes a few misuses of \"member\" that were to restrictive.",
+      "createdAt": "2019-03-10T14:58:07Z",
+      "updatedAt": "2019-03-10T17:47:26Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "93a8f9a9bbe0ff6cccb346d3906b30ff9be0e582",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "beurdouche_terminology",
+      "headRefOid": "79d110eb7d705484a9b40e6a1f56a8a20a4b8608",
+      "closedAt": "2019-03-10T17:47:22Z",
+      "mergedAt": "2019-03-10T17:47:22Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "e7f8dc184c1a33f7542c8588e7fc558d5d3e0719"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjEyNjEyNjQy",
+          "commit": {
+            "abbreviatedOid": "bc255f3"
+          },
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2019-03-10T17:20:28Z",
+          "updatedAt": "2019-03-10T17:24:52Z",
+          "comments": [
+            {
+              "originalPosition": 100,
+              "body": "To account for both multi-device modes we discussed, I'd like to add the following:\r\n\r\n\"Multiple user devices can be grouped, appearing as one virtual client to the rest of the group.\"",
+              "createdAt": "2019-03-10T17:20:29Z",
+              "updatedAt": "2019-03-10T17:31:17Z"
+            },
+            {
+              "originalPosition": 90,
+              "body": "Since there can be more than one identity key per virtual client, this should be changed to:\r\n\r\n\"Each client owns at least one long term identity key pair that uniquely defines\r\nits identity to other clients or members a the Group.\"",
+              "createdAt": "2019-03-10T17:21:54Z",
+              "updatedAt": "2019-03-10T17:31:17Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MjEyNjEzNTg1",
+          "commit": {
+            "abbreviatedOid": "79d110e"
+          },
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-03-10T17:46:56Z",
+          "updatedAt": "2019-03-10T17:46:56Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 55,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjU5Nzc1ODky",
+      "title": "The DS ensures UIK identifier uniqueness",
+      "url": "https://github.com/mlswg/mls-architecture/pull/55",
+      "state": "MERGED",
+      "author": "beurdouche",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/mlswg/mls-protocol/issues/96",
+      "createdAt": "2019-03-10T17:37:36Z",
+      "updatedAt": "2019-03-11T09:23:28Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "93a8f9a9bbe0ff6cccb346d3906b30ff9be0e582",
+      "headRepository": "mlswg/mls-architecture",
+      "headRefName": "beurdouche_ds_uik_uniqueness",
+      "headRefOid": "2622bfb2da86b1df93da9c1397418e11436f8292",
+      "closedAt": "2019-03-11T09:22:52Z",
+      "mergedAt": "2019-03-11T09:22:52Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "7d5a661bf0a7c826cb961bf4a35a7854b45402d1"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "@bifurcation Should I add a sentence in the protocol document as well ?",
+          "createdAt": "2019-03-10T17:50:35Z",
+          "updatedAt": "2019-03-10T17:50:35Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 57,
+      "id": "MDExOlB1bGxSZXF1ZXN0MjcxOTk4Mzgz",
+      "title": "Removed duplicate word \"messages\"",
+      "url": "https://github.com/mlswg/mls-architecture/pull/57",
+      "state": "MERGED",
+      "author": "nicorsm",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the section _3.1.7. Compatibility with future versions of MLS_, the word \"messages\" is duplicated.",
+      "createdAt": "2019-04-19T13:33:28Z",
+      "updatedAt": "2019-04-19T13:49:19Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "7d5a661bf0a7c826cb961bf4a35a7854b45402d1",
+      "headRepository": "nicorsm/mls-architecture",
+      "headRefName": "double-messages",
+      "headRefOid": "b912cccd0cc9bb29b7e8c814c1dbe754805275ae",
+      "closedAt": "2019-04-19T13:49:16Z",
+      "mergedAt": "2019-04-19T13:49:16Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "2706992f8a82c04a4aa40336f444a3828a488475"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks",
+          "createdAt": "2019-04-19T13:49:19Z",
+          "updatedAt": "2019-04-19T13:49:19Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 58,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzU3NDk0MTg0",
+      "title": "Spelling fixes in the multi device section",
+      "url": "https://github.com/mlswg/mls-architecture/pull/58",
+      "state": "MERGED",
+      "author": "vanitasvitae",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [
+        "editorial"
+      ],
+      "body": "There were some odd formulations in section 3.1.3.\r\nI hope I addressed those issues without changing the intended meaning.",
+      "createdAt": "2019-12-28T14:09:47Z",
+      "updatedAt": "2019-12-28T21:34:13Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "2706992f8a82c04a4aa40336f444a3828a488475",
+      "headRepository": "vanitasvitae/mls-architecture",
+      "headRefName": "spellingfixes",
+      "headRefOid": "532490130ddd7472988987b854e85d28f9dad94e",
+      "closedAt": "2019-12-28T18:20:41Z",
+      "mergedAt": "2019-12-28T18:20:41Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "0c0ea2fdb9a6bd0973fb086e854c7f8bf4d4aae2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzM2OTIxMzQ1",
+          "commit": {
+            "abbreviatedOid": "0ed5b9a"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2019-12-28T16:14:07Z",
+          "updatedAt": "2019-12-28T16:14:16Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Can you please revert that sentence, the new one is incorrect. Users/Someone can own clients and members while a member or a client cannot own another member or client.",
+              "createdAt": "2019-12-28T16:14:08Z",
+              "updatedAt": "2019-12-28T18:17:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzM2OTI1MTUx",
+          "commit": {
+            "abbreviatedOid": "0ed5b9a"
+          },
+          "author": "vanitasvitae",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-12-28T18:00:13Z",
+          "updatedAt": "2019-12-28T18:00:13Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "> A Group using a Messaging Service (MS) comprises a set of participants called Members where each member is typically expected to own multiple devices, called Clients\r\n\r\nIf I understood this correctly, it doesn't make sense that a member owns another member, right?\r\nOr did I misinterpret the statement above?",
+              "createdAt": "2019-12-28T18:00:13Z",
+              "updatedAt": "2019-12-28T18:17:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzM2OTI1MjY1",
+          "commit": {
+            "abbreviatedOid": "0ed5b9a"
+          },
+          "author": "vanitasvitae",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-12-28T18:04:22Z",
+          "updatedAt": "2019-12-28T18:04:23Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "I noticed, that the following statement contradicts with what I quoted above:\r\n\r\n> Informally, a group is a set of *users* who possibly use multiple endpoint devices to interact with the Messaging Service. These *members* will typically correspond to end-user *devices* such as phones, web clients or other devices running MLS, which are called *clients*.\r\n\r\nThis really confuses me. Are *members* now *users* or *devices*?\r\nYou probably want to correct the statement quoted in this posting.",
+              "createdAt": "2019-12-28T18:04:22Z",
+              "updatedAt": "2019-12-28T18:17:41Z"
+            }
+          ]
+        },
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzM2OTI1NDIx",
+          "commit": {
+            "abbreviatedOid": "0ed5b9a"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2019-12-28T18:10:13Z",
+          "updatedAt": "2019-12-28T18:10:13Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "Arf, this is the root cause of the problem... This sentence is incorrect, you can refer to the Protocol document to have a correct terminology. I am about to massively update the Architecture document to fix all of that, but it is not done yet.\r\n\r\nThe rough idea is that a Client is a set of keys. When it is in a group, it is called a Member. As a User, you can have a lot of Devices and on each devices you may have a lot of groups (hence members) and a lot of potentially unused clients.\r\n\r\nMy advice is to wait until the interim and focus on the protocol document terminology for now, hopefully I'll have time to update the architecture by then...",
+              "createdAt": "2019-12-28T18:10:13Z",
+              "updatedAt": "2019-12-28T18:17:41Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 59,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzY1MzIwMDIy",
+      "title": "Spelling fixes in various sections.",
+      "url": "https://github.com/mlswg/mls-architecture/pull/59",
+      "state": "MERGED",
+      "author": "GaPhil",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR aims to fix some odd formulations, whilst maintaining the intended meaning of the sentences.",
+      "createdAt": "2020-01-21T14:00:11Z",
+      "updatedAt": "2020-01-21T14:17:26Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "cfcd1b2365506046bbfb12c759a952fe44b9e1cb",
+      "headRepository": null,
+      "headRefName": "master",
+      "headRefOid": "f825da7f6d6b283817485317ba0fdc85a0183961",
+      "closedAt": "2020-01-21T14:17:14Z",
+      "mergedAt": "2020-01-21T14:17:13Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "edadcf663e2e2dc54a4f50f04d045577bf2b8cb5"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks @GaPhil !",
+          "createdAt": "2020-01-21T14:17:26Z",
+          "updatedAt": "2020-01-21T14:17:26Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 60,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzY3MjYyMjk0",
+      "title": "Small fixes",
+      "url": "https://github.com/mlswg/mls-architecture/pull/60",
+      "state": "MERGED",
+      "author": "Flowdalic",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-01-26T21:16:18Z",
+      "updatedAt": "2020-01-27T12:27:30Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "edadcf663e2e2dc54a4f50f04d045577bf2b8cb5",
+      "headRepository": "Flowdalic/mls-architecture",
+      "headRefName": "fixes",
+      "headRefOid": "f64fca7f012606e3ad4b370c77432c97802eba67",
+      "closedAt": "2020-01-27T12:06:53Z",
+      "mergedAt": "2020-01-27T12:06:53Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "cc522c134d169c985ce474a5cb41860a5ee52ddf"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "@Flowdalic Thank you !",
+          "createdAt": "2020-01-27T12:07:05Z",
+          "updatedAt": "2020-01-27T12:07:05Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3MzQ4NjE1MDA0",
+          "commit": {
+            "abbreviatedOid": "f64fca7"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-01-27T12:06:33Z",
+          "updatedAt": "2020-01-27T12:06:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 61,
+      "id": "MDExOlB1bGxSZXF1ZXN0MzcyODkxODgz",
+      "title": "Update draft-ietf-mls-architecture.md",
+      "url": "https://github.com/mlswg/mls-architecture/pull/61",
+      "state": "MERGED",
+      "author": "balthorium",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix typo.",
+      "createdAt": "2020-02-10T00:11:17Z",
+      "updatedAt": "2020-02-10T07:54:58Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "7df4988118a9c25d10226f4cf035331562d108c1",
+      "headRepository": "MLS4J/mls-architecture",
+      "headRefName": "master",
+      "headRefOid": "dbe9bdf8351a969d02bd18a902749e4856120de2",
+      "closedAt": "2020-02-10T07:54:53Z",
+      "mergedAt": "2020-02-10T07:54:53Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "5b27f8513c95e874b079987f27dd40057ed40583"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks you !",
+          "createdAt": "2020-02-10T07:54:58Z",
+          "updatedAt": "2020-02-10T07:54:58Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 63,
+      "id": "MDExOlB1bGxSZXF1ZXN0Mzk3MDkxMzI0",
+      "title": "Rename messaging service to service provider",
+      "url": "https://github.com/mlswg/mls-architecture/pull/63",
+      "state": "MERGED",
+      "author": "GaPhil",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This PR addresses https://github.com/mlswg/mls-architecture/issues/62. ",
+      "createdAt": "2020-04-01T16:08:19Z",
+      "updatedAt": "2020-04-01T16:10:46Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "5b27f8513c95e874b079987f27dd40057ed40583",
+      "headRepository": "GaPhil/mls-architecture",
+      "headRefName": "master",
+      "headRefOid": "6fec5659d6bad578b4fe6387487a912de8a173c3",
+      "closedAt": "2020-04-01T16:10:43Z",
+      "mergedAt": "2020-04-01T16:10:43Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "87169154ad96e7f9d7029ec8ab222ea37025bdee"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks!",
+          "createdAt": "2020-04-01T16:10:45Z",
+          "updatedAt": "2020-04-01T16:10:45Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3Mzg1NzM2OTcy",
+          "commit": {
+            "abbreviatedOid": "6fec565"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2020-04-01T16:10:22Z",
+          "updatedAt": "2020-04-01T16:10:22Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 64,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDA5NDcwNDU2",
+      "title": "fix typo",
+      "url": "https://github.com/mlswg/mls-architecture/pull/64",
+      "state": "MERGED",
+      "author": "d1vyank",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-04-27T12:31:20Z",
+      "updatedAt": "2020-04-27T12:41:32Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "25da1e7d50bb678de9e52117c35bd0d2b929e1eb",
+      "headRepository": "d1vyank/mls-architecture",
+      "headRefName": "nit",
+      "headRefOid": "c37845d719a133dd312f28ca708d74336151dcb5",
+      "closedAt": "2020-04-27T12:41:25Z",
+      "mergedAt": "2020-04-27T12:41:25Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "98ba37c2169483a65efe8f3584ca00785ca0c073"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thank you !",
+          "createdAt": "2020-04-27T12:41:32Z",
+          "updatedAt": "2020-04-27T12:41:32Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 65,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDM4NTc5MTA2",
+      "title": "Editorial changes",
+      "url": "https://github.com/mlswg/mls-architecture/pull/65",
+      "state": "MERGED",
+      "author": "d1vyank",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-06-23T13:40:26Z",
+      "updatedAt": "2020-07-21T09:57:51Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "98ba37c2169483a65efe8f3584ca00785ca0c073",
+      "headRepository": "d1vyank/mls-architecture",
+      "headRefName": "master",
+      "headRefOid": "16267c4aa7f3527b729e8e1601b66c6e4c99a080",
+      "closedAt": "2020-07-21T09:57:51Z",
+      "mergedAt": "2020-07-21T09:57:51Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "be54fe16f78a0d12cef5eb175a6e730a40b85383"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDUxOTc4MDgy",
+          "commit": {
+            "abbreviatedOid": "16267c4"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "Thank you !",
+          "createdAt": "2020-07-20T21:38:51Z",
+          "updatedAt": "2020-07-20T21:38:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 66,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDQ3NDI4MTc5",
+      "title": "Clarify guarantees on TLS compromise",
+      "url": "https://github.com/mlswg/mls-architecture/pull/66",
+      "state": "CLOSED",
+      "author": "d1vyank",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-07-10T13:04:06Z",
+      "updatedAt": "2020-11-17T06:10:37Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "98ba37c2169483a65efe8f3584ca00785ca0c073",
+      "headRepository": "d1vyank/mls-architecture",
+      "headRefName": "tls-failure",
+      "headRefOid": "ce676ee0c2aa3b96190a144437307bf0516d72c5",
+      "closedAt": "2020-11-17T06:10:37Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 67,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDQ3NDI4NzQy",
+      "title": "Expand privacy section",
+      "url": "https://github.com/mlswg/mls-architecture/pull/67",
+      "state": "CLOSED",
+      "author": "d1vyank",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2020-07-10T13:05:25Z",
+      "updatedAt": "2020-11-17T06:10:11Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "98ba37c2169483a65efe8f3584ca00785ca0c073",
+      "headRepository": "d1vyank/mls-architecture",
+      "headRefName": "privacy",
+      "headRefOid": "02ee0d17b831f8d38609b853aa7b248b7a6a118c",
+      "closedAt": "2020-11-17T06:10:11Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "chelseakomlo",
+          "authorAssociation": "NONE",
+          "body": "I would specify [here](https://github.com/mlswg/mls-architecture/pull/67/files#diff-a09258ea2d61fd11b2530846d6be9395R515) why this privacy property is true- i.e, users sign messages that they send to one another, but messages and signatures are then encrypted under the group key. ",
+          "createdAt": "2020-07-13T18:25:19Z",
+          "updatedAt": "2020-07-13T18:25:19Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 69,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDUzODU1MDkw",
+      "title": "Update build",
+      "url": "https://github.com/mlswg/mls-architecture/pull/69",
+      "state": "MERGED",
+      "author": "Bren2010",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This should give you the same GitHub pages website as mls-protocol",
+      "createdAt": "2020-07-20T21:28:39Z",
+      "updatedAt": "2020-07-20T22:13:19Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "98ba37c2169483a65efe8f3584ca00785ca0c073",
+      "headRepository": "Bren2010/mls-architecture",
+      "headRefName": "brendan/update-build",
+      "headRefOid": "ceaea702afa29219c4a5348ee0ea7fad8ce7b105",
+      "closedAt": "2020-07-20T21:35:44Z",
+      "mergedAt": "2020-07-20T21:35:44Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "689624c633c90d7d9a1052a66228af4a4b0d2be8"
+      },
+      "comments": [
+        {
+          "author": "Bren2010",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Yeah go for it",
+          "createdAt": "2020-07-20T21:34:59Z",
+          "updatedAt": "2020-07-20T21:34:59Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "\ud83d\ude47\u200d\u2642\ufe0f",
+          "createdAt": "2020-07-20T21:36:11Z",
+          "updatedAt": "2020-07-20T21:36:11Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Woops, something went wrong...\n\n> On Jul 20, 2020, at 11:35 PM, Brendan McMillion <notifications@github.com> wrote:\n> \n> \ufeff\n> Yeah go for it\n> \n> \u2014\n> You are receiving this because you commented.\n> Reply to this email directly, view it on GitHub, or unsubscribe.\n",
+          "createdAt": "2020-07-20T21:46:58Z",
+          "updatedAt": "2020-07-20T21:46:58Z"
+        },
+        {
+          "author": "Bren2010",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Someone with push to this repo just needs to run \"make -f lib/setup.mk setup-ghpages\"",
+          "createdAt": "2020-07-20T21:49:45Z",
+          "updatedAt": "2020-07-20T21:49:45Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Ack, don\u2019t have a computer, but I\u2019ll do this asap. Thanks :)\n\n> On Jul 20, 2020, at 11:50 PM, Brendan McMillion <notifications@github.com> wrote:\n> \n> \ufeff\n> Someone with push to this repo just needs to run \"make -f lib/setup.mk setup-ghpages\"\n> \n> \u2014\n> You are receiving this because you modified the open/close state.\n> Reply to this email directly, view it on GitHub, or unsubscribe.\n",
+          "createdAt": "2020-07-20T22:13:19Z",
+          "updatedAt": "2020-07-20T22:13:19Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NDUxOTczOTE5",
+          "commit": {
+            "abbreviatedOid": "ceaea70"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "Amazing!! Thanks a lot for this Brendan! Should I just merge it as is?",
+          "createdAt": "2020-07-20T21:30:57Z",
+          "updatedAt": "2020-07-20T21:30:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 73,
+      "id": "MDExOlB1bGxSZXF1ZXN0NDU3NTIxOTcx",
+      "title": "Fix some grammar",
+      "url": "https://github.com/mlswg/mls-architecture/pull/73",
+      "state": "MERGED",
+      "author": "claucece",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "cc ./@beurdouche",
+      "createdAt": "2020-07-28T03:46:24Z",
+      "updatedAt": "2020-07-28T07:51:30Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "a2200df1e0007a56aeb2c6ea9a7da5df7e47b6bb",
+      "headRepository": "claucece/mls-architecture",
+      "headRefName": "master",
+      "headRefOid": "b1d9213284d6c5418c8ef9d80f05950f53317ea6",
+      "closedAt": "2020-07-28T07:51:30Z",
+      "mergedAt": "2020-07-28T07:51:30Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "67a8f94765cef93f8f3c31d26f3c54f2f5709e98"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 77,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjE0OTQ5NTY4",
+      "title": "Move definitions of security properties to security considerations section",
+      "url": "https://github.com/mlswg/mls-architecture/pull/77",
+      "state": "MERGED",
+      "author": "kkohbrok",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "As the title says, this PR doesn't change any text, but simply moves the sections on \r\n- `Message Secrecy and Authentication`\r\n- `Forward and Post-Compromise Security`\r\n- `Non-Repudiation vs Deniability`\r\nto the `Security and Privacy Considerations` section in preparation for further PRs., where we plan on going into more detail on each of these properties.\r\n\r\nThis PR is joint work with @br-hale and @cascremers. ",
+      "createdAt": "2021-04-14T05:58:21Z",
+      "updatedAt": "2021-04-14T14:10:20Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "master",
+      "baseRefOid": "491ba29cd431f6ac19259da41a8d4b6b89d16247",
+      "headRepository": "kkohbrok/mls-architecture",
+      "headRefName": "konrad/security_section_reorg",
+      "headRefOid": "8b152649d5974dd96b9afc62c301239da97d2d35",
+      "closedAt": "2021-04-14T14:10:13Z",
+      "mergedAt": "2021-04-14T14:10:13Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "305423af24007d79e37b7c8373500920872670cd"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks !",
+          "createdAt": "2021-04-14T14:10:20Z",
+          "updatedAt": "2021-04-14T14:10:20Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjM1MjkzOTQ1",
+          "commit": {
+            "abbreviatedOid": "8b15264"
+          },
+          "author": "raphaelrobert",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-04-14T07:27:29Z",
+          "updatedAt": "2021-04-14T07:27:29Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 78,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjQzMjQ4Mjky",
+      "title": "Reorganize section 3",
+      "url": "https://github.com/mlswg/mls-architecture/pull/78",
+      "state": "MERGED",
+      "author": "cascremers",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Reorganization of Section 3 in preparation of expanding text later.\r\n\r\nThis PR reorders text for a more logical structure, but does not meaningfully change any text. \r\n - Provide separate heading for assumptions.\r\n - Client/endpoint compromise now precedes compromise of other nodes.\r\n - Attacks outside of threat model moved to the end.\r\n\r\nJoint work with @br-hale @kkohbrok .\r\n",
+      "createdAt": "2021-05-12T15:10:19Z",
+      "updatedAt": "2021-05-17T15:46:35Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "main",
+      "baseRefOid": "305423af24007d79e37b7c8373500920872670cd",
+      "headRepository": "br-hale/mls-architecture",
+      "headRefName": "reorganize-Section-3",
+      "headRefOid": "2c34543c981f0eb9ccb7a3259b530d391e2f37d1",
+      "closedAt": "2021-05-17T15:46:25Z",
+      "mergedAt": "2021-05-17T15:46:25Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "8064ecb3e7a23b1fc01061aeb019810b99f5cd90"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks!",
+          "createdAt": "2021-05-17T15:46:35Z",
+          "updatedAt": "2021-05-17T15:46:35Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 79,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjQzMjQ5MDcx",
+      "title": "Fixing outdated affiliation for contributor.",
+      "url": "https://github.com/mlswg/mls-architecture/pull/79",
+      "state": "MERGED",
+      "author": "cascremers",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixing outdated affiliation.",
+      "createdAt": "2021-05-12T15:11:17Z",
+      "updatedAt": "2021-05-12T17:41:15Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "main",
+      "baseRefOid": "305423af24007d79e37b7c8373500920872670cd",
+      "headRepository": "br-hale/mls-architecture",
+      "headRefName": "fix-CC-affil",
+      "headRefOid": "d4e0782e5f1cec638313de6a6bfe947578744e34",
+      "closedAt": "2021-05-12T17:41:15Z",
+      "mergedAt": "2021-05-12T17:41:15Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "5a54c6dbaf3a3a2d8687db6fb59a40075ae199a5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "MDE3OlB1bGxSZXF1ZXN0UmV2aWV3NjU4MTk1OTE1",
+          "commit": {
+            "abbreviatedOid": "d4e0782"
+          },
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2021-05-12T17:41:10Z",
+          "updatedAt": "2021-05-12T17:41:10Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 80,
+      "id": "MDExOlB1bGxSZXF1ZXN0NjQ2NDQ4NzI3",
+      "title": "Rewrite AS definition to reflect its role in the Spec",
+      "url": "https://github.com/mlswg/mls-architecture/pull/80",
+      "state": "OPEN",
+      "author": "kkohbrok",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the current definition, the AS is portrayed as a distinct service that could, for example run on a server separate from other MLS participants. However, in the MLS spec, it's more of an abstract layer that fulfills certain functionalities, some of which are likely to run on client devices. For example, an identity key that signs individual group-level signature keys could live in the secure element of a device. From the standpoint of the spec, that key would be part of the AS.\r\n\r\nThis PR changes the definition of the AS to reflect this, although there are of course multiple ways to tackle this.\r\n\r\nThe MLS spec is not explicit about the fact that it's the AS that's potentially responsible for message authentication, i.e. to bridge a potential gap between the key used to sign a message and the key in a member's leaf. However, it makes sense that this would be part of an abstract AS layer. If not, I believe it would still make sense to address this in the architecture doc somewhere.\r\n\r\nThe plan is to add more details on compromise of parts of the abstract AS to the security section in a future PR.\r\n\r\nLet us know what you think!\r\n\r\nThis is joint work with @br-hale and @cascremers.",
+      "createdAt": "2021-05-18T06:37:40Z",
+      "updatedAt": "2021-05-18T06:37:40Z",
+      "baseRepository": "mlswg/mls-architecture",
+      "baseRefName": "main",
+      "baseRefOid": "410d0bd4952cefe3d9222f9b138e2e33a42fc188",
+      "headRepository": "br-hale/mls-architecture",
+      "headRefName": "konrad/as-definition",
+      "headRefOid": "681a09a351fba2f996a96b4655a2d1f8095b11a2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
