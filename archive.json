@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-05-20T00:43:23.045920+00:00",
+  "timestamp": "2021-05-27T01:04:09.372462+00:00",
   "repo": "mlswg/mls-architecture",
   "labels": [
     {
@@ -359,7 +359,7 @@
       "id": "MDU6SXNzdWU0MTAxNzU4NDc=",
       "title": "Description of the formal security guarantees that the protocol MUST provide",
       "url": "https://github.com/mlswg/mls-architecture/issues/48",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "beurdouche",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -369,13 +369,11 @@
         "claucece",
         "raphaelrobert"
       ],
-      "labels": [
-        "work in progress"
-      ],
+      "labels": [],
       "body": "- [ ]  Forward secrecy\r\n\r\nSof\u00eda noted: \"We are also unsure on the 'type' of forward secrecy provided. The Signal's X3DH\r\nprotocol, for example, provides a forward secrecy between strong and weak. We\r\nare unsure if the way the Delivery Service, as defined in MLS, when providing the\r\nauthentication keys and initial keying material, achieves which type of forward\r\nsecrecy. But, of course, this can be a misunderstood from our side.\"",
       "createdAt": "2019-02-14T08:06:15Z",
-      "updatedAt": "2021-03-08T13:32:05Z",
-      "closedAt": null,
+      "updatedAt": "2021-05-26T09:42:52Z",
+      "closedAt": "2021-05-26T09:42:46Z",
       "comments": [
         {
           "author": "claucece",
@@ -411,6 +409,13 @@
           "body": "Just re-read the draft @beurdouche and looks awesome so far! I'm going to list here the properties that should be analyzed and clarified:\r\n\r\n- Forward secrecy\r\n- Post-compromise security\r\n- Authentication: to the group, with respect to the sender\r\n- End-to-end security\r\n- Metadata-Resistance\r\n- Integrity\r\n- Confidentiality (Message Secrecy)\r\n\r\nit might be also worth listing the threats, such as DDoS attacks, replay attacks, etc.\r\n\r\nOver the upcoming months, I'll analyze more in depth the protocol and see how the current definitions map into it. I'll start a docu somewhere, so @br-hale , @raphaelrobert , @bifurcation , @cascremers and, perhaps, @Bren2010 , let me know if you want to be included.\r\n",
           "createdAt": "2020-07-28T04:14:00Z",
           "updatedAt": "2020-07-28T04:14:10Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "I think we can close this in favor or more fined-grained discussions. All the things we discussed here are in the document.\r\nWe have to strike a balance between being too precise and clear enough for readers but things are going ok.",
+          "createdAt": "2021-05-26T09:42:46Z",
+          "updatedAt": "2021-05-26T09:42:46Z"
         }
       ]
     },
@@ -419,7 +424,7 @@
       "id": "MDU6SXNzdWU0MTAxOTEzNzc=",
       "title": "Provide recommandations for Key Update",
       "url": "https://github.com/mlswg/mls-architecture/issues/49",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "beurdouche",
       "authorAssociation": "MEMBER",
       "assignees": [],
@@ -428,9 +433,17 @@
       ],
       "body": "Sof\u00eda notes: \"At some points, it might be nice to give recommendations in the spec:\r\n\"It is left to the application to determine the interval of time between Update\r\nmessages.\". It is maybe good to provide an example of this time frame.\"",
       "createdAt": "2019-02-14T08:53:02Z",
-      "updatedAt": "2021-03-08T13:31:46Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2021-05-26T15:12:25Z",
+      "closedAt": "2021-05-26T15:12:25Z",
+      "comments": [
+        {
+          "author": "seanturner",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Discussed at 20210526 Interim. Unable to provide anything more specific than as often as your implementation can support.",
+          "createdAt": "2021-05-26T15:12:25Z",
+          "updatedAt": "2021-05-26T15:12:25Z"
+        }
+      ]
     },
     {
       "number": 50,
@@ -531,7 +544,7 @@
     {
       "number": 51,
       "id": "MDU6SXNzdWU0MTIzMDA4MjA=",
-      "title": "Authentication service required?  TOFU?",
+      "title": "Improve description of out-of-bound authentication for the AS",
       "url": "https://github.com/mlswg/mls-architecture/issues/51",
       "state": "OPEN",
       "author": "burdges",
@@ -542,7 +555,7 @@
       ],
       "body": "Authentication services actually required?  Or would TOFU be as secure as it usually is? \r\n\r\nAt least one distributed group messenger (Riot/Matrix) has the *extremely* insecure practice of prompting users to verify keys with a pop-up.  Is there perhaps some problem with TOFU in the group messaging setting?\r\n\r\nIt's probably good to address TOFU regardless, even if only saying that you do not know if it's security properties change.",
       "createdAt": "2019-02-20T08:25:26Z",
-      "updatedAt": "2021-03-08T13:32:28Z",
+      "updatedAt": "2021-05-26T09:45:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -597,7 +610,7 @@
       "id": "MDU6SXNzdWU0MTkyMDAzODE=",
       "title": "Review from Joel Alwen",
       "url": "https://github.com/mlswg/mls-architecture/issues/54",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "beurdouche",
       "authorAssociation": "MEMBER",
       "assignees": [
@@ -608,9 +621,17 @@
       ],
       "body": "```Hi everyone,\r\n\r\nI've read over the architecture draft and put together some thoughts\r\nthat came to mind. Some are just small typos while others are a bit more\r\nsubstantial. Feel free to incorporate, ignore or talk to me about whatever!\r\n\r\n- Jo\u00ebl\r\n\r\n\r\n------------------------- Comments on MLS Architecture --------------------\r\n\r\n- Abstract : \"It is meant to protect against eavesdropping, tampering,\r\nand message forgery.\" This omits PCS and FS which, IMO, is quite central\r\nto what we are doing. Thus, already in the abstract, I'd add something\r\nreferring/hinting to FS and PCS (e.g. protecting against \"past or future\r\ndevice compromises\" or something else along those lines). The same goes\r\nfor the Introduction as it currently also only talks about E2E security.\r\nAfter all, for the security notions outlined in the abstract and intro\r\n(i.e. basic E2E authentication and privacy) we could use MUCH simpler\r\nprotocols (e.g. a static group key decided upon during group setup. Even\r\njust FS would be much easier E.g. a hash ratchet would do the trick.).\r\nThis, is why I believe much (most?) of what we are doing (on the\r\nprotocol level at least) is about getting PCS and FS on top of the usual\r\nE2E security. Despite this, as far as I can tell the first mention of FS\r\nand PCS are only in 2.3.5 under the heading \"Membership and offline\r\nmembers\".\r\n\r\n\r\n- It is not really clear to me why we require the Authentication Service\r\n(AS) to issue credentials binding identities to keys. I believe this\r\nshould be optional. In particular, if users are able to ensure this\r\nbinding on their own (e.g. using an external authenticated channel to,\r\nsay, comparing key fingerprints or scan each others 2D barcodes) then it\r\ndoes not seem necessary to have the AS provide these credentials. My\r\nconcern is that by not making this optional we are more restrictive than\r\nreally need be. Ultimately what the MS should do is provide *some*\r\nmechanism for verifying the binding of identities to keys. Whether its\r\nvia certificates from an AS attesting to the binding or some other\r\nmechanism performed by end users them selves seems less important to the\r\nrest of the MLS protocol.\r\n\r\n- I'm not a fan of having the DS do key storage for initial key material\r\nbut have the AS store member (public) key material. (I also think the AS\r\nshould store client public keys along with member identity (public)\r\nkeys.) In general, to me a natural logical separation is that the AS is\r\nin charge of public key storage and dissemination while the DS handles\r\nof storage (buffering) and dissemination of traffic. Additionally, some\r\nissues with the current division of labor between the AS and DS that\r\ncould then be avoided are:\r\n    - Its not clear why ordering for the storage of initial key material\r\nshould matter.\r\n        - 3.1.5 \"The DS must only persist data required for the delivery\r\nof messages and avoid Personally Identifiable Information (PII) or other\r\nsensitive metadata wherever possible.\" This sentence doesn't seem very\r\ncompatible to me with the DS also persistently maintaining initial keys;\r\nespecially together with credentials ultimately binding them to a member\r\n(or at least client's) identity.\r\n\r\n- At the meeting in Paris we very brief discussed that it could\r\neventually make sense to have \"the server\" maintain some of the group\r\nstate on behalf of clients (but, of course, without introducing any\r\ntrust in the server beyond the current \"universal ordering\" and \"no-DOS\"\r\nassumptions). With that in mind it may eventually make sense to mention\r\nthis role as part of the DS's tasks. Alternatively, this could be\r\nconsidered part of the AS's role or even a third service exclusive to\r\nthis purpose.\r\n\r\n- 2.3.1 I'd specify that the initial *public* key material is stored\r\nwith the DS.\r\n\r\n- 2.3.1 I don't see why the AS should be involved in binding the Client\r\nkeys to the Member keys. It should suffice for the Client public key to\r\nbe signed by owning member's keys. As far as I can tell this doesn't\r\ninvolve the AS.\r\n\r\n- I think a brief, 1 or 2 sentences clarifying key material names would\r\nbe helpful. Something like: a member has one pair of long term \"identity\r\nkeys\", a client has one pair of medium term \"client keys\" and many short\r\nterm \"initial keys\". For example, this could come right after the\r\nconcepts of Member's vs. Clients is introduced.\r\n\r\n- 3.1.4 \"affect the group state\". IMO the transcript (i.e. chat history)\r\nis part of group state. So appending a message to the transcript is a\r\ngroup state change. I guess what is meant here is the group's metadata?\r\nGiven that this metadata is also referred to in other places (e.g.\r\n3.1.5) would it make sense to include a sentence or two somewhere making\r\na bit clearer the terms \"group state\",  \"group metadata\" and \"group's\r\nprivate content\" (as used in 3.2.2 for e.g.). In any case the difference\r\nbetween \"state\" in 3.1.4 vs. \"metadata\" in 3.1.5 isn't too clear to me.\r\n\r\n- 3.1.5.  \"A Messaging Service provider that has control over both the\r\nAS and the DS, will not be able to correlate encrypted messages\r\nforwarded by the DS, with the initial public keys signed by the AS.\"\r\nThis seems like a very strong property to shoot for. (Also, given the\r\ndiscussion in Paris, deniability didn't seem to be a serious goal of\r\nMLS.) At the very least it would require the protocol packets not to be\r\nlinkable to long term identities (OK but we must be careful with\r\nsignatures) but also that the DS authenticate clients via (pseudonymous)\r\nidentities. After all, if the DS does not identify clients at all, say,\r\nwhen they request packets buffered in some queue) then, at the very\r\nleast, traffic analysis becomes too easy to perform (or alternatively\r\nDOS attacks become too easy if the queue is emptied). So just to be\r\nsure, is deniability with respect to compromised AS and DS really what\r\nwe mean here?\r\n\r\n- 3.1.7 typo: the word \"messages\" is repeated.\r\n\r\n- 3.2.2 Message Integrity and Authentication: \"and that one Client must\r\nnot be able to send a message which other Clients accept as being from\r\nanother Client.\" This seems weaker than what we want and get (from both\r\nthe ART and TreeKEM drafts). Instead, we want that \"no coalition of\r\nClients can send a message which other Clients accept as being from a\r\nClient not already part of that coalition.\" A similar change should be\r\nmade to the first sentence in 3.2.2.5 and 4.4.\r\n\r\n- 3.2.2.1 \"MLS provides additional protection regarding secrecy of past\r\nmessages and future messages.\" I suggest changing this to \"...regarding\r\nsecrecy and authenticity of past...\" Especially in the PCS case\r\nauthenticity is just as much a goal as privacy. But also for past\r\n(undelivered) messages when compromising a sender we still expect (and\r\nget) authenticity. In particular the sending keys are already deleted so\r\nthe attacker is expected to not be able to create an alternative\r\nciphertext for that AEAD encryption key. In more detail, authenticity\r\nshould also be mentioned (next to privacy) in the more detailed\r\nparagraphs on FS and PCS in that subsection.\r\n\r\n- 3.2.2.1 The PCS version described here is too strong. MLS really only\r\nguarantees PCS if between time t and t' the attacker did not forge a\r\nmessage on behalf of the compromised client. (Not only can a forged\r\nmessage not be prevented by MLS, it also causes the compromised client's\r\nstate to come out of sync with the rest of the group.) So instead, one\r\nsolution is to say something like \"MLS provides PCS security when the\r\nattacker remains passive between times t and t'\". Although this is a\r\nsomewhat stronger restriction on the adversary than we really need to\r\nget PCS it is a clear, succinct yet still reasonable notion we do satisfy.)\r\n\r\n- 3.2.2.1 \"Regardless, MLS does not allow addition or removal of group\r\nmembers without informing all other members.\" Out of curiosity is this\r\nreally true for ART and TreeKEM? Suppose A, B and C are in a group. A is\r\ncorrupt so she sends a add-member message to B informing B that D has\r\njoined the group. We specified that the DS shouldn't \"know\" about group\r\nmembership so it should permit forwarding this only to B. A priori, now\r\nB thinks D is in the group but C doesn't right? In fact, if B sends\r\nmessage to the group (not maybe an update though) its not clear to me\r\nthat C will realize B thinks D is in the group... Worse, D will actually\r\nbe able to decrypt the message. In fact, if D gets their hands on a\r\nmessages sent by C they could also decrypt them (at least before an\r\nupdate occurs) since they are protected only by the group key which D\r\nknows. Any way, it might just be me, but I'm not too clear if, or at\r\nleast, to which extent or in which sense we really get this property.\r\n\r\n- 3.2.2.3 \"hence slightly weakening the PCS guarantees for attachments.\"\r\nI'd probably phrase this as \"hence potentially extending the time before\r\nPCS guarantees take effect.\" rather than use the term \"weaken\" as its\r\nthe same security notion. (I believe that in crypto papers the terms\r\n\"stronger\" and \"weaker\" are normally used to describe security games\r\nthat strictly imply (or are implie by) each other. But, the parameters t\r\nand t' in PCS are not part of the definition of security game. Rather,\r\nthey are a function of the adversary and all inputs and random coins\r\nused in the security game.)\r\n\r\n- 3.2.2.5 My take on the discussion about deniability in Paris was that\r\nthere was a general consensus that deniability is not an interesting\r\ngoal for MLS because what we could achieve is too weak to be interesting\r\nwhile notions strong enough to be worth it in practice are out of our\r\nreach... but to be sure I'd recommend at least checking the notes from\r\nthe meeting to confirm.\r\n\r\n- 4 First paragraph. Typo: \"in\" repeated twice.\r\n\r\n- 4.1. Realistically we might want to also add leaking meta-data. E.g.\r\nwho talks when to whom and how much they say as well as when updates are\r\nperformed vs messages exchanged.\r\n\r\n- 4.4 \"It will also be able to send messages impersonating the\r\ncompromised Client until the Client updates its keying material (see\r\nSection 3.2.2.1).\" I think, at least if an update has been forged on\r\nbehalf of a compromised Client then even if the Client updates its key\r\nmaterial it still wont be able to send messages. In fact, in this cast\r\nAFAIK A) forging can continue and B) the Client can no longer rejoin the\r\ngroup; at least not without wiping its state completely and re-joining\r\nfrom scratch. If this is true then we might consider adding a caveat to\r\nthe quoted sentence reflecting that updates only recover sending\r\ncapabilities if no update was forged in the meantime.```",
       "createdAt": "2019-03-10T15:50:08Z",
-      "updatedAt": "2021-03-08T13:32:41Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2021-05-26T09:46:41Z",
+      "closedAt": "2021-05-26T09:46:41Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks Joel! Most of these changes have been made in previous versions of the document. Feel free to open sub issues if you feel that the document is still incomplete.",
+          "createdAt": "2021-05-26T09:46:41Z",
+          "updatedAt": "2021-05-26T09:46:41Z"
+        }
+      ]
     },
     {
       "number": 56,
@@ -844,20 +865,36 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [
-        "editorial"
+        "editorial",
+        "help wanted"
       ],
       "body": "This ticket is meant to collect all of the use-cases and types of deployments that we support, or types of deployments that we've chosen not to support. In the future, I'd like us to take some time to make a sorta taxonomy of deployments -- think through the architecture / protocol decisions you need to achieve each use-case, and the security properties you get.\r\n\r\nI'll start with a few:\r\n\r\n- **Centralized Deployment:** Optimally simple client-side implementation.\r\n  - Authentication Service: Endpoint run by service provider. Either trusted to act correctly or built with transparency technology.\r\n  - Delivery Service: Endpoint run by service provider. Ensures a linear ordering of Commits.\r\n  - Proposals and Commits are left as plaintext.\r\n  - *Properties:*\r\n    - The DS knows of all groups and which members are in each group, as well as the value of the group's ratchet tree.\r\n    - Since the DS ensures a linear ordering of Commits, members can process Commits in the naive way.\r\n    - The DS must process messages and maintain a copy of the ratchet tree.\r\n    - New members can get a copy of a group's ratchet tree from the DS, meaning Welcome messages can be smaller.\r\n    - Members are aware of all the other members in each group.\r\n- **Broadcast Channel Deployment:** Server-side implementation that doesn't require strong coordination.\r\n  - Authentication Service: Endpoint run by service provider. Either trusted to act correctly or built with transparency technology.\r\n  - Delivery Service: Broadcast channel that sends new messages to all group members indiscriminately, combined with a separate mechanism for KeyPackage distribution.\r\n  - Proposals and Commits are encrypted.\r\n  - *Properties:*\r\n    - The DS can infer which groups exist and which members are in each group, but this isn't required for it to operate. It does not know the ratchet tree.\r\n    - Members must use a consensus protocol to decide on which Commit to accept if multiple are sent at once. This may imply forking or reverting to a previous state.\r\n    - Since the ratchet tree isn't stored centrally, Welcome messages must be larger to accommodate the serialized tree.\r\n    - Members are aware of all the other members in each group.\r\n- **Anonymous Deployment:** Attempts to hide the membership of each group but does not attempt to hide the number of groups / number of members in each group.\r\n  - Authentication Service: Endpoint run by service provider. Either trusted to act correctly or built with transparency technology. Must be accessed anonymously.\r\n  - Delivery Service: Oblivious to *both* who writes a message to a given group, and who read that message. An onion network could be used, as long as a new circuit is created for each message. Ensures a linear ordering of Commits.\r\n  - Proposals and Commits are encrypted. No additional framing is used beyond what the onion network dictates.\r\n  - *Properties:*\r\n    - The DS knows of all groups and how many members are in each group. It does not know the ratchet tree or the identities of group members.\r\n    - Since the DS ensures a linear ordering of Commits, members can process Commits in the naive way.\r\n    - Since the ratchet tree isn't stored centrally, Welcome messages must be larger to accommodate the serialized tree.\r\n    - Members are aware of all the other members in each group.\r\n\r\nSome that I need to think more about:\r\n\r\n- **Hidden-Membership Deployment:** Allows groups where group members are unable to determine the identity of other members. All communication is either from/to the group creator.\r\n- **Deniable Deployment:** Avoids signing messages sent to a group with a binding private key.\r\n- **Federated Deployment:** Allows the users of multiple cooperating AS and DS providers to inter-communicate.\r\n",
       "createdAt": "2020-10-19T15:18:50Z",
-      "updatedAt": "2021-03-08T13:33:17Z",
+      "updatedAt": "2021-05-26T10:14:58Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Include discussion for client/server fan-out (https://github.com/mlswg/mls-architecture/issues/76)",
+          "createdAt": "2021-05-26T09:49:50Z",
+          "updatedAt": "2021-05-26T09:49:50Z"
+        },
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "I haven't reached out to you yet @Bren2010 but let's talk at the interim, if you are not around, feel free to ping me at your convenience to discuss this : ) ",
+          "createdAt": "2021-05-26T10:14:58Z",
+          "updatedAt": "2021-05-26T10:14:58Z"
+        }
+      ]
     },
     {
       "number": 76,
       "id": "MDU6SXNzdWU3OTc3NTkwODA=",
       "title": "Client-side fanout",
       "url": "https://github.com/mlswg/mls-architecture/issues/76",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "ShivanKaul",
       "authorAssociation": "NONE",
       "assignees": [],
@@ -866,9 +903,17 @@
       ],
       "body": "There is some text in a couple of places in the architecture draft that mentions client-side vs server-side fanout. The main tradeoff seems to be performance vs the DS learning metadata. Would some implementations might want to err more on the side of the server learning less - would this be useful guidance to have in the arch draft? Separate draft? Else, if the thought is that this is totally out-of-scope, it would be worthwhile calling it out explicitly.",
       "createdAt": "2021-01-31T17:05:11Z",
-      "updatedAt": "2021-03-08T13:33:32Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2021-05-26T09:49:12Z",
+      "closedAt": "2021-05-26T09:49:12Z",
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks for the question : )\r\nThis is an interesting discussion to have, even though we can't really be exhaustive in the descriptions, I think we can make some space to describe the tradeoffs as part as https://github.com/mlswg/mls-architecture/issues/75\r\nSo I'll close this issue and reference it there.",
+          "createdAt": "2021-05-26T09:49:11Z",
+          "updatedAt": "2021-05-26T09:49:11Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -3270,25 +3315,35 @@
       "id": "MDExOlB1bGxSZXF1ZXN0NjQ2NDQ4NzI3",
       "title": "Rewrite AS definition to reflect its role in the Spec",
       "url": "https://github.com/mlswg/mls-architecture/pull/80",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kkohbrok",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "In the current definition, the AS is portrayed as a distinct service that could, for example run on a server separate from other MLS participants. However, in the MLS spec, it's more of an abstract layer that fulfills certain functionalities, some of which are likely to run on client devices. For example, an identity key that signs individual group-level signature keys could live in the secure element of a device. From the standpoint of the spec, that key would be part of the AS.\r\n\r\nThis PR changes the definition of the AS to reflect this, although there are of course multiple ways to tackle this.\r\n\r\nThe MLS spec is not explicit about the fact that it's the AS that's potentially responsible for message authentication, i.e. to bridge a potential gap between the key used to sign a message and the key in a member's leaf. However, it makes sense that this would be part of an abstract AS layer. If not, I believe it would still make sense to address this in the architecture doc somewhere.\r\n\r\nThe plan is to add more details on compromise of parts of the abstract AS to the security section in a future PR.\r\n\r\nLet us know what you think!\r\n\r\nThis is joint work with @br-hale and @cascremers.",
       "createdAt": "2021-05-18T06:37:40Z",
-      "updatedAt": "2021-05-18T06:37:40Z",
+      "updatedAt": "2021-05-26T09:04:21Z",
       "baseRepository": "mlswg/mls-architecture",
       "baseRefName": "main",
       "baseRefOid": "410d0bd4952cefe3d9222f9b138e2e33a42fc188",
       "headRepository": "br-hale/mls-architecture",
       "headRefName": "konrad/as-definition",
       "headRefOid": "681a09a351fba2f996a96b4655a2d1f8095b11a2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2021-05-26T09:03:49Z",
+      "mergedAt": "2021-05-26T09:03:49Z",
+      "mergedBy": "beurdouche",
+      "mergeCommit": {
+        "oid": "16f2aedf4b78d7d47d7f2ce2e72b68ed337e8f1c"
+      },
+      "comments": [
+        {
+          "author": "beurdouche",
+          "authorAssociation": "MEMBER",
+          "body": "Thanks !",
+          "createdAt": "2021-05-26T09:04:21Z",
+          "updatedAt": "2021-05-26T09:04:21Z"
+        }
+      ],
       "reviews": []
     }
   ]
