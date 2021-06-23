@@ -2,19 +2,19 @@
 
 
 
-Network Working Group                                           E. Omara
-Internet-Draft                                                    Google
-Intended status: Informational                             B. Beurdouche
-Expires: 27 November 2021                                Inria & Mozilla
-                                                             E. Rescorla
-                                                                 Mozilla
+Network Working Group                                      B. Beurdouche
+Internet-Draft                                           Inria & Mozilla
+Intended status: Informational                               E. Rescorla
+Expires: 25 December 2021                                        Mozilla
+                                                                E. Omara
+                                                                  Google
                                                                S. Inguva
                                                                  Twitter
                                                                  A. Kwon
                                                                      MIT
                                                                 A. Duric
                                                                     Wire
-                                                             26 May 2021
+                                                            23 June 2021
 
 
             The Messaging Layer Security (MLS) Architecture
@@ -75,7 +75,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 November 2021.
+   This Internet-Draft will expire on 25 December 2021.
 
 Copyright Notice
 
@@ -1488,22 +1488,22 @@ Table of Contents
 
 Authors' Addresses
 
-   Emad Omara
-   Google
-
-   Email: emadomara@google.com
-
-
    Benjamin Beurdouche
    Inria & Mozilla
 
-   Email: benjamin.beurdouche@inria.fr
+   Email: ietf@beurdouche.com
 
 
    Eric Rescorla
    Mozilla
 
    Email: ekr@rtfm.com
+
+
+   Emad Omara
+   Google
+
+   Email: emadomara@google.com
 
 
    Srinivas Inguva

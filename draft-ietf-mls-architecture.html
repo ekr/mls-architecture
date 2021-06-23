@@ -5,9 +5,9 @@
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
 <title>The Messaging Layer Security (MLS) Architecture</title>
-<meta content="Emad Omara" name="author">
 <meta content="Benjamin Beurdouche" name="author">
 <meta content="Eric Rescorla" name="author">
+<meta content="Emad Omara" name="author">
 <meta content="Srinivas Inguva" name="author">
 <meta content="Albert Kwon" name="author">
 <meta content="Alan Duric" name="author">
@@ -36,30 +36,193 @@ overall messaging system. This is especially true in case of active
 adversaries that are able to compromise clients, the delivery service
 or the authentication service. 
     " name="description">
-<meta content="xml2rfc 3.7.0" name="generator">
+<meta content="xml2rfc 3.8.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ietf-mls-architecture-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.7.0
-    Python 3.8.10
+  xml2rfc 3.8.0
+    Python 3.9.5
     appdirs 1.4.4
-    ConfigArgParse 1.2.3
+    ConfigArgParse 1.3
     google-i18n-address 2.4.0
     html5lib 1.1
     intervaltree 3.1.0
-    Jinja2 2.11.2
+    Jinja2 2.11.3
     kitchen 1.2.6
     lxml 4.6.3
     pycountry 20.7.3
-    pyflakes 2.2.0
+    pyflakes 2.3.0
     PyYAML 5.4.1
     requests 2.25.1
-    setuptools 51.3.3
+    setuptools 52.0.0
     six 1.15.0
 -->
 <link href="draft-ietf-mls-architecture.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
-<style type="text/css">@import url('https://martinthomson.github.io/i-d-template/fonts.css');
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Cabin Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 html {
   --background-color: #fff;
@@ -870,11 +1033,11 @@ address div.right {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">MLS Architecture</td>
-<td class="right">May 2021</td>
+<td class="right">June 2021</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Omara, et al.</td>
-<td class="center">Expires 27 November 2021</td>
+<td class="left">Beurdouche, et al.</td>
+<td class="center">Expires 25 December 2021</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -887,18 +1050,14 @@ address div.right {
 <dd class="internet-draft">draft-ietf-mls-architecture-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-05-26" class="published">26 May 2021</time>
+<time datetime="2021-06-23" class="published">23 June 2021</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2021-11-27">27 November 2021</time></dd>
+<dd class="expires"><time datetime="2021-12-25">25 December 2021</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
-<div class="author">
-      <div class="author-name">E. Omara</div>
-<div class="org">Google</div>
-</div>
 <div class="author">
       <div class="author-name">B. Beurdouche</div>
 <div class="org">Inria &amp; Mozilla</div>
@@ -906,6 +1065,10 @@ address div.right {
 <div class="author">
       <div class="author-name">E. Rescorla</div>
 <div class="org">Mozilla</div>
+</div>
+<div class="author">
+      <div class="author-name">E. Omara</div>
+<div class="org">Google</div>
 </div>
 <div class="author">
       <div class="author-name">S. Inguva</div>
@@ -979,7 +1142,7 @@ or the authentication service.<a href="#section-abstract-4" class="pilcrow">¶</
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 November 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 December 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1007,167 +1170,167 @@ or the authentication service.<a href="#section-abstract-4" class="pilcrow">¶</
         <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
 <a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
         </h2>
-<nav class="toc"><ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.1">
+<nav class="toc"><ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.1">
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="xref">1</a>.  <a href="#name-introduction" class="xref">Introduction</a></p>
 </li>
-          <li class="compact toc ulEmpty" id="section-toc.1-1.2">
+          <li class="ulEmpty compact toc" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="xref">2</a>.  <a href="#name-general-setting" class="xref">General Setting</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.2.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.2.2.1">
                 <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-group-members-and-clients" class="xref">Group, Members and Clients</a></p>
 </li>
-              <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.2">
+              <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2">
                 <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="xref">2.2</a>.  <a href="#name-authentication-service" class="xref">Authentication Service</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.2.2.2.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.1">
                     <p id="section-toc.1-1.2.2.2.2.1.1" class="keepWithNext"><a href="#section-2.2.1" class="xref">2.2.1</a>.  <a href="#name-credential-authentication" class="xref">Credential Authentication</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.2.2.2">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.2.2.2">
                     <p id="section-toc.1-1.2.2.2.2.2.1"><a href="#section-2.2.2" class="xref">2.2.2</a>.  <a href="#name-message-authentication" class="xref">Message Authentication</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.3">
+              <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.3">
                 <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="xref">2.3</a>.  <a href="#name-delivery-service" class="xref">Delivery Service</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.2.2.3.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.2.2.3.2.1">
                     <p id="section-toc.1-1.2.2.3.2.1.1"><a href="#section-2.3.1" class="xref">2.3.1</a>.  <a href="#name-key-storage" class="xref">Key Storage</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.3.2.2">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.3.2.2">
                     <p id="section-toc.1-1.2.2.3.2.2.1"><a href="#section-2.3.2" class="xref">2.3.2</a>.  <a href="#name-key-retrieval" class="xref">Key Retrieval</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.3.2.3">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.3.2.3">
                     <p id="section-toc.1-1.2.2.3.2.3.1"><a href="#section-2.3.3" class="xref">2.3.3</a>.  <a href="#name-delivery-of-messages-and-at" class="xref">Delivery of messages and attachments</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.3.2.4">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.3.2.4">
                     <p id="section-toc.1-1.2.2.3.2.4.1"><a href="#section-2.3.4" class="xref">2.3.4</a>.  <a href="#name-membership-knowledge" class="xref">Membership knowledge</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.3.2.5">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.3.2.5">
                     <p id="section-toc.1-1.2.2.3.2.5.1"><a href="#section-2.3.5" class="xref">2.3.5</a>.  <a href="#name-membership-and-offline-memb" class="xref">Membership and offline members</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4">
+              <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4">
                 <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="xref">2.4</a>.  <a href="#name-functional-requirements" class="xref">Functional Requirements</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.1">
                     <p id="section-toc.1-1.2.2.4.2.1.1"><a href="#section-2.4.1" class="xref">2.4.1</a>.  <a href="#name-membership-changes" class="xref">Membership Changes</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.2">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.2">
                     <p id="section-toc.1-1.2.2.4.2.2.1"><a href="#section-2.4.2" class="xref">2.4.2</a>.  <a href="#name-parallel-groups" class="xref">Parallel Groups</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.3">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.3">
                     <p id="section-toc.1-1.2.2.4.2.3.1"><a href="#section-2.4.3" class="xref">2.4.3</a>.  <a href="#name-security-of-attachments" class="xref">Security of Attachments</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.4">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.4">
                     <p id="section-toc.1-1.2.2.4.2.4.1"><a href="#section-2.4.4" class="xref">2.4.4</a>.  <a href="#name-asynchronous-usage" class="xref">Asynchronous Usage</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.5">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.5">
                     <p id="section-toc.1-1.2.2.4.2.5.1"><a href="#section-2.4.5" class="xref">2.4.5</a>.  <a href="#name-access-control" class="xref">Access Control</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.6">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.6">
                     <p id="section-toc.1-1.2.2.4.2.6.1"><a href="#section-2.4.6" class="xref">2.4.6</a>.  <a href="#name-recovery-after-state-loss" class="xref">Recovery After State Loss</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.7">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.7">
                     <p id="section-toc.1-1.2.2.4.2.7.1"><a href="#section-2.4.7" class="xref">2.4.7</a>.  <a href="#name-support-for-multiple-device" class="xref">Support for Multiple Devices</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.8">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.8">
                     <p id="section-toc.1-1.2.2.4.2.8.1"><a href="#section-2.4.8" class="xref">2.4.8</a>.  <a href="#name-extensibility-pluggability" class="xref">Extensibility / Pluggability</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.9">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.9">
                     <p id="section-toc.1-1.2.2.4.2.9.1"><a href="#section-2.4.9" class="xref">2.4.9</a>.  <a href="#name-federation" class="xref">Federation</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.2.2.4.2.10">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.2.2.4.2.10">
                     <p id="section-toc.1-1.2.2.4.2.10.1"><a href="#section-2.4.10" class="xref">2.4.10</a>. <a href="#name-compatibility-with-future-v" class="xref">Compatibility with future versions of MLS</a></p>
 </li>
                 </ul>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulEmpty" id="section-toc.1-1.3">
+          <li class="ulEmpty compact toc" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-security-and-privacy-consid" class="xref">Security and Privacy Considerations</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.3.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.3.2.1">
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-assumptions-on-transport-se" class="xref">Assumptions on Transport Security Links</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.3.2.1.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.3.2.1.2.1">
                     <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="xref">3.1.1</a>.  <a href="#name-metadata-protection-for-une" class="xref">Metadata protection for unencrypted group operations</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.1.2.2">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.1.2.2">
                     <p id="section-toc.1-1.3.2.1.2.2.1"><a href="#section-3.1.2" class="xref">3.1.2</a>.  <a href="#name-dos-protection" class="xref">DoS protection</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.1.2.3">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.1.2.3">
                     <p id="section-toc.1-1.3.2.1.2.3.1"><a href="#section-3.1.3" class="xref">3.1.3</a>.  <a href="#name-message-suppression-and-err" class="xref">Message suppression and error correction</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.2">
+              <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.2">
                 <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="xref">3.2</a>.  <a href="#name-intended-security-guarantee" class="xref">Intended Security Guarantees</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.3.2.2.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.3.2.2.2.1">
                     <p id="section-toc.1-1.3.2.2.2.1.1"><a href="#section-3.2.1" class="xref">3.2.1</a>.  <a href="#name-message-secrecy-and-authent" class="xref">Message Secrecy and Authentication</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.2.2.2">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.2.2.2">
                     <p id="section-toc.1-1.3.2.2.2.2.1"><a href="#section-3.2.2" class="xref">3.2.2</a>.  <a href="#name-forward-and-post-compromise" class="xref">Forward and Post-Compromise Security</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.2.2.3">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.2.2.3">
                     <p id="section-toc.1-1.3.2.2.2.3.1"><a href="#section-3.2.3" class="xref">3.2.3</a>.  <a href="#name-non-repudiation-vs-deniabil" class="xref">Non-Repudiation vs Deniability</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.3">
+              <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.3">
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="xref">3.3</a>.  <a href="#name-endpoint-compromise" class="xref">Endpoint Compromise</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.3.2.3.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.3.2.3.2.1">
                     <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="xref">3.3.1</a>.  <a href="#name-compromise-of-aead-key-mate" class="xref">Compromise of AEAD key material</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.3.2.2">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.3.2.2">
                     <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="xref">3.3.2</a>.  <a href="#name-compromise-of-the-group-sec" class="xref">Compromise of the Group Secrets of a single group for one or more group epochs</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.3.2.3">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.3.2.3">
                     <p id="section-toc.1-1.3.2.3.2.3.1"><a href="#section-3.3.3" class="xref">3.3.3</a>.  <a href="#name-compromise-by-an-active-adv" class="xref">Compromise by an active adversary with the ability to sign messages</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.3.2.4">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.3.2.4">
                     <p id="section-toc.1-1.3.2.3.2.4.1"><a href="#section-3.3.4" class="xref">3.3.4</a>.  <a href="#name-compromise-of-the-authentic" class="xref">Compromise of the authentication with access to a signature key</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.3.2.5">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.3.2.5">
                     <p id="section-toc.1-1.3.2.3.2.5.1"><a href="#section-3.3.5" class="xref">3.3.5</a>.  <a href="#name-security-consideration-in-t" class="xref">Security consideration in the context of a full state compromise</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.3.2.6">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.3.2.6">
                     <p id="section-toc.1-1.3.2.3.2.6.1"><a href="#section-3.3.6" class="xref">3.3.6</a>.  <a href="#name-more-attack-scenarios" class="xref">More attack scenarios</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.4">
+              <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.4">
                 <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="xref">3.4</a>.  <a href="#name-service-node-compromise" class="xref">Service Node Compromise</a></p>
-<ul class="compact toc ulEmpty">
-<li class="compact toc ulEmpty" id="section-toc.1-1.3.2.4.2.1">
+<ul class="ulEmpty compact toc">
+<li class="ulEmpty compact toc" id="section-toc.1-1.3.2.4.2.1">
                     <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="xref">3.4.1</a>.  <a href="#name-general-considerations" class="xref">General considerations</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.4.2.2">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.4.2.2">
                     <p id="section-toc.1-1.3.2.4.2.2.1"><a href="#section-3.4.2" class="xref">3.4.2</a>.  <a href="#name-delivery-service-compromise" class="xref">Delivery Service Compromise</a></p>
 </li>
-                  <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.4.2.3">
+                  <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.4.2.3">
                     <p id="section-toc.1-1.3.2.4.2.3.1"><a href="#section-3.4.3" class="xref">3.4.3</a>.  <a href="#name-authentication-service-comp" class="xref">Authentication Service Compromise</a></p>
 </li>
                 </ul>
 </li>
-              <li class="compact toc ulEmpty" id="section-toc.1-1.3.2.5">
+              <li class="ulEmpty compact toc" id="section-toc.1-1.3.2.5">
                 <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="xref">3.5</a>.  <a href="#name-considerations-for-attacks-" class="xref">Considerations for attacks outside of the threat model</a></p>
 </li>
             </ul>
 </li>
-          <li class="compact toc ulEmpty" id="section-toc.1-1.4">
+          <li class="ulEmpty compact toc" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-iana-considerations" class="xref">IANA Considerations</a></p>
 </li>
-          <li class="compact toc ulEmpty" id="section-toc.1-1.5">
+          <li class="ulEmpty compact toc" id="section-toc.1-1.5">
             <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-contributors" class="xref">Contributors</a></p>
 </li>
-          <li class="compact toc ulEmpty" id="section-toc.1-1.6">
+          <li class="ulEmpty compact toc" id="section-toc.1-1.6">
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="xref">6</a>.  <a href="#name-informative-references" class="xref">Informative References</a></p>
 </li>
-          <li class="compact toc ulEmpty" id="section-toc.1-1.7">
+          <li class="ulEmpty compact toc" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-appendix.a" class="xref"></a><a href="#name-authors-addresses" class="xref">Authors' Addresses</a></p>
 </li>
         </ul>
@@ -1692,8 +1855,8 @@ access control tasks on behalf of the group.<a href="#section-2.4.5-2" class="pi
 handshake messages in plaintext has inconveniences in terms of privacy
 as someone could collect the signatures on the handshake messages and
 use it for tracking.<a href="#section-2.4.5-3" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-2.4.5-4.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-2.4.5-4.1">
               <strong>RECOMMENDATION:</strong>
 Prefer using encrypted group operation messages to avoid privacy
 issues related to non-encrypted signatures.<a href="#section-2.4.5-4.1" class="pilcrow">¶</a>
@@ -1705,8 +1868,8 @@ consistent across all clients to make sure that they remain in sync.
 If two different policies were applied, the clients might not accept
 or reject a group operation and end-up in different cryptographic
 states, breaking their ability to communicate.<a href="#section-2.4.5-5" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-2.4.5-6.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-2.4.5-6.1">
               <strong>RECOMMENDATION:</strong>
 Avoid using inconsistent access control policies in the case of
 encrypted group operations.<a href="#section-2.4.5-6.1" class="pilcrow">¶</a>
@@ -1845,8 +2008,8 @@ number of group operations that have been performed).<a href="#section-3.1.1-2" 
 <p id="section-3.1.1-3">MLS protocol provides an authenticated "Authenticated Additional
 Data" field for application to make data available outside the
 MLSCiphertext.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.1.1-4.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.1.1-4.1">
               <strong>RECOMMENDATION:</strong>
 Use the "Authenticated Additional Data" field of the MLSCiphertext
 message instead of using other unauthenticated means of sending
@@ -1864,8 +2027,8 @@ channel to exchange the MLS messages can have a serious impact on
 privacy. In the case of unencrypted group operation messages,
 observing the signatures of the Group Operation messages may lead an
 adversary to extract information about the group memberships.<a href="#section-3.1.1-6" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.1.1-7.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.1.1-7.1">
               <strong>RECOMMENDATION:</strong>
 Never use the unencrypted mode for group operations without using a
 secure channel for the transport layer.<a href="#section-3.1.1-7.1" class="pilcrow">¶</a>
@@ -1888,8 +2051,8 @@ by using tickets or cookies which identify users to a service for a
 certain number of connections. Such a system helps preventing
 anonymous clients to send arbitrary numbers of Group Operation
 messages to the Delivery Service or the MLS clients.<a href="#section-3.1.2-2" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.1.2-3.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.1.2-3.1">
               <strong>RECOMMENDATION:</strong>
 Anonymous credentials can be used in order to help DoS attacks
 prevention, in a privacy preserving manner. Note that the privacy of
@@ -1921,8 +2084,8 @@ lead to payload corruption which does not affect the security or
 privacy properties of the MLS Protocol but does affect the reliability
 of the service. In that case specific measures can be taken to ensure
 the appropriate level of redundancy and quality of service for MLS.<a href="#section-3.1.3-3" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.1.3-4.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.1.3-4.1">
               <strong>RECOMMENDATION:</strong>
 If unidirectional transport is used for the secure transport
 channel, prefer using a protocol which provides Forward Error
@@ -2184,8 +2347,8 @@ adaptative attacker, can follow the protocol and request to update its
 own credential. This in turn induce a signature key rotation which
 could provide the attacker with part or the full value of the private
 key depending on the architecture of the service provider.<a href="#section-3.3.4-6" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.3.4-7.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.3.4-7.1">
               <strong>RECOMMENDATION:</strong>
 Signature private keys should be compartmentalized from other
 secrets and preferably protected by an HSM or dedicated hardware
@@ -2212,16 +2375,16 @@ the unencrypted messages. If so, the adversary does not have to break
 encryption at all to access sent and received messages. Messages may
 also be send by using the application to instruct the protocol
 implementation.<a href="#section-3.3.5-2" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.3.5-3.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.3.5-3.1">
               <strong>RECOMMENDATION:</strong>
 If messages are stored on the device, they should be protected using
 encryption at rest, and the keys used should be stored
 securely using dedicated mechanisms on the device.<a href="#section-3.3.5-3.1" class="pilcrow">¶</a>
 </li>
           </ul>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.3.5-4.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.3.5-4.1">
               <strong>RECOMMENDATION:</strong>
 If the threat model of the system is against an adversary which can
 access the messages on the device without even needing to attack
@@ -2247,8 +2410,8 @@ discussed in the previous sections, performing separation of the
 application secret states can help recovery after compromise, this is
 the case for signature keys but similar concern exists for the
 encryption private key used in the TreeKEM Group Key Agreement.<a href="#section-3.3.5-8" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.3.5-9.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.3.5-9.1">
               <strong>RECOMMENDATION:</strong>
 The secret keys used for public key encryption should be stored
 similarly to the way the signature keys are stored as key can be
@@ -2315,8 +2478,8 @@ via a secure transport which leaks information about the origin of the
 request such as the IP address and depending on the protocol the MAC
 address of the device.<a href="#section-3.4.1.1-3" class="pilcrow">¶</a></p>
 <p id="section-3.4.1.1-4">Similar concerns exist in the peer-to-peer use cases of MLS.<a href="#section-3.4.1.1-4" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.1.1-5.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.1.1-5.1">
                 <strong>RECOMMENDATION:</strong>
 In the case where privacy or anonymity is important, using adequate
 protection such as TOR or a VPN can improve metadata protection.<a href="#section-3.4.1.1-5.1" class="pilcrow">¶</a>
@@ -2377,8 +2540,8 @@ on which devices are recipients of the same message.<a href="#section-3.4.2.1-3"
 <p id="section-3.4.2.1-4">For secure messaging systems, push notification are often sent
 real-time as it is not acceptable to create artificial delays for
 message retrieval.<a href="#section-3.4.2.1-4" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.2.1-5.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.2.1-5.1">
                 <strong>RECOMMENDATION:</strong>
 If real time notification are not necessary and that specific steps
 must be taken to improve privacy, one can delay notifications
@@ -2391,8 +2554,8 @@ provider for the push-token associated to an identifier and perform a
 second request to the company operating the push-notification system
 to get information about the device, which is often linked with a real
 identity via a cloud account, a credit card or other information.<a href="#section-3.4.2.1-6" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.2.1-7.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.2.1-7.1">
                 <strong>RECOMMENDATION:</strong>
 If stronger privacy guarantees are needed vis-a-vis of the push
 notification provider, the client can choose to periodically connect
@@ -2422,8 +2585,8 @@ often the ability to use the associated secrets to perform operations
 on behalf of the user, which is unacceptable in many situations. Other
 mechanisms can be used to prevent this issue, such as the service
 blessing cryptographic material used by an MLS client.<a href="#section-3.4.3-6" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.3-7.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.3-7.1">
               <strong>RECOMMENDATION:</strong>
 Make clients submit signature public keys to the AS, this is usually
 better than the AS generating public key pairs because the AS
@@ -2435,8 +2598,8 @@ Key Infrastructure in the style of the Internet PKI.<a href="#section-3.4.3-7.1"
 have access to the underlying cryptographic material necessary to
 perform such operations. In that last case, it results in windows of
 time for which all emitted credentials might be compromised.<a href="#section-3.4.3-8" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.3-9.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.3-9.1">
               <strong>RECOMMENDATION:</strong>
 Using HSMs to store the root signature keys to limit the ability of
 an adversary with no physical access to extract the top-level
@@ -2471,8 +2634,8 @@ out-of-band authentication mechanism could inject a malicious client
 into a group by impersonating a user. This is especially the case in
 large groups where the UI might not reflect all the changes back the
 the users.<a href="#section-3.4.3.1-4" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.3.1-5.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.3.1-5.1">
                 <strong>RECOMMENDATION:</strong>
 Make sure that MLS clients reflect all the membership changes to the
 users as they happen. If a choice has to be made because the number
@@ -2495,8 +2658,8 @@ benefit of this mechanism is for revocation. The users of a group
 could check for revoked keys (in case of compromise detection) using a
 mechanism such as CRLite or some more advanced privacy preserving
 technology.<a href="#section-3.4.3.1-7" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.3.1-8.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.3.1-8.1">
                 <strong>RECOMMENDATION:</strong>
 Provide a Key Transparency and Out-of-Band authentication mechanisms
 to limit the impact of an Authentication Service compromise.<a href="#section-3.4.3.1-8.1" class="pilcrow">¶</a>
@@ -2525,8 +2688,8 @@ identities. This can benefit an adversary that has compromised the AS
 (or required access according to regulation) the ability of monitoring
 unencrypted traffic and correlate the messages exchanged within the
 same group.<a href="#section-3.4.3.2-1" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.3.2-2.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.3.2-2.1">
                 <strong>RECOMMENDATION:</strong>
 Always use encrypted group operation messages to reduce issues
 related to privacy.<a href="#section-3.4.3.2-2.1" class="pilcrow">¶</a>
@@ -2536,14 +2699,14 @@ related to privacy.<a href="#section-3.4.3.2-2.1" class="pilcrow">¶</a>
 between public keys and identities. If the signature keys are reused
 across groups, the adversary can get more information about the
 targeted user.<a href="#section-3.4.3.2-3" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.3.2-4.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.3.2-4.1">
                 <strong>RECOMMENDATION:</strong>
 Do not use the same signature keypair across groups.<a href="#section-3.4.3.2-4.1" class="pilcrow">¶</a>
 </li>
             </ul>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.4.3.2-5.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.4.3.2-5.1">
                 <strong>RECOMMENDATION:</strong>
 Separate the service binding the identities and the public keys from
 the service which generates or validates the credentials or
@@ -2573,14 +2736,14 @@ behavior of the client or service.<a href="#section-3.5-2" class="pilcrow">¶</a
 always run the protocol according to its specification. This relies on
 implementations of the protocol to securely implement the
 specification, which remains non-trivial.<a href="#section-3.5-3" class="pilcrow">¶</a></p>
-<ul class="normal ulEmpty">
-<li class="normal ulEmpty" id="section-3.5-4.1">
+<ul class="ulEmpty normal">
+<li class="ulEmpty normal" id="section-3.5-4.1">
             <strong>RECOMMENDATION:</strong>
 Additional steps should be taken to protect the device and the MLS
 clients from physical compromise. In such setting, HSMs and secure
 enclaves can be used to protect signature keys.<a href="#section-3.5-4.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal ulEmpty" id="section-3.5-4.2">More information will be available in the Server-Assist draft.<a href="#section-3.5-4.2" class="pilcrow">¶</a>
+          <li class="ulEmpty normal" id="section-3.5-4.2">More information will be available in the Server-Assist draft.<a href="#section-3.5-4.2" class="pilcrow">¶</a>
 </li>
         </ul>
 <p id="section-3.5-5">[[TODO: Reference to server assist when the draft is available.]]<a href="#section-3.5-5" class="pilcrow">¶</a></p>
@@ -2674,19 +2837,11 @@ raphael@wire.com<a href="#section-5-1.7" class="pilcrow">¶</a>
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Emad Omara</span></div>
-<div dir="auto" class="left"><span class="org">Google</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:emadomara@google.com" class="email">emadomara@google.com</a>
-</div>
-</address>
-<address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Benjamin Beurdouche</span></div>
 <div dir="auto" class="left"><span class="org">Inria &amp; Mozilla</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:benjamin.beurdouche@inria.fr" class="email">benjamin.beurdouche@inria.fr</a>
+<a href="mailto:ietf@beurdouche.com" class="email">ietf@beurdouche.com</a>
 </div>
 </address>
 <address class="vcard">
@@ -2695,6 +2850,14 @@ raphael@wire.com<a href="#section-5-1.7" class="pilcrow">¶</a>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:ekr@rtfm.com" class="email">ekr@rtfm.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Emad Omara</span></div>
+<div dir="auto" class="left"><span class="org">Google</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:emadomara@google.com" class="email">emadomara@google.com</a>
 </div>
 </address>
 <address class="vcard">
